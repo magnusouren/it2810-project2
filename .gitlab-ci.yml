@@ -1,0 +1,50 @@
+image: node:20
+
+stages:
+  - setup
+  - test
+  - lint
+  - lint-css
+  - build
+
+node-setup:
+  stage: setup
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules
+
+unit-test-job:
+  stage: test
+  script:
+    - echo "Running unit tests..."
+    - npm run coverage
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  artifacts:
+    when: always
+    paths:
+      - ./coverage/junit.xml
+    reports:
+      junit: ./coverage/junit.xml
+
+lint-test-job 1/2:
+  stage: lint
+  script:
+    - echo "Linting code..."
+    - npm run lint
+    - echo "No lint issues found."
+
+lint-test-job 2/2:
+  stage: lint-css
+  script:
+    - echo "Linting code..."
+    - npm run lint:css
+    - echo "No lint issues found."
+
+build-job:
+  stage: build
+  script:
+    - echo "Compiling the code..."
+    - npm run build:ci
+    - echo "Compile complete."
