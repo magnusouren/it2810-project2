@@ -1,10 +1,14 @@
+import {
+  AccountCircle as AccountCircleIcon,
+  Home as HomeIcon,
+  PlaylistPlay as PlaylistPlayIcon,
+} from '@mui/icons-material';
+import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem } from '@mui/material';
-import { Home as HomeIcon, AccountCircle as AccountCircleIcon, PlaylistPlay as PlaylistPlayIcon } from '@mui/icons-material';
-import styles from './Navbar.module.scss';
 import { Link } from 'react-router-dom';
-import Search from '../search/Search';
 
+import Search from '../search/Search';
+import styles from './Navbar.module.scss';
 
 const Navbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -29,30 +33,30 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position='static'>
       <Toolbar className={styles.navbarToolbar}>
-        <Link to="/" className={styles.navLink}>
-            <IconButton edge="start" color="inherit" aria-label="home">
+        <Link to='/' className={styles.navLink}>
+          <IconButton edge='start' color='inherit' aria-label='home'>
             <HomeIcon />
-            <Typography variant="h6" className={styles.navbarTitle}/>
-            </IconButton>
+            <Typography variant='h6' className={styles.navbarTitle} />
+          </IconButton>
         </Link>
         <Search />
         {loggedIn ? (
           <>
-            <IconButton color="inherit" onClick={handleMenuOpen}>
+            <IconButton color='inherit' onClick={handleMenuOpen}>
               <PlaylistPlayIcon />
             </IconButton>
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-            <Link to="/watchlist" className={styles.navLink}>
+              <Link to='/watchlist' className={styles.navLink}>
                 <MenuItem onClick={handleMenuClose}>My Watchlist</MenuItem>
-            </Link>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Link>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </>
         ) : (
-          <IconButton color="inherit" onClick={handleLogin}>
-            <AccountCircleIcon /> 
+          <IconButton color='inherit' onClick={handleLogin}>
+            <AccountCircleIcon />
             <p className={styles.loginText}>Login</p>
           </IconButton>
         )}

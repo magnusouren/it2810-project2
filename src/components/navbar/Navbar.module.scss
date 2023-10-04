@@ -1,4 +1,4 @@
-@import '../../colors.scss';
+@import url('../../colors.scss');
 
 .navbarToolbar {
     display: flex;
@@ -16,7 +16,7 @@
     color: inherit;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (width <= 550px) {
     .loginText {
         display: none;
     }
