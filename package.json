@@ -18,6 +18,10 @@
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,scss,json,css}' --config .prettierrc.cjs"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.11",
+    "@mui/material": "^5.14.11",
     "@tanstack/react-query": "^4.33.0",
     "axios": "^1.5.0",
     "eslint-config-prettier": "^9.0.0",
