@@ -1,1 +1,15 @@
 @import '../../colors.scss';
+
+.navbarToolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbarTitle {
+    flex-grow: 1;
+}
+
+.navLink {
+    text-decoration: none;
+    color: inherit;
+}
