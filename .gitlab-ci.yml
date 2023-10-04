@@ -1,19 +1,18 @@
 image: node:20
 
+cache:  # Cache modules in between jobs
+  key: $CI_COMMIT_REF_SLUG
+  paths:
+    - .npm/
+
+before_script:
+  - npm ci
+
 stages:
-  - setup
   - test
   - lint
   - lint-css
   - build
-
-node-setup:
-  stage: setup
-  script:
-    - npm install
-  artifacts:
-    paths:
-      - node_modules
 
 unit-test-job:
   stage: test
