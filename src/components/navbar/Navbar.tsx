@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem } from '@mui/material';
 import { Home as HomeIcon, AccountCircle as AccountCircleIcon, PlaylistPlay as PlaylistPlayIcon } from '@mui/icons-material';
 import './Navbar.scss';
+import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -28,25 +29,30 @@ const Navbar: React.FC = () => {
   return (
     <AppBar position="static">
       <Toolbar className="navbar-toolbar">
-        <IconButton edge="start" color="inherit" aria-label="home">
-          <HomeIcon />
-        </IconButton>
-        <Typography variant="h6" className="navbar-title">
-          MovieMan
-        </Typography>
+        <Link to="/fihihf" className='navLink'>
+            <IconButton edge="start" color="inherit" aria-label="home">
+            <HomeIcon />
+            <Typography variant="h6" className="navbar-title">
+            MovieMan
+            </Typography>
+            </IconButton>
+        </Link>
         {loggedIn ? (
-          <div>
+          <>
             <IconButton color="inherit" onClick={handleMenuOpen}>
               <PlaylistPlayIcon />
             </IconButton>
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-              <MenuItem onClick={handleMenuClose}>My Watchlist</MenuItem>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <Link to="/watchlist" className='navLink'>
+                <MenuItem onClick={handleMenuClose}>My Watchlist</MenuItem>
+            </Link>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
-          </div>
+          </>
         ) : (
           <IconButton color="inherit" onClick={handleLogin}>
-            <AccountCircleIcon /> Login
+            <AccountCircleIcon /> 
+            Login
           </IconButton>
         )}
       </Toolbar>
