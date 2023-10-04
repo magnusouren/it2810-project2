@@ -3,13 +3,22 @@
 .navbarToolbar {
     display: flex;
     justify-content: space-between;
+    height: 80px;
 }
 
 .navbarTitle {
     flex-grow: 1;
+    font-size: 20px;
 }
 
 .navLink {
     text-decoration: none;
     color: inherit;
+}
+
+@media screen and (max-width: 550px) {
+    .loginText {
+        display: none;
+    }
+    
 }

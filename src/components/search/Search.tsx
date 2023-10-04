@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment, TextField } from '@mui/material';
 
 const Search: React.FC = () => {
+    // TODO: Search logic 
     return (
         <TextField 
             variant="outlined"

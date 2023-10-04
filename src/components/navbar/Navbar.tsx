@@ -34,9 +34,7 @@ const Navbar: React.FC = () => {
         <Link to="/" className={styles.navLink}>
             <IconButton edge="start" color="inherit" aria-label="home">
             <HomeIcon />
-            <Typography variant="h6" className={styles.navbarTitle}>
-            MovieMan
-            </Typography>
+            <Typography variant="h6" className={styles.navbarTitle}/>
             </IconButton>
         </Link>
         <Search />
@@ -55,7 +53,7 @@ const Navbar: React.FC = () => {
         ) : (
           <IconButton color="inherit" onClick={handleLogin}>
             <AccountCircleIcon /> 
-            Login
+            <p className={styles.loginText}>Login</p>
           </IconButton>
         )}
       </Toolbar>
