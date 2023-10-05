@@ -17,7 +17,9 @@ const queryClient = new QueryClient();
 // Function to render a component wrapped inside a browserrouter and queryclient for testing purposes
 export const renderWithRouterAndQueryClient = (component: JSX.Element) =>
   render(
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>{component}</BrowserRouter>
-    </QueryClientProvider>,
+    <UserProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>{component}</BrowserRouter>
+      </QueryClientProvider>
+    </UserProvider>,
   );

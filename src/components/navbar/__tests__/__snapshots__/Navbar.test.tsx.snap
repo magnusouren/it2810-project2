@@ -90,6 +90,7 @@ exports[`Navbar > Should match snapshot 1`] = `
       </div>
       <button
         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeMedium css-zylse7-MuiButtonBase-root-MuiIconButton-root"
+        data-testid="login-button"
         tabindex="0"
         type="button"
       >

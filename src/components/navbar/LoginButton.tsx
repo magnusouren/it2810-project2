@@ -47,20 +47,26 @@ function LoginButton() {
 
   return user ? (
     <>
-      <IconButton color='inherit' onClick={handleMenuOpen}>
-        <p className={styles.loginText}>{user.name}</p>
+      <IconButton color='inherit' onClick={handleMenuOpen} data-testid='menu'>
+        <p className={styles.loginText} data-testid='user-name'>
+          {user.name}
+        </p>
         <PlaylistPlayIcon />
       </IconButton>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-        <Link to='/watchlist' className={styles.navLink}>
+        <Link to='/watchlist' className={styles.navLink} data-testid='watchlist-link'>
           <MenuItem onClick={handleMenuClose}>My Watchlist</MenuItem>
         </Link>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        <MenuItem onClick={handleDeleteUser}>Delete user</MenuItem>
+        <MenuItem onClick={handleLogout} data-testid='logout'>
+          Logout
+        </MenuItem>
+        <MenuItem onClick={handleDeleteUser} data-testid='delete-user'>
+          Delete user
+        </MenuItem>
       </Menu>
     </>
   ) : (
-    <IconButton color='inherit' onClick={handleLogin}>
+    <IconButton color='inherit' onClick={handleLogin} data-testid='login-button'>
       <AccountCircleIcon />
       <p className={styles.loginText}>Login</p>
     </IconButton>
