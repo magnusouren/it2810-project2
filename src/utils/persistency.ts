@@ -1,22 +1,17 @@
-import { User } from '../types';
-
-export const userExists = () => {
-  const user = localStorage.getItem('user');
+export const itemExists = (key: string) => {
+  const user = localStorage.getItem(key);
   return user ? true : false;
 };
 
-export const getUser = () => {
-  const user = localStorage.getItem('user');
-  return user ? JSON.parse(user) : undefined;
+export const getItem = (key: string) => {
+  const item = localStorage.getItem(key);
+  return item ? JSON.parse(item) : undefined;
 };
 
-export const setUser = (user: User) => {
-  if (userExists()) {
-    throw new Error('User already exists');
-  }
-  localStorage.setItem('user', JSON.stringify(user));
+export const setItem = (key: string, item: unknown) => {
+  localStorage.setItem(key, JSON.stringify(item));
 };
 
-export const removeUser = () => {
-  localStorage.removeItem('user');
+export const removeItem = (key: string) => {
+  localStorage.removeItem(key);
 };
