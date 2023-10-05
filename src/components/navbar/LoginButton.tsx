@@ -6,6 +6,17 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import styles from './LoginButton.module.scss';
 
+/**
+ * Login button component.
+ * If the user is logged in, the user's name is displayed.
+ * If the user is not logged in, the login button is displayed.
+ * If the user is logged in, a menu is displayed with the following options:
+ * - My Watchlist
+ * - Logout
+ * - Delete user
+ *
+ * @returns {JSX.Element}
+ */
 function LoginButton() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const userContext = useUser();

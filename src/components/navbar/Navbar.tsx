@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
   return (
     <AppBar position='static'>
       <Toolbar className={styles.navbarToolbar}>
-        <Link to='/' className={styles.navLink}>
+        <Link to='/' className={styles.navLink} data-testid='home-link'>
           <IconButton edge='start' color='inherit' aria-label='home'>
             <HomeIcon />
             <Typography variant='h6' className={styles.navbarTitle} />
