@@ -1,14 +1,16 @@
 import { AccountCircle as AccountCircleIcon, PlaylistPlay as PlaylistPlayIcon } from '@mui/icons-material';
 import { IconButton, Menu, MenuItem } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../../context/UserContext';
 import styles from './LoginButton.module.scss';
 
 function LoginButton() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { user, login, logout, deleteUser } = useUser();
+  const userContext = useUser();
+  if (!userContext) throw new Error('UserContext is null');
+  const { user, login, logout, deleteUser } = userContext;
 
   const handleLogin = () => {
     login();
