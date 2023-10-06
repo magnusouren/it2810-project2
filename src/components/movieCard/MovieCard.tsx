@@ -2,8 +2,10 @@ import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useUser } from '../../context/UserContext';
 import { Movie } from '../../types';
 import { getCategoryById } from '../../utils/categoryUtils';
+import WatchlistButton from '../watchlistButton/WatchlistButton';
 import styles from './MovieCard.module.scss';
 
 interface MovieProps {
@@ -11,6 +13,10 @@ interface MovieProps {
 }
 
 export const MovieCard: FC<MovieProps> = ({ movie }) => {
+  const userContext = useUser();
+  if (!userContext) return null;
+  const { user, existInWatchlist, toggleMovieInWatchlist } = userContext;
+
   return (
     <Card sx={{ maxWidth: 200 }}>
       <Link to={`/movie/${movie.id}`} state={movie} className={styles.link}>
@@ -24,6 +30,14 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
           </Typography>
         </CardContent>
       </Link>
+      {user && (
+        <WatchlistButton
+          movieId={movie.id}
+          existInWatchlist={existInWatchlist}
+          toggleMovieInWatchlist={toggleMovieInWatchlist}
+          data-testid='watchlist-button'
+        />
+      )}
     </Card>
   );
 };
