@@ -3,6 +3,18 @@
 section {
   margin: 0 20%;
 
+  @media (width <= 1024px) {
+    margin: 0 10%;
+  }
+
+  @media (width <= 768px) {
+    margin: 0 5%;
+  }
+
+  @media (width <= 480px) {
+    margin: 0 2%;
+  }
+
   h1 {
     font-size: 2em;
     border-bottom: solid colors.$primary-color 2px;

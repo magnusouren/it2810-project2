@@ -1,0 +1,26 @@
+// container grid with 4 elements per row
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1.5rem;
+
+  @media (width <= 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (width <= 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (width <= 480px) {
+    grid-template-columns: 1fr;
+  }
+
+  > div:hover {
+    cursor: pointer;
+    box-shadow:
+      0 4px 2px -2px rgb(0 0 0 / 30%),
+      0 2px 2px 0 rgb(0 0 0 / 30%),
+      0 2px 6px 0 rgb(0 0 0 / 30%);
+  }
+}
