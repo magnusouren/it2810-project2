@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MovieCard > should match snapshot 1`] = `
+<div>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1gwrruu-MuiPaper-root-MuiCard-root"
+  >
+    <a
+      class="_link_6d7af0"
+      href="/movie/111111"
+    >
+      <img
+        alt="Foo Bar"
+        class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-o69gx8-MuiCardMedia-root"
+        src="https://image.tmdb.org/t/p/w200/mockPosterURL.jpg"
+      />
+      <div
+        class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+      >
+        <div
+          class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-d3wcwz-MuiTypography-root"
+        >
+          Foo Bar
+        </div>
+        <p
+          class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+        >
+          Adventure, Action
+        </p>
+      </div>
+    </a>
+  </div>
+</div>
+`;
