@@ -1,0 +1,7 @@
+@use 'Navbar.module.scss';
+
+@media screen and (width <= 550px) {
+  .loginText {
+    display: none;
+  }
+}
