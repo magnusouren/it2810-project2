@@ -1,6 +1,9 @@
-import CheckIcon from '@mui/icons-material/Check';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { ToggleButton } from '@mui/material';
 import { FC, memo, useState } from 'react';
+
+import styles from './WatchlistButton.module.scss';
 
 interface WatchlistButtonProps {
   movieId: number;
@@ -12,16 +15,20 @@ const Button: FC<WatchlistButtonProps> = ({ movieId, existInWatchlist, toggleMov
   const [selected, setSelected] = useState(() => existInWatchlist(movieId));
 
   return (
-    <ToggleButton
-      value='check'
-      selected={selected}
-      onChange={() => {
-        setSelected(!selected);
-        toggleMovieInWatchlist(movieId);
-      }}
-    >
-      <CheckIcon />
-    </ToggleButton>
+    <div className={styles.container}>
+      <ToggleButton
+        value='check'
+        selected={selected}
+        color='primary'
+        size='small'
+        onChange={() => {
+          setSelected(!selected);
+          toggleMovieInWatchlist(movieId);
+        }}
+      >
+        {selected ? <RemoveIcon /> : <AddIcon />}
+      </ToggleButton>
+    </div>
   );
 };
 
