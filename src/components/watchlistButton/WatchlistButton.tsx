@@ -3,16 +3,17 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { ToggleButton } from '@mui/material';
 import { FC, memo, useState } from 'react';
 
+import { Movie } from '../../types';
 import styles from './WatchlistButton.module.scss';
 
 interface WatchlistButtonProps {
-  movieId: number;
-  existInWatchlist: (movieId: number) => boolean;
-  toggleMovieInWatchlist: (movieId: number) => void;
+  movie: Movie;
+  existInWatchlist: (movie: Movie) => boolean;
+  toggleMovieInWatchlist: (movie: Movie) => void;
 }
 
-const Button: FC<WatchlistButtonProps> = ({ movieId, existInWatchlist, toggleMovieInWatchlist }) => {
-  const [selected, setSelected] = useState(() => existInWatchlist(movieId));
+const Button: FC<WatchlistButtonProps> = ({ movie, existInWatchlist, toggleMovieInWatchlist }) => {
+  const [selected, setSelected] = useState(() => existInWatchlist(movie));
 
   return (
     <div className={styles.container}>
@@ -23,7 +24,7 @@ const Button: FC<WatchlistButtonProps> = ({ movieId, existInWatchlist, toggleMov
         size='small'
         onChange={() => {
           setSelected(!selected);
-          toggleMovieInWatchlist(movieId);
+          toggleMovieInWatchlist(movie);
         }}
       >
         {selected ? <RemoveIcon /> : <AddIcon />}

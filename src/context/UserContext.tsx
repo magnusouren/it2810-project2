@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { createContext, ReactNode, useContext, useState } from 'react';
 
-import { User } from '../types';
+import { Movie, User } from '../types';
 import { getItem, itemExists, removeItem, setItem } from '../utils/persistency';
 
 interface UserContextProps {
@@ -10,9 +10,9 @@ interface UserContextProps {
   login: () => void;
   logout: () => void;
   deleteUser: () => void;
-  toggleMovieInWatchlist: (movieId: number) => void;
-  existInWatchlist: (movieId: number) => boolean;
-  getWatchlist: () => string[];
+  toggleMovieInWatchlist: (movie: Movie) => void;
+  existInWatchlist: (movie: Movie) => boolean;
+  getWatchlist: () => Movie[];
 }
 
 const UserContext = createContext<UserContextProps | null>(null);
@@ -44,32 +44,36 @@ export function useUser() {
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | undefined>(getItem('user') as User | undefined);
 
-  const addMovieToWatchlist = (movieId: number) => {
+  const addMovieToWatchlist = (movie: Movie) => {
     if (user) {
-      const newUser = { ...user, watchlist: [...(user.watchlist ?? []), movieId.toString()] };
+      const newUser = { ...user, watchlist: [...(user.watchlist ?? []), movie] };
+
       setUser(newUser);
       setItem('user', newUser);
     }
   };
 
-  const removeMovieFromWatchlist = (movieId: number) => {
+  const removeMovieFromWatchlist = (movie: Movie) => {
     if (user) {
-      const newUser = { ...user, watchlist: user.watchlist?.filter((id) => id !== movieId.toString()) };
+      const newUser = {
+        ...user,
+        watchlist: user.watchlist?.filter((watchlistMovie) => watchlistMovie.id !== movie.id),
+      };
       setUser(newUser);
       setItem('user', newUser);
     }
   };
 
-  const existInWatchlist = (movieId: number) => {
-    return user?.watchlist?.includes(movieId.toString()) ?? false;
+  const existInWatchlist = (movie: Movie) => {
+    return user?.watchlist?.map((watchlistMovie) => watchlistMovie.id).includes(movie.id) ?? false;
   };
 
-  const toggleMovieInWatchlist = (movieId: number) => {
+  const toggleMovieInWatchlist = (movie: Movie) => {
     if (user) {
-      if (existInWatchlist(movieId)) {
-        removeMovieFromWatchlist(movieId);
+      if (existInWatchlist(movie)) {
+        removeMovieFromWatchlist(movie);
       } else {
-        addMovieToWatchlist(movieId);
+        addMovieToWatchlist(movie);
       }
     }
   };

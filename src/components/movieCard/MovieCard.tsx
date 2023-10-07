@@ -32,7 +32,7 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
       </Link>
       {user && (
         <WatchlistButton
-          movieId={movie.id}
+          movie={movie}
           existInWatchlist={existInWatchlist}
           toggleMovieInWatchlist={toggleMovieInWatchlist}
           data-testid='watchlist-button'
