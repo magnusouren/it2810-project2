@@ -1,6 +1,6 @@
 export interface User {
   name: string;
-  watchlist?: string[];
+  watchlist?: Movie[];
 }
 
 export interface Movie {
