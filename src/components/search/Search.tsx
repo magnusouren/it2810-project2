@@ -1,10 +1,11 @@
+import SearchIcon from '@mui/icons-material/Search';
+import { InputAdornment, TextField } from '@mui/material';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import movieData from '../../../storage/data.json';
 import { Movie } from '../../types';
 import styles from './Search.module.scss';
-import movieData from '../../../storage/data.json';
-import { InputAdornment, TextField } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate } from 'react-router-dom';
 
 const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -30,7 +31,7 @@ const Search: React.FC = () => {
   // Hides the dropdown when user clicks outside of it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !(dropdownRef.current as any).contains(event.target as Node)) {
+      if (dropdownRef.current && !(dropdownRef.current as Node).contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
     };

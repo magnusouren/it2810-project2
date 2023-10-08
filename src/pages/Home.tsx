@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import Search from '../components/search/Search';
 
 export const Home: FC = () => {
   return (
