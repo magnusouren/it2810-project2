@@ -7,12 +7,15 @@ import { RouterProvider } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
+import { UserProvider } from './context/UserContext';
 import { Router } from './routes';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={Router} />
-    </QueryClientProvider>
+    <UserProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={Router} />
+      </QueryClientProvider>
+    </UserProvider>
   </React.StrictMode>,
 );
