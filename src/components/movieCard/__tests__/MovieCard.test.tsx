@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { screen } from '@testing-library/react';
 
+import { renderWithRouterAndUserContext } from '../../../utils/testUtils';
 import { MovieCard } from '../MovieCard';
 
 describe('MovieCard', () => {
@@ -22,42 +22,26 @@ describe('MovieCard', () => {
   };
 
   it('should match snapshot', () => {
-    const { container } = render(
-      <MemoryRouter>
-        <MovieCard movie={movie} />
-      </MemoryRouter>,
-    );
+    const { container } = renderWithRouterAndUserContext(<MovieCard movie={movie} />);
     expect(container).toMatchSnapshot();
   });
 
   it('should render the movie title', () => {
-    render(
-      <MemoryRouter>
-        <MovieCard movie={movie} />
-      </MemoryRouter>,
-    );
+    renderWithRouterAndUserContext(<MovieCard movie={movie} />);
 
     const titleElement = screen.getByText(movie.title);
     expect(titleElement).toBeDefined();
   });
 
   it('should render the movie genres', () => {
-    render(
-      <MemoryRouter>
-        <MovieCard movie={movie} />
-      </MemoryRouter>,
-    );
+    renderWithRouterAndUserContext(<MovieCard movie={movie} />);
 
     const genreElement = screen.getByText('Adventure, Action');
     expect(genreElement).toBeDefined();
   });
 
   it('should render the movie poster', () => {
-    render(
-      <MemoryRouter>
-        <MovieCard movie={movie} />
-      </MemoryRouter>,
-    );
+    renderWithRouterAndUserContext(<MovieCard movie={movie} />);
 
     const posterElement = screen.getByAltText(movie.title);
     expect(posterElement).toBeDefined();

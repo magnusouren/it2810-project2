@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { screen } from '@testing-library/react';
 
 import { Movie } from '../../../types';
+import { renderWithRouterAndUserContext } from '../../../utils/testUtils';
 import { MovieList } from '../MovieList';
 
 describe('MovieList', () => {
@@ -41,20 +41,12 @@ describe('MovieList', () => {
   ];
 
   it('should match snapshot', () => {
-    const { container } = render(
-      <MemoryRouter>
-        <MovieList movies={movies} />
-      </MemoryRouter>,
-    );
+    const { container } = renderWithRouterAndUserContext(<MovieList movies={movies} />);
     expect(container).toMatchSnapshot();
   });
 
   it('should render a MovieCard for each movie in the list', () => {
-    render(
-      <MemoryRouter>
-        <MovieList movies={movies} />
-      </MemoryRouter>,
-    );
+    renderWithRouterAndUserContext(<MovieList movies={movies} />);
 
     const movieCards = screen.getAllByRole('link');
     expect(movieCards).toHaveLength(2);

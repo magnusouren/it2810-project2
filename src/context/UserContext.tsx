@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { createContext, ReactNode, useContext, useState } from 'react';
 
-import { User } from '../types';
+import { Movie, User } from '../types';
 import { getItem, itemExists, removeItem, setItem } from '../utils/persistency';
 
 interface UserContextProps {
@@ -10,6 +10,9 @@ interface UserContextProps {
   login: () => void;
   logout: () => void;
   deleteUser: () => void;
+  toggleMovieInWatchlist: (movie: Movie) => void;
+  existInWatchlist: (movie: Movie) => boolean;
+  getWatchlist: () => Movie[];
 }
 
 const UserContext = createContext<UserContextProps | null>(null);
@@ -17,7 +20,7 @@ const UserContext = createContext<UserContextProps | null>(null);
 /**
  * Custom hook to manage user state.
  *
- * @returns {Object} login, logout, deleteUser
+ * @returns {Object} user, setUser, login, logout, deleteUser, addMovieToWatchlist
  * @example
  * const { login, logout, deleteUser } = useUser();
  *
@@ -41,6 +44,44 @@ export function useUser() {
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | undefined>(getItem('user') as User | undefined);
 
+  const addMovieToWatchlist = (movie: Movie) => {
+    if (user) {
+      const newUser = { ...user, watchlist: [...(user.watchlist ?? []), movie] };
+
+      setUser(newUser);
+      setItem('user', newUser);
+    }
+  };
+
+  const removeMovieFromWatchlist = (movie: Movie) => {
+    if (user) {
+      const newUser = {
+        ...user,
+        watchlist: user.watchlist?.filter((watchlistMovie) => watchlistMovie.id !== movie.id),
+      };
+      setUser(newUser);
+      setItem('user', newUser);
+    }
+  };
+
+  const existInWatchlist = (movie: Movie) => {
+    return user?.watchlist?.map((watchlistMovie) => watchlistMovie.id).includes(movie.id) ?? false;
+  };
+
+  const toggleMovieInWatchlist = (movie: Movie) => {
+    if (user) {
+      if (existInWatchlist(movie)) {
+        removeMovieFromWatchlist(movie);
+      } else {
+        addMovieToWatchlist(movie);
+      }
+    }
+  };
+
+  const getWatchlist = () => {
+    return user?.watchlist ?? [];
+  };
+
   const login = () => {
     const tempUser = { name: faker.person.fullName() } as User;
     if (!itemExists('user')) setItem('user', tempUser);
@@ -56,7 +97,16 @@ export function UserProvider({ children }: { children: ReactNode }) {
     setUser(undefined);
   };
 
-  const value = { user, setUser, login, logout, deleteUser };
+  const value = {
+    user,
+    setUser,
+    login,
+    logout,
+    deleteUser,
+    toggleMovieInWatchlist,
+    existInWatchlist,
+    getWatchlist,
+  };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
