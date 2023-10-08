@@ -10,10 +10,12 @@ interface MovieListProps {
 
 export const MovieList: FC<MovieListProps> = ({ movies }) => {
   return (
-    <div className={styles.container}>
-      {movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
-    </div>
+    <>
+      <div className={styles.container}>
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
+    </>
   );
 };
