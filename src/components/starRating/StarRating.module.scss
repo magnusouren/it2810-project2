@@ -1,0 +1,26 @@
+@use '../../colors.scss';
+
+.rating {
+  margin-top: 4rem;
+  border: solid colors.$body-color 0.5px;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+
+  h2 {
+    font-size: 1.5em;
+    line-height: 2em;
+
+    span {
+      font-weight: 200;
+    }
+  }
+
+  p {
+    font-size: 1em;
+    line-height: 1.5em;
+    font-style: italic;
+    margin-top: 0.5em;
+  }
+}

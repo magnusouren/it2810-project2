@@ -1,0 +1,83 @@
+@use '../../colors.scss';
+
+.container {
+  position: relative;
+}
+
+.backdropPoster {
+  width: 100%;
+  margin-top: 1.5em;
+}
+
+.date {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.content {
+  display: flex;
+  gap: 4rem;
+  justify-content: space-between;
+  margin-top: 2rem;
+
+  @media screen and (width <= 1024px) {
+    flex-direction: column;
+  }
+
+  .overview {
+    line-height: 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .textContent {
+    width: 45%;
+
+    @media screen and (width <= 1024px) {
+      width: 100%;
+    }
+  }
+
+  .details {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 55%;
+    background-color: colors.$body-color;
+    color: colors.$quaternary-color;
+    border-radius: 5px;
+
+    @media screen and (width <= 1024px) {
+      width: 100%;
+      padding: 20px 0;
+    }
+
+    .detail {
+      text-align: center;
+      margin-top: 1rem;
+
+      h3 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-weight: 200;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
+
+.rating {
+  margin-top: 2rem;
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  .slider {
+    color: colors.$accent-color;
+  }
+}
