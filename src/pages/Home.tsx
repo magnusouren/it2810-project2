@@ -8,6 +8,7 @@ export const Home: FC = () => {
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim vero doloribus nobis at, optio veniam veritatis
         autem. Consequatur labore, ut aspernatur laboriosam temporibus dolor quasi facilis eius et commodi culpa.
       </p>
+      {/* <Search /> */}
     </>
   );
 };
