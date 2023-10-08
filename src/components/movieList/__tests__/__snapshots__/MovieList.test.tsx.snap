@@ -6,7 +6,7 @@ exports[`MovieList > should match snapshot 1`] = `
     class="_container_e01689"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1gwrruu-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_6d7af0 css-1gwrruu-MuiPaper-root-MuiCard-root"
     >
       <a
         class="_link_6d7af0"
@@ -34,7 +34,7 @@ exports[`MovieList > should match snapshot 1`] = `
       </a>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1gwrruu-MuiPaper-root-MuiCard-root"
+      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_6d7af0 css-1gwrruu-MuiPaper-root-MuiCard-root"
     >
       <a
         class="_link_6d7af0"

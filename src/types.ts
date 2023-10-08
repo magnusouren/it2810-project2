@@ -1,5 +1,6 @@
 export interface User {
   name: string;
+  ratings: Rating[];
   watchlist?: Movie[];
 }
 
@@ -23,4 +24,9 @@ export interface Movie {
 export interface Category {
   id: number;
   name: string;
+}
+
+export interface Rating {
+  movieId: number;
+  rating: number;
 }

@@ -1,5 +1,4 @@
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { BookmarkAdd, BookmarkRemove } from '@mui/icons-material';
 import { ToggleButton } from '@mui/material';
 import { FC, memo, useState } from 'react';
 
@@ -10,13 +9,14 @@ interface WatchlistButtonProps {
   movie: Movie;
   existInWatchlist: (movie: Movie) => boolean;
   toggleMovieInWatchlist: (movie: Movie) => void;
+  style?: 'big' | 'small';
 }
 
-const Button: FC<WatchlistButtonProps> = ({ movie, existInWatchlist, toggleMovieInWatchlist }) => {
+const Button: FC<WatchlistButtonProps> = ({ movie, existInWatchlist, toggleMovieInWatchlist, style = 'small' }) => {
   const [selected, setSelected] = useState(() => existInWatchlist(movie));
 
   return (
-    <div className={styles.container}>
+    <div className={style == 'big' ? styles.bigContainer : styles.smallContainer}>
       <ToggleButton
         value='check'
         selected={selected}
@@ -27,7 +27,7 @@ const Button: FC<WatchlistButtonProps> = ({ movie, existInWatchlist, toggleMovie
           toggleMovieInWatchlist(movie);
         }}
       >
-        {selected ? <RemoveIcon /> : <AddIcon />}
+        {selected ? <BookmarkRemove className={styles.remove} /> : <BookmarkAdd className={styles.add} />}
       </ToggleButton>
     </div>
   );

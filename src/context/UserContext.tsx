@@ -13,6 +13,7 @@ interface UserContextProps {
   toggleMovieInWatchlist: (movie: Movie) => void;
   existInWatchlist: (movie: Movie) => boolean;
   getWatchlist: () => Movie[];
+  addRating: (movieId: number, rating: number) => void;
 }
 
 const UserContext = createContext<UserContextProps | null>(null);
@@ -43,6 +44,17 @@ export function useUser() {
  */
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | undefined>(getItem('user') as User | undefined);
+
+  const addRating = (movieId: number, rating: number) => {
+    if (user) {
+      const newUser = {
+        ...user,
+        ratings: [...user.ratings.filter((r) => r.movieId !== movieId), { movieId: movieId, rating: rating }],
+      };
+      setUser(newUser);
+      setItem('user', newUser);
+    }
+  };
 
   const addMovieToWatchlist = (movie: Movie) => {
     if (user) {
@@ -83,7 +95,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   const login = () => {
-    const tempUser = { name: faker.person.fullName() } as User;
+    const tempUser = { name: faker.person.fullName(), ratings: [] } as User;
     if (!itemExists('user')) setItem('user', tempUser);
     setUser(getItem('user'));
   };
@@ -106,6 +118,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     toggleMovieInWatchlist,
     existInWatchlist,
     getWatchlist,
+    addRating,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
