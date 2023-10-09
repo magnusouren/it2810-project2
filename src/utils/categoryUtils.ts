@@ -16,6 +16,10 @@ export const getCategoryIds = (): number[] => {
   return categoryData.map((category) => category.id);
 };
 
+export const getCategories = (): Category[] => {
+  return categoryData;
+};
+
 export const getCategoryNames = (): string[] => {
   return categoryData.map((category) => category.name);
 };
