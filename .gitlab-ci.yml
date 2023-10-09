@@ -1,6 +1,6 @@
 image: node:20
 
-cache:  # Cache modules in between jobs
+cache: # Cache modules in between jobs
   key: $CI_COMMIT_REF_SLUG
   paths:
     - .npm/
@@ -38,7 +38,7 @@ lint-test-job 2/2:
   stage: lint-css
   script:
     - echo "Linting code..."
-    - npm run lint:css
+    - npm run lint:style
     - echo "No lint issues found."
 
 build-job:

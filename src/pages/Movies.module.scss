@@ -8,3 +8,17 @@
   justify-content: center;
   margin: 2rem 0;
 }
+
+.filter {
+  p {
+    margin-bottom: 1rem;
+  }
+
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  box-shadow: 1px 5px 5px 0 rgb(85 85 85 / 30%);
+
+  select {
+    margin-left: 1rem;
+  }
+}
