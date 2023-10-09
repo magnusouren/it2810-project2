@@ -12,6 +12,23 @@ interface WatchlistButtonProps {
   style?: 'big' | 'small';
 }
 
+/**
+ * TODO: Add unit tests
+ */
+
+/**
+ *
+ * WatchlistButton component.
+ * Displays a button that adds/removes a movie from the watchlist.
+ *
+ * @param movie
+ * @param existInWatchlist
+ * @param toggleMovieInWatchlist
+ * @param style
+ * @returns {React.JSX.Element}
+ *
+ */
+
 const Button: FC<WatchlistButtonProps> = ({ movie, existInWatchlist, toggleMovieInWatchlist, style = 'small' }) => {
   const [selected, setSelected] = useState(() => existInWatchlist(movie));
 

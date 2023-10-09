@@ -15,9 +15,10 @@ import styles from './LoginButton.module.scss';
  * - Logout
  * - Delete user
  *
- * @returns {JSX.Element}
+ * @returns {React.JSX.Element}
  */
-function LoginButton() {
+
+const LoginButton = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const userContext = useUser();
   if (!userContext) throw new Error('UserContext is null');
@@ -71,6 +72,6 @@ function LoginButton() {
       <p className={styles.loginText}>Login</p>
     </IconButton>
   );
-}
+};
 
 export default LoginButton;

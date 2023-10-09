@@ -8,6 +8,16 @@ interface MovieListProps {
   movies: Movie[];
 }
 
+/**
+ *
+ * MovieList component.
+ * Maps all movies to MovieCard components.
+ *
+ * @param movies
+ * @returns {React.JSX.Element}
+ *
+ */
+
 export const MovieList: FC<MovieListProps> = ({ movies }) => {
   return (
     <>

@@ -7,6 +7,14 @@ import Search from '../search/Search';
 import LoginButton from './LoginButton';
 import styles from './Navbar.module.scss';
 
+/**
+ *
+ * Navbar component.
+ *
+ * @returns {React.JSX.Element}
+ *
+ */
+
 const Navbar: React.FC = () => {
   return (
     <AppBar position='static'>

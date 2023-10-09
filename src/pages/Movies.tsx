@@ -7,6 +7,14 @@ import { Movie } from '../types';
 import { getCategories } from '../utils/categoryUtils';
 import styles from './Movies.module.scss';
 
+/**
+ *
+ * Movies component.
+ * Displays a list of movies with pagination and filtering.
+ *
+ * @returns {React.JSX.Element}
+ */
+
 export const Movies = () => {
   const sizeLimit = 16;
 

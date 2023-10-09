@@ -8,6 +8,17 @@ interface StarRatingProps {
   movieId: number;
 }
 
+/**
+ *
+ * StarRating component.
+ * Allows the user to rate a movie.
+ * The rating is saved to the user's account.
+ *
+ * @param movieId
+ * @returns {React.JSX.Element}
+ *
+ */
+
 export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
   const userContext = useUser();
   if (!userContext) throw new Error('UserContext is null');

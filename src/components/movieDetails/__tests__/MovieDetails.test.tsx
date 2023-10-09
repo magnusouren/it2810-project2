@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
-import { renderWithRouterAndUserContext } from '../../utils/testUtils';
-import { MovieDetails } from './MovieDetails';
+import { renderWithRouterAndUserContext } from '../../../utils/testUtils';
+import { MovieDetails } from '../MovieDetails';
 
 const movie = {
   adult: false,
