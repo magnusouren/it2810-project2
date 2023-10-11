@@ -19,17 +19,12 @@ exports[`Navbar > Should match snapshot 1`] = `
           tabindex="0"
           type="button"
         >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          <img
+            alt="yeha"
             data-testid="HomeIcon"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
-            />
-          </svg>
+            src="/project2/src/assets/SVG/camera-white.svg"
+            width="40"
+          />
           <h6
             class="MuiTypography-root MuiTypography-h6 _navbarTitle_3eb8eb css-2ulfj5-MuiTypography-root"
           />

@@ -1,5 +1,15 @@
 @use '../colors';
 
+.wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url('../assets/SVG/camera-gray.svg') no-repeat;
+  background-size: 30%;
+  background-position: 96% 100%;
+  transform: rotateZ(0.02turn);
+}
+
 section {
   margin: 0 20%;
 
