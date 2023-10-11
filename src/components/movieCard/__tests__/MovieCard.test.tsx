@@ -45,6 +45,6 @@ describe('MovieCard', () => {
 
     const posterElement = screen.getByAltText(movie.title);
     expect(posterElement).toBeDefined();
-    expect(posterElement).toHaveProperty('src', `https://image.tmdb.org/t/p/w200${movie.poster_path}`);
+    expect(posterElement).toHaveProperty('src', `https://image.tmdb.org/t/p/w400${movie.poster_path}`);
   });
 });
