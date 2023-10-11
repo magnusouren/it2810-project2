@@ -10,6 +10,8 @@
   "rules": {
     "selector-class-pattern": null,
     "selector-id-pattern": null,
-    "at-rule-no-unknown": null
+    "at-rule-no-unknown": null,
+    "media-feature-name-no-unknown": null,
+    "media-query-no-invalid": null
   }
 }

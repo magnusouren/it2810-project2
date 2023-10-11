@@ -32,6 +32,7 @@ describe('MovieDetails', () => {
 
   it('renders the movie title and release year', () => {
     const titleElement = screen.getByText(movie.title + ' (' + movie.release_date.split('-')[0] + ')');
+
     expect(titleElement).toBeDefined();
   });
 

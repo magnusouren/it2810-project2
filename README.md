@@ -7,6 +7,16 @@ Binge Watcher is a platform to search for movies and TV shows. The user can sear
 This readme is intended to provide a brief overview of the project setup and available npm scripts.
 Other documentation can be found in the [docs](./docs) folder.
 
+## Third party libraries
+
+- [MUI](https://mui.com/) - React UI framework
+
+We have used MaterialUI for more effecient and faster development. MaterialUI provides a lot of components that we can use, and we have used some of them in our project.
+
+- [SCSS](https://sass-lang.com/) - CSS preprocessor
+
+We have used .SCSS files to style our components. This makes it easier to style our components, and we can use variables and mixins to make our code more reusable.
+
 ## Environment
 
 The system is built on node v20.5.0 and npm v9.8.1.

@@ -1,7 +1,12 @@
 @use '../../styles/colors.scss';
+@use '../../styles/breakpoints.scss';
 
 .container {
   position: relative;
+
+  .textContent {
+    background-color: white;
+  }
 }
 
 .backdropPoster {
@@ -21,7 +26,7 @@
   justify-content: space-between;
   margin-top: 2rem;
 
-  @media screen and (width <= 1024px) {
+  @media screen and (width <= breakpoints.$l) {
     flex-direction: column;
   }
 
@@ -33,7 +38,7 @@
   .textContent {
     width: 45%;
 
-    @media screen and (width <= 1024px) {
+    @media screen and (width <= breakpoints.$l) {
       width: 100%;
     }
   }
@@ -47,7 +52,7 @@
     color: colors.$quaternary-color;
     border-radius: 5px;
 
-    @media screen and (width <= 1024px) {
+    @media screen and (width <= breakpoints.$l) {
       width: 100%;
       padding: 20px 0;
     }
@@ -80,4 +85,11 @@
   .slider {
     color: colors.$accent-color;
   }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
