@@ -10,13 +10,15 @@
 }
 
 .filter {
-  p {
-    margin-bottom: 1rem;
-  }
-
+  background-color: white;
+  border-radius: 4px;
   margin-bottom: 1.5rem;
   padding: 1rem;
   box-shadow: 1px 5px 5px 0 rgb(85 85 85 / 30%);
+
+  p {
+    margin-bottom: 1rem;
+  }
 
   select {
     margin-left: 1rem;
