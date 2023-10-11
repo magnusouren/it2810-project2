@@ -1,6 +1,7 @@
 @use 'Navbar.module.scss';
+@use '../../styles/breakpoints.scss';
 
-@media screen and (width <= 550px) {
+@media screen and (width <= breakpoints.$s) {
   .loginText {
     display: none;
   }

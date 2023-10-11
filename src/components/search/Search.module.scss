@@ -1,10 +1,9 @@
 .searchBar {
   background-color: rgb(255 255 255 / 34.9%);
   border-radius: 4px;
-  width: 300px;
-  max-width: 300px;
   margin: auto 25px;
   margin-top: 15px;
+  width: 50%;
 }
 
 .searchInput {
@@ -12,9 +11,22 @@
 }
 
 .dropdown {
-  background-color: rgb(120 112 112);
+  background-color: rgb(227 227 227);
+  color: black;
   max-height: 500px;
   overflow-y: scroll;
+  z-index: 2;
+  position: relative;
+  margin-left: 2px;
+
+  li {
+    border-bottom: 0.5px solid black;
+  }
+
+  li:hover {
+    box-shadow: rgb(20 19 19) 0 0 10px;
+    cursor: pointer;
+  }
 }
 
 .movie {
@@ -22,10 +34,5 @@
 
   p {
     line-height: 20px;
-  }
-
-  :hover {
-    box-shadow: rgb(20 19 19) 0 0 10px;
-    cursor: pointer;
   }
 }

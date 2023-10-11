@@ -22,8 +22,10 @@ interface MovieDetailsProps {
 
 export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
   const userContext = useUser();
+
   if (!userContext) return null;
   const { user, existInWatchlist, toggleMovieInWatchlist } = userContext;
+
   return (
     <>
       <img

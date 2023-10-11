@@ -1,4 +1,5 @@
 @use '../styles/colors';
+@use '../styles/breakpoints';
 
 .wallpaper {
   position: fixed;
@@ -13,15 +14,15 @@
 section {
   margin: 0 20%;
 
-  @media (width <= 1024px) {
+  @media (width <= breakpoints.$l) {
     margin: 0 10%;
   }
 
-  @media (width <= 768px) {
+  @media (width <= breakpoints.$m) {
     margin: 0 5%;
   }
 
-  @media (width <= 480px) {
+  @media (width <= breakpoints.$xs) {
     margin: 0 2%;
   }
 

@@ -1,18 +1,20 @@
+@use '../../styles/breakpoints.scss';
+
 // container grid with 4 elements per row
 .container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1.5rem;
 
-  @media (width <= 1024px) {
+  @media (width <= breakpoints.$l) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (width <= 768px) {
+  @media (width <= breakpoints.$m) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (width <= 480px) {
+  @media (width <= breakpoints.$xs) {
     grid-template-columns: 1fr;
 
     > div {

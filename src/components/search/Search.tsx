@@ -26,10 +26,21 @@ const Search: React.FC = () => {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
-  const filteredMovies: Movie[] = movieData.filter((movie: Movie) => {
-    // Case-insensitive search by movie title
-    return movie.title.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  const filteredMovies: Movie[] = movieData
+    .filter((movie: Movie) => {
+      // Case-insensitive search by movie title
+      return movie.title.toLowerCase().includes(searchTerm.toLowerCase());
+    })
+    .sort((a, b) => {
+      // Sorts the movies by title, with the ones starting with the search term first
+      if (a.title.startsWith(searchTerm) && !b.title.startsWith(searchTerm)) {
+        return -1;
+      } else if (!a.title.startsWith(searchTerm) && b.title.startsWith(searchTerm)) {
+        return 1;
+      } else {
+        return a.title.localeCompare(b.title);
+      }
+    });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
