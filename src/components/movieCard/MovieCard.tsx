@@ -27,9 +27,9 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
   const { user, existInWatchlist, toggleMovieInWatchlist } = userContext;
 
   return (
-    <Card sx={{ maxWidth: 200 }} className={styles.card}>
+    <Card className={styles.card}>
       <Link to={`/movie/${movie.id}`} state={movie} className={styles.link}>
-        <CardMedia component='img' image={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+        <CardMedia component='img' image={`https://image.tmdb.org/t/p/w400${movie.poster_path}`} alt={movie.title} />
         <CardContent>
           <Typography gutterBottom component='div'>
             {movie.title}
