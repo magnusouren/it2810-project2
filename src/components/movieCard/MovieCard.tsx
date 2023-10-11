@@ -12,6 +12,15 @@ interface MovieProps {
   movie: Movie;
 }
 
+/**
+ *
+ * MovieCard component.
+ * Takes values from parameters and displays them in an organized card.
+ *
+ * @param movie
+ * @returns {React.JSX.Element}
+ */
+
 export const MovieCard: FC<MovieProps> = ({ movie }) => {
   const userContext = useUser();
   if (!userContext) return null;

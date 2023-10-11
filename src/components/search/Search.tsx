@@ -7,6 +7,19 @@ import movieData from '../../../storage/data.json';
 import { Movie } from '../../types';
 import styles from './Search.module.scss';
 
+/**
+ * TODO: Add tests
+ */
+
+/**
+ *
+ * Search component.
+ * Displays a search bar that filters movies by title.
+ *
+ * @returns {React.JSX.Element}
+ *
+ */
+
 const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);

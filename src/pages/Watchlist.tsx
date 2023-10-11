@@ -6,6 +6,14 @@ import { useUser } from '../context/UserContext';
 import { Movie } from '../types';
 import styles from './Movies.module.scss';
 
+/**
+ *
+ * Watchlist component.
+ * Displays a list of movies in the user's watchlist with pagination.
+ *
+ * @returns {React.JSX.Element}
+ */
+
 export const Watchlist = () => {
   const sizeLimit = 16;
 
