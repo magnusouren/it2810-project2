@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 import { renderWithRouterAndUserContext } from '../../../utils/testUtils';
 import { MovieDetails } from '../MovieDetails';
@@ -26,7 +26,7 @@ describe('MovieDetails', () => {
   });
 
   it('should match snapshot', () => {
-    const { container } = render(<MovieDetails movie={movie} />);
+    const { container } = renderWithRouterAndUserContext(<MovieDetails movie={movie} />);
     expect(container).toMatchSnapshot();
   });
 
