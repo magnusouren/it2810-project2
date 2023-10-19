@@ -21,7 +21,6 @@ interface StarRatingProps {
 
 export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
   const userContext = useUser();
-  if (!userContext) throw new Error('UserContext is null');
   const { user, addRating } = userContext;
 
   const [value, setValue] = useState<number>(user?.ratings?.find((rating) => rating.movieId === movieId)?.rating || 0);

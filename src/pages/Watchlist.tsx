@@ -28,7 +28,6 @@ export const Watchlist = () => {
   };
 
   const userContext = useUser();
-  if (!userContext) return null;
   const { getWatchlist } = userContext;
 
   const watchlistMovies = getWatchlist();

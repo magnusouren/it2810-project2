@@ -23,7 +23,6 @@ interface MovieProps {
 
 export const MovieCard: FC<MovieProps> = ({ movie }) => {
   const userContext = useUser();
-  if (!userContext) return null;
   const { user, existInWatchlist, toggleMovieInWatchlist } = userContext;
 
   return (

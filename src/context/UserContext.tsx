@@ -31,7 +31,11 @@ const UserContext = createContext<UserContextProps | null>(null);
  */
 // eslint-disable-next-line react-refresh/only-export-components
 export function useUser() {
-  return useContext(UserContext);
+  const context = useContext(UserContext);
+
+  if (!context) throw new Error('useUser must be used within a UserProvider');
+
+  return context;
 }
 
 /**

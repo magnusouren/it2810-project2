@@ -21,7 +21,6 @@ import styles from './LoginButton.module.scss';
 const LoginButton = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const userContext = useUser();
-  if (!userContext) throw new Error('UserContext is null');
   const { user, login, logout, deleteUser } = userContext;
 
   const handleLogin = () => {
