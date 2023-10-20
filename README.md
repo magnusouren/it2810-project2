@@ -40,10 +40,10 @@ npm install -g npm@9.8.1
 This section provides an overview of the available npm scripts for this project. These scripts help you manage development, testing, building, and other maintenance tasks for the project.
 
 ```
-npm install
+npm setup
 ```
 
-To be executed in order to run the project.
+To be executed in order to run the project. Installs all dependencies in the project.
 
 ```
 npm run dev
@@ -51,26 +51,26 @@ npm run dev
 
 This script starts Vite development mode. The project will run locally on a local port number. Any code changes will trigger automatic browser updates.
 
-```
-npm start
-```
-
-This script also starts Vite development mode and behaves identically to `npm run dev`.
-
 ```cli
 npm test
 ```
 
-This script runs tests using Vitest. It will execute all tests in the project.
+This script will run all the test files in the project.
 
 ```cli
-npm run coverage
+npm run test:frontend
 ```
 
-This script runs tests with code coverage using Vitest. After completion, it will generate code coverage reports that you can find in your project. You can find the reports [here](./coverage/index.html)
+This script runs tests in the frontend using Vitest. It will execute all tests in the `./client` directory.
+
+```cli
+npm run coverage:frontend
+```
+
+This script runs tests with code coverage using Vitest. After completion, it will generate code coverage reports that you can find in your project. You can find the reports [here](./client/coverage/index.html).
 
 ```
-npm run build
+npm run build:frontend
 ```
 
 This script builds the project for production using Vite. Before building, it will perform the following steps:
@@ -79,12 +79,6 @@ This script builds the project for production using Vite. Before building, it wi
 - Run linting for SCSS files.
 - Run TypeScript compilation.
 - Run Vite bundling.
-
-```
-npm run build:ci
-```
-
-This script builds the project for production using Vite. This script is intended for use in continuous integration (CI) environments, to ensure that the project builds correctly in CI.
 
 ```cli
 npm run lint
@@ -121,6 +115,12 @@ npm run format
 ```
 
 This script runs Prettier to format the code in TypeScript, JavaScript, SCSS, JSON, and CSS files in the project according to the configuration defined in the .prettierrc.cjs file.
+
+```cli
+npm run setup:ci
+```
+
+This script is used by the CI pipeline to install dependencies and build the project.
 
 ## Copy project to VM
 

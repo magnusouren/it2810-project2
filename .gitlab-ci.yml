@@ -7,7 +7,7 @@ cache: # Cache modules in between jobs
 
 #TODO: Split frontend and server CI
 before_script:
-  - npm ci
+  - npm run setup:ci
 
 stages:
   - test
