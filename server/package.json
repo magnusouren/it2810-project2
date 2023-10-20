@@ -1,0 +1,21 @@
+{
+  "name": "bingewatcher-server",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Bingewatcher",
+  "type": "module",
+  "scripts": {
+    "compile": "tsc",
+    "start": "npm run compile && node ./dist/index.js"
+  },
+  "author": "Team 16 | IT2810 NTNU",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.8.7",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.9.4",
+    "graphql": "^16.8.1"
+  }
+}
