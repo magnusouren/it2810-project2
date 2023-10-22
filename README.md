@@ -40,10 +40,17 @@ npm install -g npm@9.8.1
 This section provides an overview of the available npm scripts for this project. These scripts help you manage development, testing, building, and other maintenance tasks for the project.
 
 ```
-npm setup
+npm run setup
 ```
 
 To be executed in order to run the project. Installs all dependencies in the project.
+It runs three concurrent terminals to install dependencies for the root, backend and frontend.
+
+```cli
+npm run setup:nonconcurrent
+```
+
+This script installs all dependencies in the project, non concurrently.
 
 ```
 npm run dev
