@@ -5,8 +5,9 @@ cache: # Cache modules in between jobs
   paths:
     - .npm/
 
+#TODO: Split frontend and server CI
 before_script:
-  - npm ci
+  - npm run setup:ci
 
 stages:
   - test
@@ -18,14 +19,16 @@ unit-test-job:
   stage: test
   script:
     - echo "Running unit tests..."
+    - cd client
+    - npm ci
     - npm run coverage
   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   artifacts:
     when: always
     paths:
-      - ./coverage/junit.xml
+      - ./client/coverage/junit.xml
     reports:
-      junit: ./coverage/junit.xml
+      junit: ./client/coverage/junit.xml
 
 lint-test-job 1/2:
   stage: lint
@@ -45,5 +48,7 @@ build-job:
   stage: build
   script:
     - echo "Compiling the code..."
-    - npm run build:ci
+    - cd client
+    - npm ci
+    - npm run build
     - echo "Compile complete."
