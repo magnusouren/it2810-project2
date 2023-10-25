@@ -26,9 +26,9 @@ unit-test-job:
   artifacts:
     when: always
     paths:
-      - ./coverage/junit.xml
+      - ./client/coverage/junit.xml
     reports:
-      junit: ./coverage/junit.xml
+      junit: ./client/coverage/junit.xml
 
 lint-test-job 1/2:
   stage: lint
