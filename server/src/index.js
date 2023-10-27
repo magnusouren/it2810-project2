@@ -1,8 +1,9 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
 import dotenv from 'dotenv';
+dotenv.config();
 import { readFileSync } from 'fs';
 import mongoose from 'mongoose';
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
 
 /**
  * Mock data
@@ -42,16 +43,14 @@ const typeDefs = readFileSync('./src/schema.graphql', 'utf8');
 /**
  * Conifgure MongoDB details
  */
-dotenv.config();
-const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_DB}.9yooxkj.mongodb.net/?retryWrites=true&w=majority`;
 
-/**
- * Start server
- *
- * The ApolloServer constructor requires two parameters: your schema
- * definition and your set of resolvers.
- *
- */
+// /**
+//  * Start server
+//  *
+//  * The ApolloServer constructor requires two parameters: your schema
+//  * definition and your set of resolvers.
+//  *
+//  */
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -59,7 +58,7 @@ const server = new ApolloServer({
 
 // For now, only starting server if we can connect to DB
 mongoose
-  .connect(uri)
+  .connect(process.env.URI)
   .then(async () => {
     console.log('Connected to MongoDB');
 
