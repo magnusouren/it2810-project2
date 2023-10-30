@@ -1,12 +1,54 @@
-# This "Book" type defines the queryable fields for every book in our data source.
-type Book {
-  title: String
-  author: String
+# This Category type defines the queryable fields for every book in our data source.
+type GenreID {
+  _id: Int!
+}
+
+type Genre {
+  name: String!
+  id: GenreID!
+}
+
+type Movie {
+  _id: ID!
+  title: String!
+  genre_ids: [Int]!
+  overview: String!
+  release_date: String!
+  adult: Boolean
+  backdrop_path: String
+  original_language: String
+  original_title: String
+  popularity: Float
+  poster_path: String
+  video: Boolean
+  vote_average: Float
+  vote_count: Int
+}
+
+type Ratings {
+  userID: Int!
+  ratings: [Rating]
+}
+
+type Rating {
+  movieID: Int!
+  rating: Float!
 }
 
 # The "Query" type is special: it lists all of the available queries that
 # clients can execute, along with the return type for each. In this
-# case, the "books" query returns an array of zero or more Books (defined above).
+# case, the "movies" query returns an array of zero or more Movies (defined above).
 type Query {
-  books: [Book]
+  getMovies(page: Int!): [Movie]
+  getMovieById(id: Int!): Movie
+  getMovieByTitle(title: String!): Movie
+  getMoviesByTitle(title: String!): [Movie]
+  getMoviesByGenre(page: Int!, genreId: Int!): [Movie]
+  getMoviesByTitleAZ(page: Int!, genreId: Int, order: String): [Movie]
+  getMoviesByRating(page: Int!, genreId: Int, order: String!): [Movie]
+  getRatingsByUserID(userID: Int!): [Ratings]
+}
+
+type Mutation {
+  addRating(userID: Int!, movieID: Int!, rating: Float!): Ratings
 }
