@@ -1,17 +1,9 @@
 @use '../../styles/colors.scss';
 
 .rating {
-  margin-top: 4rem;
-  border: solid colors.$body-color 0.5px;
-  border-radius: 5px;
-  padding: 20px;
-  margin-bottom: 40px;
-  box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
-  background-color: white;
-
-  h2 {
-    font-size: 1.5em;
+  h3 {
     line-height: 2em;
+    font-weight: 500;
 
     span {
       font-weight: 200;
@@ -19,9 +11,16 @@
   }
 
   p {
-    font-size: 1em;
-    line-height: 1.5em;
+    line-height: 1.75rem;
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .info {
+    line-height: 1.75rem;
+    font-size: 1rem;
     font-style: italic;
-    margin-top: 0.5em;
+    font-weight: 300;
   }
 }

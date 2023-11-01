@@ -1,36 +1,52 @@
 @use '../styles/colors';
 @use '../styles/breakpoints';
 
-.wallpaper {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: url('../assets/SVG/camera-gray.svg') no-repeat;
-  background-size: 30%;
-  background-position: 96% 100%;
-  transform: rotateZ(0.02turn);
+body {
+  background-color: #f9f9f9;
+
+  section {
+    margin: 0 20%;
+
+    @media (width <= breakpoints.$l) {
+      margin: 0 10%;
+    }
+
+    @media (width <= breakpoints.$m) {
+      margin: 0 5%;
+    }
+
+    @media (width <= breakpoints.$xs) {
+      margin: 0 2%;
+    }
+
+    h1 {
+      font-size: 2em;
+      border-bottom: solid colors.$primary-color 2px;
+      line-height: 1.5em;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+  }
 }
 
-section {
-  margin: 0 20%;
+.scrollToTop {
+  position: fixed;
+  z-index: 1000;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  transition: background-color 0.1s ease-in-out;
+  border-color: rgb(40 108 164);
+  border-style: solid;
+
+  &:hover {
+    background-color: white;
+    cursor: pointer;
+  }
 
   @media (width <= breakpoints.$l) {
-    margin: 0 10%;
-  }
-
-  @media (width <= breakpoints.$m) {
-    margin: 0 5%;
-  }
-
-  @media (width <= breakpoints.$xs) {
-    margin: 0 2%;
-  }
-
-  h1 {
-    font-size: 2em;
-    border-bottom: solid colors.$primary-color 2px;
-    line-height: 1.5em;
-    margin-top: 8px;
-    margin-bottom: 16px;
+    display: none;
   }
 }
