@@ -36,7 +36,7 @@ export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
     if (rating) {
       return (
         <span>
-          {rating} star{rating !== 1 ? 's' : ''}
+          {rating} star{rating !== 1 ? 's' : ''} out of 10
         </span>
       );
     }
@@ -44,9 +44,15 @@ export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
   };
   return (
     <div className={styles.rating}>
-      <h2>Your selected rating: {textRating(value)}</h2>
+      <h2>Personal rating:</h2>
+      <p>
+        You can rate this movie by clicking on the stars below. Your rating will be saved to your account and is a great
+        way to keep track of your favorite movies.
+      </p>
+      <h3>Your selected rating: {textRating(value)}</h3>
+
       <Rating
-        name='customized-10'
+        name='star-rating'
         getLabelText={(value: number) => `${value} Star${value !== 1 ? 's' : ''}`}
         precision={0.5}
         max={10}
@@ -56,7 +62,7 @@ export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
         }}
         size='large'
       />
-      <p>Click on a star to select/change rating. The rating will be saved to your account.</p>
+      <p className={styles.info}>Click on a star to select/change rating. The rating will be saved to your account.</p>
     </div>
   );
 };

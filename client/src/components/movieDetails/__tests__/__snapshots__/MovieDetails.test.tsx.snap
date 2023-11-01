@@ -2,98 +2,191 @@
 
 exports[`MovieDetails > should match snapshot 1`] = `
 <div>
-  <img
-    alt="Foo Bar backdrop poster"
-    class="_backdropPoster_5e4481"
-    src="https://image.tmdb.org/t/p/original//mockBackdropURL.jpg"
-  />
   <div
-    class="_container_5e4481"
+    class="_movieDetails_5e4481"
   >
-    <div
-      class="_bigContainer_5a3f18"
+    <a
+      class="_goBack_5e4481"
+      href="/"
     >
-      <button
-        aria-pressed="false"
-        class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary css-1dlyelz-MuiButtonBase-root-MuiToggleButton-root"
-        tabindex="0"
-        type="button"
-        value="check"
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+        data-testid="ArrowBackIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
       >
-        <svg
-          aria-hidden="true"
-          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium _add_5a3f18 css-i4bv87-MuiSvgIcon-root"
-          data-testid="BookmarkAddIcon"
-          focusable="false"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M21 7h-2v2h-2V7h-2V5h2V3h2v2h2v2zm-2 14-7-3-7 3V5c0-1.1.9-2 2-2h7c-.63.84-1 1.87-1 3 0 2.76 2.24 5 5 5 .34 0 .68-.03 1-.1V21z"
-          />
-        </svg>
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        <path
+          d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
         />
-      </button>
-    </div>
-    <h1>
-      Foo Bar
-       (
-      1970
-      )
-    </h1>
-    <p
-      class="_date_5e4481"
-    >
-      1970-01-01
-       - 
-      Adventure, Action
-    </p>
+      </svg>
+       
+      <span>
+        Movies
+      </span>
+    </a>
+    <img
+      alt="Foo Bar backdrop poster"
+      class="_backdropPoster_5e4481"
+      src="https://image.tmdb.org/t/p/original//mockBackdropURL.jpg"
+    />
     <div
-      class="_content_5e4481"
+      class="_container_5e4481"
     >
       <div
-        class="_textContent_5e4481"
+        class="_bigContainer_5a3f18"
       >
-        <p
-          class="_overview_5e4481"
+        <button
+          aria-pressed="false"
+          class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary css-1dlyelz-MuiButtonBase-root-MuiToggleButton-root"
+          tabindex="0"
+          type="button"
+          value="check"
         >
-          Simple mock overview
-        </p>
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium _add_5a3f18 css-i4bv87-MuiSvgIcon-root"
+            data-testid="BookmarkAddIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M21 7h-2v2h-2V7h-2V5h2V3h2v2h2v2zm-2 14-7-3-7 3V5c0-1.1.9-2 2-2h7c-.63.84-1 1.87-1 3 0 2.76 2.24 5 5 5 .34 0 .68-.03 1-.1V21z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
       </div>
+      <h1>
+        Foo Bar
+         (
+        1970
+        )
+      </h1>
+      <p
+        class="_date_5e4481"
+      >
+        1970-01-01
+         - 
+        Adventure, Action
+      </p>
       <div
-        class="_details_5e4481"
+        class="_content_5e4481"
       >
         <div
-          class="_detail_5e4481"
+          class="_textContent_5e4481"
         >
-          <h3>
-            5
-            /10
-          </h3>
-          <p>
-            Avg. Rating
+          <h2
+            class="_subtitle_5e4481"
+          >
+            About:
+          </h2>
+          <p
+            class="_overview_5e4481"
+          >
+            Simple mock overview
           </p>
         </div>
-        <div
-          class="_detail_5e4481"
+        <h2
+          class="_subtitle_5e4481"
         >
-          <h3>
-            555
-          </h3>
-          <p>
-            Vote Count
-          </p>
-        </div>
+          Statistics:
+        </h2>
         <div
-          class="_detail_5e4481"
+          class="_details_5e4481"
         >
-          <h3>
-            1000
-          </h3>
-          <p>
-            Popularity
-          </p>
+          <div
+            class="_detail_5e4481"
+          >
+            <div
+              class="_score_5e4481"
+            >
+              5
+               / 10
+               
+              <div>
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+                  data-testid="StarIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p>
+              Avg. Rating
+            </p>
+          </div>
+          <div
+            class="_detail_5e4481"
+          >
+            <div
+              class="_score_5e4481"
+            >
+              555
+               
+              <div>
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+                  data-testid="PeopleAltIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16.67 13.13C18.04 14.06 19 15.32 19 17v3h4v-3c0-2.18-3.57-3.47-6.33-3.87z"
+                    fill-rule="evenodd"
+                  />
+                  <circle
+                    cx="9"
+                    cy="8"
+                    fill-rule="evenodd"
+                    r="4"
+                  />
+                  <path
+                    d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4c-.47 0-.91.1-1.33.24C14.5 5.27 15 6.58 15 8s-.5 2.73-1.33 3.76c.42.14.86.24 1.33.24zm-6 1c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"
+                    fill-rule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p>
+              Vote Count
+            </p>
+          </div>
+          <div
+            class="_detail_5e4481"
+          >
+            <div
+              class="_score_5e4481"
+            >
+              1000
+               
+              <div>
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+                  data-testid="LiveTvIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M21 6h-7.59l3.29-3.29L16 2l-4 4-4-4-.71.71L10.59 6H3c-1.1 0-2 .89-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.11-.9-2-2-2zm0 14H3V8h18v12zM9 10v8l7-4z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p>
+              Popularity
+            </p>
+          </div>
         </div>
       </div>
     </div>
