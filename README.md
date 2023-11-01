@@ -7,6 +7,10 @@ Binge Watcher is a platform to search for movies and TV shows. The user can sear
 This readme is intended to provide a brief overview of the project setup and available npm scripts.
 Other documentation can be found in the [docs](./docs) folder.
 
+### Feedback
+
+Feedback from the different deliveries during the project can be found in the [docs/feedback.md](./docs/feedback.md) file.
+
 ## Third party libraries
 
 - [MUI](https://mui.com/) - React UI framework
