@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { createContext, ReactNode, useContext, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import { Movie, User } from '../types';
 import { getItem, itemExists, removeItem, setItem } from '../utils/persistency';
@@ -53,7 +54,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     if (user) {
       const newUser: User = {
         ...user,
-        ratings: [...user.ratings.filter((r) => r.movieId !== movieId), { movieId: movieId, rating: rating }],
+        ratings: [...(user.ratings ?? []).filter((r) => r.movieId !== movieId), { movieId: movieId, rating: rating }],
       };
       setUser(newUser);
       setItem('user', newUser);
@@ -99,7 +100,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   const login = () => {
-    const tempUser = { name: faker.person.fullName(), ratings: [] } as User;
+    const tempUser = { name: faker.person.fullName(), id: uuid() } as User;
     if (!itemExists('user')) setItem('user', tempUser);
     setUser(getItem('user'));
   };

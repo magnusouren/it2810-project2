@@ -49,19 +49,18 @@ describe('ratingResolver', () => {
       it('should return ratings for a specific user', async () => {
         // Seed the database with ratings for two different users
         await seedRatings([
-          { userID: '1', ratings: [{ movieID: '1', rating: 5 }] },
-          { userID: '2', ratings: [{ movieID: '2', rating: 8 }] },
+          { _id: '1', ratings: [{ movieID: '1', rating: 5 }] },
+          { _id: '2', ratings: [{ movieID: '2', rating: 8 }] },
         ]);
 
-        const user1Ratings = await ratingQuery.getRatingsByUserID(null, { userID: '1' });
+        const user1Ratings = await ratingQuery.getMovieRatingWithUserID(null, { userID: '1', movieID: '1' });
         expect(user1Ratings).toBeDefined();
-        expect(user1Ratings[0].userID).toBe(1);
-        expect(user1Ratings[0].ratings).toHaveLength(1);
 
-        const user2Ratings = await ratingQuery.getRatingsByUserID(null, { userID: '2' });
+        expect(user1Ratings.rating).toBe(5);
+
+        const user2Ratings = await ratingQuery.getMovieRatingWithUserID(null, { userID: '2', movieID: '2' });
         expect(user2Ratings).toBeDefined();
-        expect(user2Ratings[0].userID).toBe(2);
-        expect(user2Ratings[0].ratings).toHaveLength(1);
+        expect(user2Ratings.rating).toBe(8);
       });
     });
   });
@@ -92,16 +91,15 @@ describe('ratingResolver', () => {
         });
 
         expect(newRating).toBeDefined();
-        expect(newRating.userID).toBe(1);
-        expect(newRating.ratings).toHaveLength(1);
-        expect(newRating.ratings[0].movieID.toString()).toBe('9999');
-        expect(newRating.ratings[0].rating).toBe(7);
+
+        expect(newRating.movieID).toBe(9999);
+        expect(newRating.rating).toBe(7);
       });
 
       it('should update an existing rating for a movie by a user', async () => {
         // Seed with an existing rating
 
-        await seedRatings([{ userID: '1', ratings: [{ movieID: '9999', rating: 5 }] }]);
+        await seedRatings([{ _id: '1', ratings: [{ movieID: '9999', rating: 5 }] }]);
 
         // Update the rating
         const updatedRating = await ratingMutation.addRating(null, {
@@ -111,15 +109,13 @@ describe('ratingResolver', () => {
         });
 
         expect(updatedRating).toBeDefined();
-        expect(updatedRating.userID).toBe(1);
-        expect(updatedRating.ratings).toHaveLength(1);
-        expect(updatedRating.ratings[0].movieID.toString()).toBe('9999');
-        expect(updatedRating.ratings[0].rating).toBe(8.5);
+        expect(updatedRating.rating).toBe(8.5);
+        expect(updatedRating.movieID).toBe(9999);
       });
 
       it('should throw an error if the rating is not between 0 and 9', async () => {
         // Seed with an existing rating
-        await seedRatings([{ userID: '1', ratings: [{ movieID: '9999', rating: 5 }] }]);
+        await seedRatings([{ _id: '1', ratings: [{ movieID: '9999', rating: 5 }] }]);
 
         // Update the rating
         const addRating = ratingMutation.addRating(null, {

@@ -9,7 +9,7 @@ import { UserProvider } from './context/UserContext';
 import { Router } from './routes';
 
 const link = new HttpLink({
-  uri: 'http://localhost:4000', // Endepunktet til din GraphQL server
+  uri: 'http://localhost:4000',
 });
 
 const client = new ApolloClient({

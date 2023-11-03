@@ -3,12 +3,14 @@ import Rating from '../models/Rating.js';
 
 const ratingResolver = {
   Query: {
-    getRatingsByUserID: async (_, { userID }) => {
+    async getMovieRatingWithUserID(_, { userID, movieID }) {
+      // Find the user rating for the given userID and the given movieID in Rating.ratings
       try {
-        const ratings = await Rating.find({ userID: userID });
-        return ratings;
-      } catch (err) {
-        throw new Error(err);
+        const userRating = await Rating.findOne({ _id: userID });
+        const rat = userRating.ratings.find((r) => r.movieID.toString() === movieID.toString());
+        return { rating: rat.rating };
+      } catch (error) {
+        return { rating: 0 };
       }
     },
   },
@@ -24,11 +26,11 @@ const ratingResolver = {
           throw new Error('Movie does not exist');
         }
 
-        let userRating = await Rating.findOne({ userID: userID });
+        let userRating = await Rating.findOne({ _id: userID });
 
         if (!userRating) {
           // If the user doesn't exist, initialize a new userRating
-          userRating = new Rating({ userID: userID, ratings: [] });
+          userRating = new Rating({ _id: userID, ratings: [] });
         }
 
         // Find the existing movie rating for the given movieID
@@ -43,7 +45,7 @@ const ratingResolver = {
         }
 
         await userRating.save();
-        return userRating;
+        return userRating.ratings.filter((r) => r.movieID.toString() === movieID.toString())[0];
       } catch (err) {
         throw new Error(err);
       }

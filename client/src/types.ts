@@ -1,6 +1,7 @@
 export interface User {
   name: string;
-  ratings: Rating[];
+  id: string;
+  ratings?: Rating[];
   watchlist?: Movie[];
 }
 
