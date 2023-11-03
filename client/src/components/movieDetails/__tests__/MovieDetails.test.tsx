@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import { Movie } from '../../../types';
 import { renderWithRouterAndUserContext } from '../../../utils/testUtils';
@@ -20,6 +21,8 @@ const movie: Movie = {
   vote_average: 5,
   vote_count: 555,
 };
+
+window.scrollTo = vi.fn().mockImplementation(() => {});
 
 describe('MovieDetails', () => {
   beforeEach(() => {

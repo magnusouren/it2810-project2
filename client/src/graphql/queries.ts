@@ -56,6 +56,22 @@ export const GET_MOVIES_BY_TITLE = gql`
   }
 `;
 
+export const GET_MOVIE_RATING_WITH_USERID = gql`
+  query getMovieRatingWithUserID($userID: String!, $movieID: Int!) {
+    getMovieRatingWithUserID(userID: $userID, movieID: $movieID) {
+      rating
+    }
+  }
+`;
+
+export const ADD_RATING = gql`
+  mutation addRating($userID: String!, $movieID: Int!, $rating: Float!) {
+    addRating(userID: $userID, movieID: $movieID, rating: $rating) {
+      rating
+    }
+  }
+`;
+
 export const determineQueryAndVariables = (
   page: number,
   genre: string,

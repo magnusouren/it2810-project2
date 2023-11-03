@@ -16,7 +16,7 @@ type Movie {
 }
 
 type Ratings {
-  userID: Int!
+  _id: String!
   ratings: [Rating]
 }
 
@@ -38,12 +38,14 @@ type Query {
   getMoviesByGenre(page: Int!, genreId: Int!): [Movie]
   getMoviesByTitleAZ(page: Int!, genreId: Int, order: String): [Movie]
   getMoviesByRating(page: Int!, genreId: Int, order: String!): [Movie]
+  getMovieRatingWithUserID(userID: String!, movieID: Int!): Rating
   getRatingsByUserID(userID: Int!): [Ratings]
   getWatchlistByUserID(userID: String!): UserWatchlist
   getMovieCountByGenre(genreId: Int): Int
 }
 
 type Mutation {
+  addRating(userID: String!, movieID: Int!, rating: Float!): Rating
   addRating(userID: Int!, movieID: Int!, rating: Float!): Ratings
   addMovieToWatchlist(userID: String!, movieID: Int!): UserWatchlist
 }
