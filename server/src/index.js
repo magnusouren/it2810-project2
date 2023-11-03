@@ -6,15 +6,17 @@ import { mergeResolvers } from '@graphql-tools/merge';
 import { readFileSync } from 'fs';
 import mongoose from 'mongoose';
 
-import movieResolver from './movieResolver.js';
-import ratingResolver from './ratingResolver.js';
+import movieResolver from './resolvers/movieResolver.js';
+import ratingResolver from './resolvers/ratingResolver.js';
+import watchlistResolver from './resolvers/watchlistResolver.js';
+
 /**
  * Schema
  *
  * The GraphQL schema defines the API contract between the client and the server.
  */
 const typeDefs = readFileSync('./src/schema.graphql', 'utf8');
-const mergedResolvers = mergeResolvers([movieResolver, ratingResolver]);
+const mergedResolvers = mergeResolvers([movieResolver, ratingResolver, watchlistResolver]);
 /**
  * Conifgure MongoDB details
  */

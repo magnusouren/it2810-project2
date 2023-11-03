@@ -1,5 +1,5 @@
-import Movie from './models/Movie.js';
-import Rating from './models/Rating.js';
+import Movie from '../models/Movie.js';
+import Rating from '../models/Rating.js';
 
 const ratingResolver = {
   Query: {
@@ -15,8 +15,8 @@ const ratingResolver = {
   Mutation: {
     addRating: async (_, { userID, movieID, rating }) => {
       try {
-        if (rating < 0.5 || rating > 9) {
-          throw new Error('Rating must be between 0 and 9');
+        if (rating < 0.5 || rating > 10) {
+          throw new Error('Rating must be between 0 and 10');
         }
 
         const movieExists = await Movie.exists({ _id: movieID });
