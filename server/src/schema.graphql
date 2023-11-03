@@ -1,13 +1,3 @@
-# This Category type defines the queryable fields for every book in our data source.
-type GenreID {
-  _id: Int!
-}
-
-type Genre {
-  name: String!
-  id: GenreID!
-}
-
 type Movie {
   _id: ID!
   title: String!
@@ -35,9 +25,11 @@ type Rating {
   rating: Float!
 }
 
-# The "Query" type is special: it lists all of the available queries that
-# clients can execute, along with the return type for each. In this
-# case, the "movies" query returns an array of zero or more Movies (defined above).
+type UserWatchlist {
+  userID: String!
+  movies: [Movie]
+}
+
 type Query {
   getMovies(page: Int!): [Movie]
   getMovieById(id: Int!): Movie
@@ -47,9 +39,11 @@ type Query {
   getMoviesByTitleAZ(page: Int!, genreId: Int, order: String): [Movie]
   getMoviesByRating(page: Int!, genreId: Int, order: String!): [Movie]
   getRatingsByUserID(userID: Int!): [Ratings]
+  getWatchlistByUserID(userID: String!): UserWatchlist
   getMovieCountByGenre(genreId: Int): Int
 }
 
 type Mutation {
   addRating(userID: Int!, movieID: Int!, rating: Float!): Ratings
+  addMovieToWatchlist(userID: String!, movieID: Int!): UserWatchlist
 }

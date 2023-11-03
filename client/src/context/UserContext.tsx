@@ -51,7 +51,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   const addRating = (movieId: number, rating: number) => {
     if (user) {
-      const newUser = {
+      const newUser: User = {
         ...user,
         ratings: [...user.ratings.filter((r) => r.movieId !== movieId), { movieId: movieId, rating: rating }],
       };
@@ -62,7 +62,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   const addMovieToWatchlist = (movie: Movie) => {
     if (user) {
-      const newUser = { ...user, watchlist: [...(user.watchlist ?? []), movie] };
+      const newUser: User = { ...user, watchlist: [...(user.watchlist ?? []), movie] };
 
       setUser(newUser);
       setItem('user', newUser);
@@ -71,7 +71,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   const removeMovieFromWatchlist = (movie: Movie) => {
     if (user) {
-      const newUser = {
+      const newUser: User = {
         ...user,
         watchlist: user.watchlist?.filter((watchlistMovie) => watchlistMovie._id !== movie._id),
       };
