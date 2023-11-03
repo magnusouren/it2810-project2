@@ -23,7 +23,7 @@ export const MovieList: FC<MovieListProps> = ({ movies }) => {
     <>
       <div className={styles.container}>
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard key={movie._id} movie={movie} />
         ))}
       </div>
     </>

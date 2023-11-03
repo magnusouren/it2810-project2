@@ -1,11 +1,33 @@
-import { useLocation } from 'react-router-dom';
+import { gql, useQuery } from '@apollo/client';
+import { useParams } from 'react-router-dom';
 
 import { MovieDetails } from '../components/movieDetails/MovieDetails';
-import { Movie as MovieType } from '../types';
+
+const GET_MOVIE = gql`
+  query getMovieById($id: Int!) {
+    getMovieById(id: $id) {
+      _id
+      backdrop_path
+      genre_ids
+      overview
+      popularity
+      release_date
+      title
+      vote_average
+      vote_count
+    }
+  }
+`;
 
 export const Movie = () => {
-  const location = useLocation();
-  const movie = location.state as MovieType;
+  const { id: idParam } = useParams<{ id: string }>();
+  const id = idParam ? parseInt(idParam) : undefined;
 
-  return <MovieDetails movie={movie} />;
+  const { data } = useQuery(GET_MOVIE, {
+    variables: { id },
+  });
+
+  if (!data) return <div>Loading...</div>;
+
+  return <MovieDetails movie={data.getMovieById} />;
 };

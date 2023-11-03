@@ -1,10 +1,10 @@
+import { useQuery } from '@apollo/client';
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment, TextField } from '@mui/material';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import movieData from '../../../storage/data.json';
-import { Movie } from '../../types';
+import { GET_MOVIES_BY_TITLE } from '../../graphql/queries';
 import styles from './Search.module.scss';
 
 /**
@@ -19,37 +19,34 @@ import styles from './Search.module.scss';
  * @returns {React.JSX.Element}
  *
  */
+interface SearchResult {
+  title: string;
+  _id: string;
+}
 
 const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [limit, setLimit] = useState<number>(20);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
-  const filteredMovies: Movie[] = movieData
-    .filter((movie: Movie) => {
-      // Case-insensitive search by movie title
-      return movie.title.toLowerCase().includes(searchTerm.toLowerCase());
-    })
-    .sort((a, b) => {
-      // Sorts the movies by title, with the ones starting with the search term first
-      if (a.title.startsWith(searchTerm) && !b.title.startsWith(searchTerm)) {
-        return -1;
-      } else if (!a.title.startsWith(searchTerm) && b.title.startsWith(searchTerm)) {
-        return 1;
-      } else {
-        return a.title.localeCompare(b.title);
-      }
-    });
+  const { data } = useQuery(GET_MOVIES_BY_TITLE, {
+    variables: { title: searchTerm, limit: limit },
+  });
+
+  const filteredMovies: SearchResult[] = data?.getMoviesByTitle || [];
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     setIsDropdownOpen(true);
+    setLimit(20);
   };
 
-  const handleMovieSelect = (movie: Movie) => {
-    navigate(`/movie/${movie.id}`, { state: movie });
+  const handleMovieSelect = (movie: SearchResult) => {
+    navigate(`/movie/${movie._id}`);
     setIsDropdownOpen(false);
+    setSearchTerm('');
   };
 
   // Hides the dropdown when user clicks outside of it
@@ -66,6 +63,10 @@ const Search: React.FC = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const loadMoreMovies = () => {
+    setLimit(limit + 20);
+  };
 
   return (
     <div className={styles.searchBar}>
@@ -88,11 +89,16 @@ const Search: React.FC = () => {
       {/* Dropdown of filtered movies */}
       {filteredMovies.length > 0 && isDropdownOpen && (
         <ul className={styles.dropdown} ref={dropdownRef}>
-          {filteredMovies.map((movie: Movie) => (
-            <li key={movie.id} className={styles.movie}>
+          {filteredMovies.map((movie: SearchResult) => (
+            <li key={movie._id} className={styles.movie}>
               <p onClick={() => handleMovieSelect(movie)}>{movie.title}</p>
             </li>
           ))}
+          {filteredMovies.length % 20 == 0 && ( // Show "Load More Movies" if there might be more movies
+            <li className={styles.loadMore} onClick={loadMoreMovies}>
+              Load More Movies
+            </li>
+          )}
         </ul>
       )}
     </div>

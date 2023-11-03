@@ -8,38 +8,3 @@
   justify-content: center;
   margin: 2rem 0;
 }
-
-.filter {
-  background-color: white;
-  border-radius: 4px;
-
-  .categorySelect {
-    margin-bottom: 1rem;
-    width: 100%;
-  }
-
-  p {
-    margin-bottom: 1rem;
-  }
-
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  box-shadow: 1px 5px 5px 0 rgb(85 85 85 / 30%);
-
-  select {
-    margin-left: 1rem;
-  }
-
-  .sort {
-    display: flex;
-    gap: 1.5rem;
-
-    .leftSelect {
-      width: 50%;
-    }
-
-    .rightSelect {
-      width: 50%;
-    }
-  }
-}

@@ -1,21 +1,28 @@
 import './index.scss';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
-const queryClient = new QueryClient();
-
 import { UserProvider } from './context/UserContext';
 import { Router } from './routes';
+
+const link = new HttpLink({
+  uri: 'http://localhost:4000', // Endepunktet til din GraphQL server
+});
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: link,
+});
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <UserProvider>
-      <QueryClientProvider client={queryClient}>
+      <ApolloProvider client={client}>
         <RouterProvider router={Router} />
-      </QueryClientProvider>
+      </ApolloProvider>
     </UserProvider>
   </React.StrictMode>,
 );

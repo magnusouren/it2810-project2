@@ -42,11 +42,12 @@ type Query {
   getMovies(page: Int!): [Movie]
   getMovieById(id: Int!): Movie
   getMovieByTitle(title: String!): Movie
-  getMoviesByTitle(title: String!): [Movie]
+  getMoviesByTitle(title: String!, limit: Int!): [Movie]
   getMoviesByGenre(page: Int!, genreId: Int!): [Movie]
   getMoviesByTitleAZ(page: Int!, genreId: Int, order: String): [Movie]
   getMoviesByRating(page: Int!, genreId: Int, order: String!): [Movie]
   getRatingsByUserID(userID: Int!): [Ratings]
+  getMovieCountByGenre(genreId: Int): Int
 }
 
 type Mutation {

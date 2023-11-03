@@ -73,7 +73,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     if (user) {
       const newUser = {
         ...user,
-        watchlist: user.watchlist?.filter((watchlistMovie) => watchlistMovie.id !== movie.id),
+        watchlist: user.watchlist?.filter((watchlistMovie) => watchlistMovie._id !== movie._id),
       };
       setUser(newUser);
       setItem('user', newUser);
@@ -81,7 +81,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   const existInWatchlist = (movie: Movie) => {
-    return user?.watchlist?.map((watchlistMovie) => watchlistMovie.id).includes(movie.id) ?? false;
+    return user?.watchlist?.map((watchlistMovie) => watchlistMovie._id).includes(movie._id) ?? false;
   };
 
   const toggleMovieInWatchlist = (movie: Movie) => {
