@@ -27,7 +27,7 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
 
   return (
     <Card className={styles.card}>
-      <Link to={`/movie/${movie.id}`} state={movie} className={styles.link}>
+      <Link to={`/movie/${movie._id}`} state={movie} className={styles.link}>
         <CardMedia component='img' image={`https://image.tmdb.org/t/p/w400${movie.poster_path}`} alt={movie.title} />
         <CardContent>
           <Typography gutterBottom component='div'>

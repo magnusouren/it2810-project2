@@ -13,7 +13,7 @@ export interface Movie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
-  id: number;
+  _id: number;
   original_language: string;
   original_title: string;
   overview: string;
@@ -39,3 +39,7 @@ export interface Rating {
   movieId: number;
   rating: number;
 }
+
+export type AlphabeticalSort = 'a-z' | 'z-a' | '';
+
+export type RatingSort = 'h-l' | 'l-h' | '';
