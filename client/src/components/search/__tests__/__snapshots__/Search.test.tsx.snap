@@ -35,7 +35,7 @@ exports[`Search > Should match snapshot 1`] = `
           aria-invalid="false"
           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
           id="searchBar"
-          placeholder="Search by title.."
+          placeholder="Search by title..."
           type="text"
           value=""
         />

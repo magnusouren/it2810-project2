@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { FilterSort } from '../components/filterSort/FilterSort';
 import { MovieList } from '../components/movieList/MovieList';
+import Search from '../components/search/Search';
 import { getCachedFilterValues, setCachedFilterValues } from '../graphql/cachedFilterValues';
 import { determineQueryAndVariables } from '../graphql/queries';
 import { AlphabeticalSort, RatingSort } from '../types';
@@ -55,6 +56,7 @@ export const Movies = () => {
   return (
     <>
       {/* Create headerelement with h1 inside */}
+      <Search />
       <h1 className={styles.heading}>
         Movies
         <Pagination

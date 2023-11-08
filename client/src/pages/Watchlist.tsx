@@ -34,7 +34,7 @@ export const Watchlist = () => {
 
   if (!data) return <div>Loading...</div>;
 
-  const length = data.getWatchlistByUserID.length;
+  const length = data.getWatchlistCountByUserID;
   const count = Math.ceil(length / sizeLimit);
 
   if (!user) {

@@ -1,18 +1,41 @@
 import Watchlist from '../models/Watchlist.js';
 
+const pageSize = 16;
+
 const watchlistResolver = {
   Query: {
     getWatchlistByUserID: async (_, { userID, page }) => {
       try {
         // Finds the watchlist for the given userID
-        const watchlist = await Watchlist.findOne({ userID: userID })
-          .skip((page - 1) * 16)
-          .limit(16)
-          .populate('movies');
+        const watchlist = await Watchlist.findOne({ userID: userID }).populate({
+          path: 'movies',
+          options: {
+            skip: (page - 1) * pageSize,
+            limit: pageSize,
+          },
+        });
+
         return watchlist;
       } catch (error) {
         console.error(error);
         throw new Error('Error retrieving watchlist');
+      }
+    },
+    getWatchlistCountByUserID: async (_, { userID }) => {
+      try {
+        // Finds the watchlist for the given userID
+        const watchlist = await Watchlist.findOne({ userID: userID });
+
+        // If user doesn't exist, return 0
+        if (!watchlist) {
+          return 0;
+        }
+
+        // Returns the number of movies in the watchlist
+        return watchlist.movies.length;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Error retrieving watchlist count');
       }
     },
     movieIsInWatchlist: async (_, { userID, movieID }) => {

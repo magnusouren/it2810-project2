@@ -96,7 +96,7 @@ const Search: React.FC = () => {
       <TextField
         id='searchBar'
         variant='outlined'
-        placeholder='Search by title..'
+        placeholder='Search by title...'
         value={searchTerm}
         onChange={handleInputChange}
         className={styles.searchInput}
@@ -110,7 +110,7 @@ const Search: React.FC = () => {
       />
 
       {/* Dropdown of filtered movies */}
-      {data?.getMoviesByTitle.length === 0 && isDropdownOpen && data && (
+      {data?.getMoviesByTitle.length === 0 && isDropdownOpen && data && searchTerm.length > 0 && (
         <ul className={styles.dropdown} ref={dropdownRef}>
           <li id={styles.notFound}>No results found for {`"${searchTerm}"`}</li>
         </ul>
@@ -129,7 +129,12 @@ const Search: React.FC = () => {
             </li>
           ))}
           {data?.getMoviesByTitle.length % 20 === 0 && (
-            <li className={styles.loadMore} onClick={loadMoreMovies}>
+            <li
+              className={styles.loadMore}
+              onClick={loadMoreMovies}
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && loadMoreMovies()}
+            >
               Load more movies...
             </li>
           )}

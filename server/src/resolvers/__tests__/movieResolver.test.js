@@ -117,17 +117,17 @@ describe('movieResolver', () => {
         await seedMovies(movies);
 
         // Test the first page
-        const firstPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'AZ' });
+        const firstPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'a-z' });
         expect(firstPageResults).toHaveLength(16);
 
         // Test the second page
-        const secondPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 2, order: 'AZ' });
+        const secondPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 2, order: 'a-z' });
         expect(secondPageResults).toHaveLength(1);
 
-        const firstPageResultsReversed = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'ZA' });
+        const firstPageResultsReversed = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'z-a' });
         expect(firstPageResultsReversed).toHaveLength(16);
 
-        const secondPageResultsReversed = await movieQuery.getMoviesByTitleAZ(null, { page: 2, order: 'ZA' });
+        const secondPageResultsReversed = await movieQuery.getMoviesByTitleAZ(null, { page: 2, order: 'z-a' });
         expect(secondPageResultsReversed).toHaveLength(1);
       });
 
@@ -145,13 +145,14 @@ describe('movieResolver', () => {
         await seedMovies(movies);
 
         // Test the first page
-        const firstPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'AZ' });
+        const firstPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'a-z' });
+
         expect(firstPageResults).toHaveLength(16);
         for (let i = 0; i < 16; i++) {
           expect(firstPageResults[i].title).toBe(`Test Movie ${letters[i]}`);
         }
         // Test the second page
-        const secondPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 2, order: 'AZ' });
+        const secondPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 2, order: 'a-z' });
         expect(secondPageResults[0].title).toBe(`Test Movie ${letters[16]}`);
       });
 
@@ -169,13 +170,13 @@ describe('movieResolver', () => {
         await seedMovies(movies);
 
         // Test the first page
-        const firstPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'ZA' });
+        const firstPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'z-a' });
         expect(firstPageResults).toHaveLength(16);
         for (let i = 0; i < 16; i++) {
           expect(firstPageResults[i].title).toBe(`Test Movie ${letters[i]}`);
         }
         // Test the second page
-        const secondPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 2, order: 'ZA' });
+        const secondPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 2, order: 'z-a' });
         expect(secondPageResults[0].title).toBe(`Test Movie ${letters[16]}`);
       });
 
@@ -194,17 +195,25 @@ describe('movieResolver', () => {
         await seedMovies(movies);
 
         // Test the first page
-        const firstPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'AZ', genreId: '28' });
+        const firstPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'a-z', genreId: '28' });
         expect(firstPageResults).toHaveLength(10);
         for (let i = 0; i < 10; i++) {
           expect(firstPageResults[i].title).toBe(`Test Movie ${letters[i]}`);
         }
 
-        const secondPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'AZ', genreId: '27' });
+        const secondPageResults = await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'a-z', genreId: '27' });
         expect(secondPageResults).toHaveLength(7);
         const titles = secondPageResults.map((movie) => movie.title);
         const sortedTitles = secondPageResults.map((movie) => movie.title).sort();
         expect(titles).toEqual(sortedTitles);
+      });
+
+      it('should return Error when order is not a-z or z-a', async () => {
+        try {
+          await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'a-m' });
+        } catch (error) {
+          expect(error.message).toBe('Invalid order');
+        }
       });
     });
 
@@ -223,17 +232,17 @@ describe('movieResolver', () => {
         await seedMovies(movies);
 
         // Test the first page
-        const firstPageResults = await movieQuery.getMoviesByRating(null, { page: 1, order: 'ASC' });
+        const firstPageResults = await movieQuery.getMoviesByRating(null, { page: 1, order: 'l-h' });
         expect(firstPageResults).toHaveLength(16);
 
         // Test the second page
-        const secondPageResults = await movieQuery.getMoviesByRating(null, { page: 2, order: 'ASC' });
+        const secondPageResults = await movieQuery.getMoviesByRating(null, { page: 2, order: 'l-h' });
         expect(secondPageResults).toHaveLength(1);
 
-        const firstPageResultsReversed = await movieQuery.getMoviesByRating(null, { page: 1, order: 'DESC' });
+        const firstPageResultsReversed = await movieQuery.getMoviesByRating(null, { page: 1, order: 'h-l' });
         expect(firstPageResultsReversed).toHaveLength(16);
 
-        const secondPageResultsReversed = await movieQuery.getMoviesByRating(null, { page: 2, order: 'DESC' });
+        const secondPageResultsReversed = await movieQuery.getMoviesByRating(null, { page: 2, order: 'h-l' });
         expect(secondPageResultsReversed).toHaveLength(1);
       });
 
@@ -252,14 +261,22 @@ describe('movieResolver', () => {
         await seedMovies(movies);
 
         // Test the first page
-        const firstPageResults = await movieQuery.getMoviesByRating(null, { page: 1, order: 'ASC' });
+        const firstPageResults = await movieQuery.getMoviesByRating(null, { page: 1, order: 'l-h' });
         const ratingslist = firstPageResults.map((movie) => movie.vote_average);
         const filteredRatings = firstPageResults.map((movie) => movie.vote_average).sort();
         expect(ratingslist).toEqual(filteredRatings);
 
         // Test the second page
-        const secondPageResults = await movieQuery.getMoviesByRating(null, { page: 2, order: 'ASC' });
+        const secondPageResults = await movieQuery.getMoviesByRating(null, { page: 2, order: 'l-h' });
         expect(secondPageResults[0].vote_average).toBe(ratings[16]);
+      });
+
+      it('shoudl return Error when order is not l-h or h-l', async () => {
+        try {
+          await movieQuery.getMoviesByRating(null, { page: 1, order: 'l-m' });
+        } catch (error) {
+          expect(error.message).toBe('Invalid order');
+        }
       });
     });
   });
