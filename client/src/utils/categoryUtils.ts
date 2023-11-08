@@ -1,4 +1,4 @@
-import categoryData from '../../storage/categories.json';
+import categoryData from '../storage/categories.json';
 import { Category } from '../types';
 
 export const getCategoryById = (id: number): Category | undefined => {

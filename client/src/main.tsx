@@ -1,4 +1,4 @@
-import './index.scss';
+import './styles/index.scss';
 
 import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client';
 import React from 'react';
