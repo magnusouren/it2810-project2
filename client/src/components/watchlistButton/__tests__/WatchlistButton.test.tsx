@@ -288,7 +288,6 @@ describe('WatchlistButton', () => {
     expect(screen.getByRole('button').querySelector('.remove')).toBeNull();
     expect(screen.getByRole('button').querySelector('.add')).toBeDefined();
     fireEvent.click(screen.getByRole('button'));
-
     expect(screen.getByRole('button').querySelector('.add')).toBeNull();
     expect(screen.getByRole('button').querySelector('.remove')).toBeDefined();
   });

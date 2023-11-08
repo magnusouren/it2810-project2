@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { FilterSort } from '../components/filterSort/FilterSort';
 import { MovieList } from '../components/movieList/MovieList';
+import { getCachedFilterValues, setCachedFilterValues } from '../graphql/cachedFilterValues';
 import { determineQueryAndVariables } from '../graphql/queries';
 import { AlphabeticalSort, RatingSort } from '../types';
 import styles from './Movies.module.scss';
@@ -16,24 +17,34 @@ import styles from './Movies.module.scss';
  * @returns {React.JSX.Element}
  */
 export const Movies = () => {
+  // Retrieving cached filter values to prefill the filter form
+  const {
+    alphabeticalSort: cachedAS,
+    genre: cachedGenre,
+    ratingSort: cachedRatingSort,
+    page: cachedPage,
+  } = getCachedFilterValues();
+
   const sizeLimit = 16;
   const defaultCount = 379;
 
   const [count, setCount] = useState<number | undefined>(undefined);
-  const [page, setPage] = useState(1);
-  const [genre, setGenre] = useState('');
-  const [alphabeticalSort, setAlphabeticalSort] = useState<AlphabeticalSort>('');
-  const [ratingSort, setRatingSort] = useState<RatingSort>('');
+  const [page, setPage] = useState(cachedPage);
+  const [genre, setGenre] = useState(cachedGenre);
+  const [alphabeticalSort, setAlphabeticalSort] = useState<AlphabeticalSort>(cachedAS);
+  const [ratingSort, setRatingSort] = useState<RatingSort>(cachedRatingSort);
 
+  const handlePagination = (_event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    setCachedFilterValues({ alphabeticalSort, genre, ratingSort, page: value });
+  };
+
+  // Creating the query and variables based on the filter values
   const { query, variables } = determineQueryAndVariables(page, genre, alphabeticalSort, ratingSort);
 
   const { data, loading, error } = useQuery(query, {
     variables: variables,
   });
-
-  const handlePagination = (_event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-  };
 
   useEffect(() => {
     if (data) {

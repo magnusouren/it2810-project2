@@ -1,14 +1,15 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { FC } from 'react';
 
+import { setCachedFilterValues } from '../../graphql/cachedFilterValues';
 import { AlphabeticalSort, RatingSort } from '../../types';
 import { getCategories } from '../../utils/categoryUtils';
 import styles from './FilterSort.module.scss';
 
 interface FilterSortProps {
   genre: string;
-  alphabeticalSort: string;
-  ratingSort: string;
+  alphabeticalSort: AlphabeticalSort;
+  ratingSort: RatingSort;
   setGenre: React.Dispatch<React.SetStateAction<string>>;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   setAlphabeticalSort: React.Dispatch<React.SetStateAction<'' | 'a-z' | 'z-a'>>;
@@ -27,16 +28,19 @@ export const FilterSort: FC<FilterSortProps> = ({
   const handleCategoryChange = (event: SelectChangeEvent<string>) => {
     setGenre(event.target.value as string);
     setPage(1);
+    setCachedFilterValues({ alphabeticalSort, genre: event.target.value as string, ratingSort, page: 1 });
   };
 
   const handleAlphabeticalSortChange = (event: SelectChangeEvent<string>) => {
     setAlphabeticalSort(event.target.value as AlphabeticalSort);
     setPage(1);
+    setCachedFilterValues({ alphabeticalSort: event.target.value as AlphabeticalSort, genre, ratingSort, page: 1 });
   };
 
   const handleRatingSortChange = (event: SelectChangeEvent<string>) => {
     setRatingSort(event.target.value as RatingSort);
     setPage(1);
+    setCachedFilterValues({ alphabeticalSort, genre, ratingSort: event.target.value as RatingSort, page: 1 });
   };
 
   return (

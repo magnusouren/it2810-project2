@@ -8,13 +8,13 @@ import { RouterProvider } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import { Router } from './routes';
 
-const link = new HttpLink({
+const serverURI = new HttpLink({
   uri: 'http://localhost:4000',
 });
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: link,
+  link: serverURI,
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
