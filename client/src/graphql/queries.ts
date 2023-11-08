@@ -95,6 +95,7 @@ export const GET_WATCHLIST_BY_USER_ID = gql`
         poster_path
       }
     }
+    getWatchlistCountByUserID(userID: $userId)
   }
 `;
 

@@ -43,36 +43,42 @@ afterAll(async () => {
   await mongod.stop();
 });
 
+const mockedMovies = [
+  {
+    _id: 1,
+    title: 'The Accountant',
+    genre_ids: [28],
+    overview: 'test',
+    release_date: '2016-10-14',
+    adult: false,
+    poster_path: '/9JKtBZxpKsuXlJg3ePOITn5cRru.jpg',
+    video: false,
+    vote_average: 7.3,
+    vote_count: 4859,
+    __v: 0,
+  },
+  {
+    _id: 2,
+    title: 'Another Movie',
+    genre_ids: [28],
+    overview: 'test',
+    release_date: '2016-10-14',
+    adult: false,
+    poster_path: '/9JKtBZxpKsuXlJg3ePOITn5cRru.jpg',
+    video: false,
+    vote_average: 7.3,
+    vote_count: 4859,
+    __v: 0,
+  },
+];
+
 describe('watchlistResolver', () => {
   describe('Query', () => {
     describe('getWatchlistByUserID', () => {
       it('should return a watchlist for a specific user', async () => {
         // Seed the database with a watchlist
         await seedWatchlist([{ userID: '1', movies: ['1', '2'] }]);
-        await seedMovies([
-          {
-            _id: '1',
-            title: 'The Accountant',
-            release_date: '2016-10-14',
-            genres: [28],
-            overview: 'test',
-            runtime: 128,
-            vote_average: 7.3,
-            vote_count: 4859,
-            poster_path: '/9JKtBZxpKsuXlJg3ePOITn5cRru.jpg',
-          },
-          {
-            _id: '2',
-            title: 'Another Movie',
-            release_date: '2016-10-14',
-            genres: [28],
-            overview: 'test',
-            runtime: 128,
-            vote_average: 7.3,
-            vote_count: 4859,
-            poster_path: '/9JKtBZxpKsuXlJg3ePOITn5cRru.jpg',
-          },
-        ]);
+        await seedMovies([mockedMovies[0], mockedMovies[1]]);
 
         const watchlist = await watchlistQuery.getWatchlistByUserID(null, { userID: '1' });
 
@@ -92,7 +98,7 @@ describe('watchlistResolver', () => {
     describe('addMovieToWatchlist', () => {
       it("should add a movie to a user's watchlist", async () => {
         // Seed the database with a watchlist
-        await seedWatchlist([{ userID: '1', movies: ['1'] }]);
+        await seedWatchlist([{ userID: '1', movies: [mockedMovies[0]] }]);
 
         // Add a movie to the watchlist
         const updatedWatchlist = await watchlistMutation.addMovieToWatchlist(null, {
@@ -102,8 +108,16 @@ describe('watchlistResolver', () => {
 
         expect(updatedWatchlist).toBeDefined();
         expect(updatedWatchlist.userID).toBe('1');
-        expect(updatedWatchlist.movies).toContain('1');
-        expect(updatedWatchlist.movies).toContain('2');
+        expect(updatedWatchlist.movies).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              ...mockedMovies[0],
+            }),
+            expect.objectContaining({
+              ...mockedMovies[1],
+            }),
+          ]),
+        );
         expect(updatedWatchlist.movies).toHaveLength(2);
       });
 
@@ -119,8 +133,17 @@ describe('watchlistResolver', () => {
 
         expect(updatedWatchlist).toBeDefined();
         expect(updatedWatchlist.userID).toBe('1');
-        expect(updatedWatchlist.movies).toContain('1');
-        expect(updatedWatchlist.movies).toContain('2');
+        expect(updatedWatchlist.movies).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              ...mockedMovies[0],
+            }),
+            expect.objectContaining({
+              ...mockedMovies[1],
+            }),
+          ]),
+        );
+
         expect(updatedWatchlist.movies).toHaveLength(2); // Length should not change
       });
 
@@ -136,7 +159,13 @@ describe('watchlistResolver', () => {
 
         expect(updatedWatchlist).toBeDefined();
         expect(updatedWatchlist.userID).toBe('2');
-        expect(updatedWatchlist.movies).toContain('2');
+        expect(updatedWatchlist.movies).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              ...mockedMovies[1],
+            }),
+          ]),
+        );
         expect(updatedWatchlist.movies).toHaveLength(1); // Length should not change
       });
     });
