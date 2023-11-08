@@ -114,6 +114,17 @@ export const ADD_RATING = gql`
   }
 `;
 
+export const GET_FILTER = gql`
+  query FilterData {
+    filter @client {
+      alphabeticalSort
+      genre
+      ratingSort
+      page
+    }
+  }
+`;
+
 export const determineQueryAndVariables = (
   page: number,
   genre: string,
