@@ -14,7 +14,7 @@ exports[`Navbar > Should match snapshot 1`] = `
         href="/"
       >
         <button
-          aria-label="home"
+          aria-label="home-button"
           class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeMedium css-1d6w9lk-MuiButtonBase-root-MuiIconButton-root"
           tabindex="0"
           type="button"

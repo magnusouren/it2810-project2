@@ -116,7 +116,7 @@ const Search: React.FC = () => {
         </ul>
       )}
       {data?.getMoviesByTitle.length > 0 && isDropdownOpen && (
-        <ul className={styles.dropdown} ref={dropdownRef} tabIndex={0}>
+        <ul className={styles.dropdown} ref={dropdownRef} tabIndex={0} aria-label='Search result for movie title'>
           {data.getMoviesByTitle.map((movie: SearchResult) => (
             <li
               key={movie._id}
@@ -124,6 +124,7 @@ const Search: React.FC = () => {
               tabIndex={0}
               onClick={() => handleMovieSelect(movie)}
               onKeyDown={(e) => handleKeyDown(e, movie)}
+              aria-label={`Movie: ${movie.title}`}
             >
               {movie.title}
             </li>
