@@ -50,12 +50,12 @@ export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
 
   return (
     <div className={styles.rating}>
-      <h2>Personal rating:</h2>
-      <p>
+      <h2 tabIndex={0}>Personal rating:</h2>
+      <p tabIndex={0}>
         You can rate this movie by clicking on the stars below. Your rating will be saved to your account and is a great
         way to keep track of your favorite movies.
       </p>
-      <h3>
+      <h3 tabIndex={0}>
         Your selected rating: <span>{fetchedRating !== 0 ? fetchedRating + ' of 10 stars' : 'No rating selected'}</span>
       </h3>
       <Rating

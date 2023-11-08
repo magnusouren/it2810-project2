@@ -32,7 +32,7 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
 
   return (
     <div className={styles.movieDetails}>
-      <Link to='/' className={styles.goBack}>
+      <Link to='/' className={styles.goBack} aria-label='link back to movie page'>
         <ArrowBack /> <span>Movies</span>
       </Link>
       <img
@@ -41,23 +41,33 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
         className={styles.backdropPoster}
       />
       <div className={styles.container}>
-        {user && <WatchlistButton movie={movie} style={'small'} user={user} />}
-        <h1>
+        <h1 tabIndex={0}>
           {movie.title} ({movie.release_date.split('-')[0]})
         </h1>
-        <p className={styles.date}>
+        {user && <WatchlistButton movie={movie} style={'small'} user={user} />}
+        <p className={styles.date} tabIndex={0}>
           {movie.release_date} - {movie.genre_ids.map((id) => getCategoryNameById(id)).join(', ')}
         </p>
         <div className={styles.content}>
           <div className={styles.textContent}>
-            <h2 className={styles.subtitle}>About:</h2>
-            <p className={styles.overview}>{movie.overview}</p>
+            <h2 className={styles.subtitle} tabIndex={0}>
+              About:
+            </h2>
+            <p className={styles.overview} tabIndex={0}>
+              {movie.overview}
+            </p>
           </div>
-          <h2 className={styles.subtitle}>Statistics:</h2>
+          <h2 className={styles.subtitle} tabIndex={0}>
+            Statistics:
+          </h2>
           <div className={styles.details}>
             <div className={styles.detail}>
-              <div className={styles.score}>
-                {movie.vote_average} / 10{' '}
+              <div
+                className={styles.score}
+                tabIndex={0}
+                aria-label={`Average rating by other users: ${movie.vote_average} out of 10`}
+              >
+                {movie.vote_average} / 10
                 <div>
                   <Star fontSize='inherit' />
                 </div>
@@ -65,8 +75,8 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
               <p>Avg. Rating</p>
             </div>
             <div className={styles.detail}>
-              <div className={styles.score}>
-                {movie.vote_count}{' '}
+              <div className={styles.score} tabIndex={0} aria-label={`Amount of votes: ${movie.vote_count}`}>
+                {movie.vote_count}
                 <div>
                   <PeopleAlt fontSize='inherit' />
                 </div>
@@ -74,8 +84,8 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
               <p>Vote Count</p>
             </div>
             <div className={styles.detail}>
-              <div className={styles.score}>
-                {movie.popularity}{' '}
+              <div className={styles.score} tabIndex={0} aria-label={`Popularity: ${movie.popularity}`}>
+                {movie.popularity}
                 <div>
                   <LiveTv fontSize='inherit' />
                 </div>

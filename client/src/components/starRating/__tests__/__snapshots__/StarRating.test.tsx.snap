@@ -5,13 +5,19 @@ exports[`StarRating > should match snapshot 1`] = `
   <div
     class="_rating_c26a0d"
   >
-    <h2>
+    <h2
+      tabindex="0"
+    >
       Personal rating:
     </h2>
-    <p>
+    <p
+      tabindex="0"
+    >
       You can rate this movie by clicking on the stars below. Your rating will be saved to your account and is a great way to keep track of your favorite movies.
     </p>
-    <h3>
+    <h3
+      tabindex="0"
+    >
       Your selected rating: 
       <span>
         8 of 10 stars

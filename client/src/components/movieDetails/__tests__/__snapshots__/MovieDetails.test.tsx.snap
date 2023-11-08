@@ -6,6 +6,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
     class="_movieDetails_5e4481"
   >
     <a
+      aria-label="link back to movie page"
       class="_goBack_5e4481"
       href="/"
     >
@@ -33,7 +34,9 @@ exports[`MovieDetails > should match snapshot 1`] = `
     <div
       class="_container_5e4481"
     >
-      <h1>
+      <h1
+        tabindex="0"
+      >
         Foo Bar
          (
         1970
@@ -41,6 +44,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
       </h1>
       <p
         class="_date_5e4481"
+        tabindex="0"
       >
         1970-01-01
          - 
@@ -54,17 +58,20 @@ exports[`MovieDetails > should match snapshot 1`] = `
         >
           <h2
             class="_subtitle_5e4481"
+            tabindex="0"
           >
             About:
           </h2>
           <p
             class="_overview_5e4481"
+            tabindex="0"
           >
             Simple mock overview
           </p>
         </div>
         <h2
           class="_subtitle_5e4481"
+          tabindex="0"
         >
           Statistics:
         </h2>
@@ -75,11 +82,12 @@ exports[`MovieDetails > should match snapshot 1`] = `
             class="_detail_5e4481"
           >
             <div
+              aria-label="Average rating by other users: 5 out of 10"
               class="_score_5e4481"
+              tabindex="0"
             >
               5
                / 10
-               
               <div>
                 <svg
                   aria-hidden="true"
@@ -102,10 +110,11 @@ exports[`MovieDetails > should match snapshot 1`] = `
             class="_detail_5e4481"
           >
             <div
+              aria-label="Amount of votes: 555"
               class="_score_5e4481"
+              tabindex="0"
             >
               555
-               
               <div>
                 <svg
                   aria-hidden="true"
@@ -139,10 +148,11 @@ exports[`MovieDetails > should match snapshot 1`] = `
             class="_detail_5e4481"
           >
             <div
+              aria-label="Popularity: 1000"
               class="_score_5e4481"
+              tabindex="0"
             >
               1000
-               
               <div>
                 <svg
                   aria-hidden="true"
