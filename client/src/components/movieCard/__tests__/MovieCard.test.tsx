@@ -44,7 +44,7 @@ describe('MovieCard', () => {
   it('should render the movie poster', () => {
     renderWithRouterAndUserContext(<MovieCard movie={movie} />);
 
-    const posterElement = screen.getByAltText(movie.title);
+    const posterElement = screen.getByAltText(movie.title + ' poster.');
     expect(posterElement).toBeDefined();
     expect(posterElement).toHaveProperty('src', `https://image.tmdb.org/t/p/w400${movie.poster_path}`);
   });

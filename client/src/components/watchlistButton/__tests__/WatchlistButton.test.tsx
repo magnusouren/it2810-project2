@@ -86,6 +86,20 @@ describe('WatchlistButton', () => {
           },
         },
       },
+      {
+        request: {
+          query: IS_IN_WATCHLIST,
+          variables: {
+            movieId: 111111,
+            userId: mockUser.id,
+          },
+        },
+        result: {
+          data: {
+            movieIsInWatchlist: true,
+          },
+        },
+      },
     ];
     const { container } = renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} style='big' />, mocks);
     expect(container.querySelector('.bigContainer')).toBeDefined();
@@ -145,6 +159,20 @@ describe('WatchlistButton', () => {
       },
       {
         request: {
+          query: IS_IN_WATCHLIST,
+          variables: {
+            movieId: 111111,
+            userId: mockUser.id,
+          },
+        },
+        result: {
+          data: {
+            movieIsInWatchlist: false,
+          },
+        },
+      },
+      {
+        request: {
           query: ADD_MOVIE_TO_WATCHLIST,
           variables: {
             movieId: 111111,
@@ -174,7 +202,7 @@ describe('WatchlistButton', () => {
         },
         result: {
           data: {
-            addMovieToWatchlist: {
+            removeMovieFromWatchlist: {
               userID: mockUser.id,
               movies: [],
             },

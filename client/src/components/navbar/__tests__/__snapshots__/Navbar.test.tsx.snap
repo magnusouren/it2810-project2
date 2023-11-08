@@ -25,9 +25,11 @@ exports[`Navbar > Should match snapshot 1`] = `
             src="/project2/src/assets/SVG/camera-white.svg"
             width="40"
           />
-          <h6
-            class="MuiTypography-root MuiTypography-h6 _navbarTitle_3eb8eb css-2ulfj5-MuiTypography-root"
-          />
+          <h5
+            class="MuiTypography-root MuiTypography-h5 _navbarTitle_3eb8eb css-ag7rrr-MuiTypography-root"
+          >
+            Bingewatcher
+          </h5>
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -66,7 +68,7 @@ exports[`Navbar > Should match snapshot 1`] = `
               aria-invalid="false"
               class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input"
               id="searchBar"
-              placeholder="Search.."
+              placeholder="Search by title.."
               type="text"
               value=""
             />

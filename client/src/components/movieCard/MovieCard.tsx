@@ -28,12 +28,20 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
   return (
     <Card className={styles.card}>
       <Link to={`/movie/${movie._id}`} state={movie} className={styles.link}>
-        <CardMedia component='img' image={`https://image.tmdb.org/t/p/w400${movie.poster_path}`} alt={movie.title} />
+        <CardMedia
+          component='img'
+          image={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
+          alt={movie.title + ' poster.'}
+        />
         <CardContent>
-          <Typography gutterBottom component='div'>
+          <Typography gutterBottom component='div' aria-label={`title: ${movie.title}.`}>
             {movie.title}
           </Typography>
-          <Typography variant='body2' color='text.secondary'>
+          <Typography
+            variant='body2'
+            color='text.secondary'
+            aria-label={`genres:${movie.genre_ids.map((genre) => getCategoryById(genre)?.name)}`}
+          >
             {movie.genre_ids.map((genre) => getCategoryById(genre)?.name).join(', ')}
           </Typography>
         </CardContent>

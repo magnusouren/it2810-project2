@@ -43,13 +43,8 @@ export const FilterSort: FC<FilterSortProps> = ({
     <div className={styles.filter}>
       <p>Filter:</p>
       <FormControl variant='filled' className={styles.categorySelect}>
-        <InputLabel id='demo-simple-select-filled-label'>Category</InputLabel>
-        <Select
-          labelId='demo-simple-select-filled-label'
-          id='demo-simple-select-filled'
-          value={genre}
-          onChange={handleCategoryChange}
-        >
+        <InputLabel id='category'>Category</InputLabel>
+        <Select id='category' value={genre} onChange={handleCategoryChange}>
           <MenuItem value=''>
             <em>None</em>
           </MenuItem>
@@ -63,10 +58,10 @@ export const FilterSort: FC<FilterSortProps> = ({
       <p>Sort:</p>
       <div className={styles.sort}>
         <FormControl variant='filled' className={styles.leftSelect}>
-          <InputLabel id='demo-simple-select-filled-label'>Alphabetical</InputLabel>
+          <InputLabel id='alphabetical-sort'>Alphabetical</InputLabel>
           <Select
-            labelId='demo-simple-select-filled-label'
-            id='demo-simple-select-filled'
+            id='alphabetical sort'
+            labelId='alphabetical-sort'
             value={alphabeticalSort}
             onChange={handleAlphabeticalSortChange}
             disabled={!!ratingSort}
@@ -83,14 +78,8 @@ export const FilterSort: FC<FilterSortProps> = ({
           </Select>
         </FormControl>
         <FormControl variant='filled' className={styles.rightSelect}>
-          <InputLabel id='demo-simple-select-filled-label'>Rating</InputLabel>
-          <Select
-            labelId='demo-simple-select-filled-label'
-            id='demo-simple-select-filled'
-            value={ratingSort}
-            onChange={handleRatingSortChange}
-            disabled={!!alphabeticalSort}
-          >
+          <InputLabel id='rating-sort'>Rating</InputLabel>
+          <Select id='rating-sort' value={ratingSort} onChange={handleRatingSortChange} disabled={!!alphabeticalSort}>
             <MenuItem value=''>
               <em>None</em>
             </MenuItem>
