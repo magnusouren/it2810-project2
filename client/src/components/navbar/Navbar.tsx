@@ -23,7 +23,9 @@ const Navbar: React.FC = () => {
           <IconButton edge='start' color='inherit' aria-label='home'>
             <img src={MovieIcon} width='40' alt='yeha' data-testid='HomeIcon' />
             {/* <HomeIcon /> From MUI */}
-            <Typography variant='h6' className={styles.navbarTitle} />
+            <Typography variant='h5' className={styles.navbarTitle}>
+              Bingewatcher
+            </Typography>
           </IconButton>
         </Link>
         <Search />

@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment, TextField } from '@mui/material';
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { GET_MOVIES_BY_TITLE } from '../../graphql/queries';
@@ -26,30 +26,47 @@ interface SearchResult {
 
 const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [limit, setLimit] = useState<number>(20);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
+  // Use useEffect to debounce search term after user input to prevent too many queries
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm.trim()); // Trim when updating debounced term
+    }, 300); // 300ms delay
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [searchTerm]);
+
+  // Use useQuery to fetch movies by title
   const { data } = useQuery(GET_MOVIES_BY_TITLE, {
-    variables: { title: searchTerm, limit: limit },
+    variables: { title: debouncedSearchTerm, limit: limit },
+    skip: !debouncedSearchTerm, // Skips the query if searchTerm is empty
   });
 
-  const filteredMovies: SearchResult[] = data?.getMoviesByTitle || [];
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  // Use useCallback to prevent to many rerenders
+  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     setIsDropdownOpen(true);
     setLimit(20);
-  };
+  }, []);
 
-  const handleMovieSelect = (movie: SearchResult) => {
-    navigate(`/movie/${movie._id}`);
-    setIsDropdownOpen(false);
-    setSearchTerm('');
-  };
+  // Use useCallback to prevent to many rerenders
+  const handleMovieSelect = useCallback(
+    (movie: SearchResult) => {
+      navigate(`/movie/${movie._id}`);
+      setIsDropdownOpen(false);
+      setSearchTerm('');
+    },
+    [navigate],
+  );
 
-  // Hides the dropdown when user clicks outside of it
+  // Use useEffect to close dropdown when user clicks outside of it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !(dropdownRef.current as Node).contains(event.target as Node)) {
@@ -68,12 +85,18 @@ const Search: React.FC = () => {
     setLimit(limit + 20);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent, movie: SearchResult) => {
+    if (e.key === 'Enter') {
+      handleMovieSelect(movie);
+    }
+  };
+
   return (
     <div className={styles.searchBar}>
       <TextField
         id='searchBar'
         variant='outlined'
-        placeholder='Search..'
+        placeholder='Search by title..'
         value={searchTerm}
         onChange={handleInputChange}
         className={styles.searchInput}
@@ -87,16 +110,27 @@ const Search: React.FC = () => {
       />
 
       {/* Dropdown of filtered movies */}
-      {filteredMovies.length > 0 && isDropdownOpen && (
+      {data?.getMoviesByTitle.length === 0 && isDropdownOpen && data && (
         <ul className={styles.dropdown} ref={dropdownRef}>
-          {filteredMovies.map((movie: SearchResult) => (
-            <li key={movie._id} className={styles.movie}>
-              <p onClick={() => handleMovieSelect(movie)}>{movie.title}</p>
+          <li id={styles.notFound}>No results found for {`"${searchTerm}"`}</li>
+        </ul>
+      )}
+      {data?.getMoviesByTitle.length > 0 && isDropdownOpen && (
+        <ul className={styles.dropdown} ref={dropdownRef} tabIndex={0}>
+          {data.getMoviesByTitle.map((movie: SearchResult) => (
+            <li
+              key={movie._id}
+              className={styles.movie}
+              tabIndex={0}
+              onClick={() => handleMovieSelect(movie)}
+              onKeyDown={(e) => handleKeyDown(e, movie)}
+            >
+              {movie.title}
             </li>
           ))}
-          {filteredMovies.length % 20 == 0 && ( // Show "Load More Movies" if there might be more movies
+          {data?.getMoviesByTitle.length % 20 === 0 && (
             <li className={styles.loadMore} onClick={loadMoreMovies}>
-              Load More Movies
+              Load more movies...
             </li>
           )}
         </ul>

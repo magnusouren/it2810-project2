@@ -10,7 +10,7 @@ exports[`MovieCard > should match snapshot 1`] = `
       href="/movie/111111"
     >
       <img
-        alt="Foo Bar"
+        alt="Foo Bar poster."
         class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-o69gx8-MuiCardMedia-root"
         src="https://image.tmdb.org/t/p/w400/mockPosterURL.jpg"
       />
@@ -18,11 +18,13 @@ exports[`MovieCard > should match snapshot 1`] = `
         class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
       >
         <div
+          aria-label="title: Foo Bar."
           class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-d3wcwz-MuiTypography-root"
         >
           Foo Bar
         </div>
         <p
+          aria-label="genres:Adventure,Action"
           class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
         >
           Adventure, Action
