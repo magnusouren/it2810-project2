@@ -23,7 +23,7 @@ interface MovieProps {
 
 export const MovieCard: FC<MovieProps> = ({ movie }) => {
   const userContext = useUser();
-  const { user, existInWatchlist, toggleMovieInWatchlist } = userContext;
+  const { user } = userContext;
 
   return (
     <Card className={styles.card}>
@@ -38,14 +38,7 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
           </Typography>
         </CardContent>
       </Link>
-      {user && (
-        <WatchlistButton
-          movie={movie}
-          existInWatchlist={existInWatchlist}
-          toggleMovieInWatchlist={toggleMovieInWatchlist}
-          data-testid='watchlist-button'
-        />
-      )}
+      {user && <WatchlistButton movie={movie} user={user} data-testid='watchlist-button' />}
     </Card>
   );
 };

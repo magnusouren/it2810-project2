@@ -13,9 +13,10 @@ interface StarRatingProps {
 export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
   const userContext = useUser();
   const { user } = userContext;
+  const MId: number = parseInt(movieId.toString()); // tmp fix because of data type mismatch
 
   const { data: ratingData, refetch } = useQuery(GET_MOVIE_RATING_WITH_USERID, {
-    variables: { userID: user?.id, movieID: movieId }, // Pass userID only if user exists
+    variables: { userID: user?.id, movieID: MId }, // Pass userID only if user exists
     fetchPolicy: 'cache-and-network', // Fetch data from cache and also make a network request to ensure data freshness
   });
 
@@ -23,12 +24,12 @@ export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
     // Update the cache after the mutation is executed successfully
     update(cache, { data: { addRating } }) {
       // Refetch the rating query to get the latest data from the server
-      refetch({ userID: user?.id, movieID: movieId });
+      refetch({ userID: user?.id, movieID: MId });
 
       // Update the ratingData in the cache with the new rating value
       cache.writeQuery({
         query: GET_MOVIE_RATING_WITH_USERID,
-        variables: { userID: user?.id, movieID: movieId },
+        variables: { userID: user?.id, movieID: MId },
         data: {
           getMovieRatingWithUserID: {
             ...ratingData?.getMovieRatingWithUserID, // Preserve existing data
@@ -41,7 +42,7 @@ export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
 
   const handleRating = (rating: number | null) => {
     if (rating && user) {
-      addRating({ variables: { userID: user.id, movieID: movieId, rating: rating } });
+      addRating({ variables: { userID: user.id, movieID: MId, rating: rating } });
     }
   };
 

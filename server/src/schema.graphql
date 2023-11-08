@@ -40,12 +40,13 @@ type Query {
   getMoviesByRating(page: Int!, genreId: Int, order: String!): [Movie]
   getMovieRatingWithUserID(userID: String!, movieID: Int!): Rating
   getRatingsByUserID(userID: Int!): [Ratings]
-  getWatchlistByUserID(userID: String!): UserWatchlist
+  getWatchlistByUserID(userID: String!, page: Int!): UserWatchlist
+  movieIsInWatchlist(userID: String!, movieID: Int!): Boolean
   getMovieCountByGenre(genreId: Int): Int
 }
 
 type Mutation {
   addRating(userID: String!, movieID: Int!, rating: Float!): Rating
-  addRating(userID: Int!, movieID: Int!, rating: Float!): Ratings
   addMovieToWatchlist(userID: String!, movieID: Int!): UserWatchlist
+  removeMovieFromWatchlist(userID: String!, movieID: Int!): UserWatchlist
 }
