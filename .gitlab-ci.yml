@@ -5,12 +5,12 @@ cache: # Cache modules in between jobs
   paths:
     - .npm/
 
-#TODO: Split frontend and server CI
 before_script:
   - npm run setup:ci
 
 stages:
   - test
+  # - test-server
   - lint
   - lint-css
   - build
@@ -30,6 +30,15 @@ unit-test-job:
     reports:
       junit: ./client/coverage/junit.xml
 
+# TODO: Fix server tests
+# server-test-job:
+#   stage: test-server
+#   script:
+#     - echo "Running unit tests..."
+#     - cd server
+#     - npm install
+#     - npm run test
+
 lint-test-job 1/2:
   stage: lint
   script:
@@ -44,7 +53,7 @@ lint-test-job 2/2:
     - npm run lint:style
     - echo "No lint issues found."
 
-build-job:
+build-client:
   stage: build
   script:
     - echo "Compiling the code..."

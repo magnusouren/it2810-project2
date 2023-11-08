@@ -1,4 +1,4 @@
-import categoryData from '../../../storage/categories.json';
+import categoryData from '../../storage/categories.json';
 import { Category } from '../../types';
 import { getCategoryById, getCategoryIds } from '../categoryUtils';
 

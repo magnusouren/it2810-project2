@@ -1,6 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 
-import { PageLayout } from './layouts/PageLayout.tsx';
+import { PageLayout } from './layout/PageLayout.tsx';
 import { Movie } from './pages/Movie.tsx';
 import { Movies } from './pages/Movies.tsx';
 import { NotFound } from './pages/NotFound.tsx';

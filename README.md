@@ -2,6 +2,14 @@
 
 Binge Watcher is a platform to search for movies and TV shows. The user can search for movies and TV shows, and add them to a watchlist. The user can also rate movies and TV shows, and see the average rating of each movie and TV show.
 
+The user can search for movies and TV shows by typing in the search bar. The user can also filter the search results by selecting a category. The user can add movies and TV shows to a watchlist by clicking the "Add to watchlist" button. The user can also rate movies and TV shows by clicking the "Rate" button. The user can see the average rating of each movie and TV show by hovering over the rating. The personal rating is per user, and the average rating is for all users.
+
+The project can be found at:
+
+> http://it2810-16.idi.ntnu.no/project2/
+
+<i>You need to be connected to NTNU's network to access the project.</i>
+
 ## Documentation
 
 This readme is intended to provide a brief overview of the project setup and available npm scripts.
@@ -11,15 +19,25 @@ Other documentation can be found in the [docs](./docs) folder.
 
 Feedback from the different deliveries during the project can be found in the [docs/feedback.md](./docs/feedback.md) file.
 
-## Third party libraries
+### Requirements
 
-- [MUI](https://mui.com/) - React UI framework
+The requirements for the project, and explenations on our implementations can be found in the [docs/requirements.md](./docs/requirements.md) file.
 
-We have used MaterialUI for more effecient and faster development. MaterialUI provides a lot of components that we can use, and we have used some of them in our project.
+## Project structure
 
-- [SCSS](https://sass-lang.com/) - CSS preprocessor
+The project is divided into two main folders: `client`, `server`.
 
-We have used .SCSS files to style our components. This makes it easier to style our components, and we can use variables and mixins to make our code more reusable.
+### Client
+
+The `client` folder contains the frontend code for the project. The frontend is built with React and TypeScript. The frontend is built with Vite, and uses Apollo Client to fetch data from the GraphQL API.
+
+The client documentation can be found in the [client/README.md](./client/README.md) file.
+
+### Server
+
+The `server` folder contains the backend code for the project. The backend is built with Node.js and Javascript. The backend is built with Node.js, and uses Apollo Server to create a GraphQL API.
+
+The server documentation can be found in the [server/README.md](./server/README.md) file.
 
 ## Environment
 
@@ -60,7 +78,19 @@ This script installs all dependencies in the project, non concurrently.
 npm run dev
 ```
 
+This script starts Vite development mode, and server with nodemon. The project will run locally on a local port number. Any code changes will trigger automatic browser updates.
+
+```
+npm run dev:frontend
+```
+
 This script starts Vite development mode. The project will run locally on a local port number. Any code changes will trigger automatic browser updates.
+
+```
+npm run dev:server
+```
+
+This script starts the server with nodemon. The project will run locally on a local port number. Any code changes will trigger automatic updates.
 
 ```cli
 npm test
@@ -73,6 +103,12 @@ npm run test:frontend
 ```
 
 This script runs tests in the frontend using Vitest. It will execute all tests in the `./client` directory.
+
+```cli
+npm run test:server
+```
+
+This script runs tests in the server using Vitest. It will execute all tests in the `./server` directory.
 
 ```cli
 npm run coverage:frontend
@@ -127,17 +163,10 @@ npm run format
 
 This script runs Prettier to format the code in TypeScript, JavaScript, SCSS, JSON, and CSS files in the project according to the configuration defined in the .prettierrc.cjs file.
 
+## CI Pipeline scripts
+
 ```cli
 npm run setup:ci
 ```
 
 This script is used by the CI pipeline to install dependencies and build the project.
-
-## Copy project to VM
-
-1. Build the project with `npm run build`.
-2. Run `npm run preview` to preview the application before deployment.
-3. SSH into the VM with `ssh <username>@it2810-16.idi.ntnu.no`. Replace `<username>` with your username.
-4. Copy files from the dist folder to the VM with `scp -r dist <username>@it2810-16.idi.ntnu.no:/tmp/`. Replace `<username>` with your username.
-5. If there is already a version of the project on the VM, run `sudo rm -r /var/www/html/project2` to remove the old files.
-6. Move files from `/tmp/dist` to `/var/www/html` with `sudo mv /tmp/dist/* /var/www/html/project2`.
