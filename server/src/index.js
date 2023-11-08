@@ -9,25 +9,9 @@ import mongoose from 'mongoose';
 import movieResolver from './resolvers/movieResolver.js';
 import ratingResolver from './resolvers/ratingResolver.js';
 import watchlistResolver from './resolvers/watchlistResolver.js';
-
-/**
- * Schema
- *
- * The GraphQL schema defines the API contract between the client and the server.
- */
-const typeDefs = readFileSync('./src/schema.graphql', 'utf8');
 const mergedResolvers = mergeResolvers([movieResolver, ratingResolver, watchlistResolver]);
-/**
- * Conifgure MongoDB details
- */
 
-// /**
-//  * Start server
-//  *
-//  * The ApolloServer constructor requires two parameters: your schema
-//  * definition and your set of resolvers.
-//  *
-//  */
+const typeDefs = readFileSync('./src/schema.graphql', 'utf8');
 
 const server = new ApolloServer({
   typeDefs,
@@ -35,17 +19,24 @@ const server = new ApolloServer({
   playground: true,
 });
 
-mongoose
-  .connect(process.env.URI)
-  .then(async () => {
-    console.log('Connected to MongoDB');
-
-    const { url } = await startStandaloneServer(server, {
-      listen: { port: 4000 },
+function connectDBWithRetry() {
+  mongoose
+    .connect(process.env.URI)
+    .then(() => {
+      console.log('Connected to MongoDB');
+    })
+    .catch((err) => {
+      console.error('MongoDB connection unsuccessful, retry after 5 seconds:', err);
+      setTimeout(connectDBWithRetry, 5000); // Retry after 5 seconds
     });
+}
 
-    console.log(`🚀  Server ready at: ${url}`);
+await startStandaloneServer(server, { listen: { port: 4000 } })
+  .then(({ url }) => {
+    console.log(`🚀 Server ready at: ${url}`);
+    // After the server is started, attempt to connect to the database
+    connectDBWithRetry();
   })
   .catch((err) => {
-    console.log(err);
+    console.error('Error starting the server:', err);
   });
