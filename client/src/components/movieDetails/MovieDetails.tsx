@@ -24,7 +24,7 @@ interface MovieDetailsProps {
 
 export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
   const userContext = useUser();
-  const { user, existInWatchlist, toggleMovieInWatchlist } = userContext;
+  const { user } = userContext;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,12 +41,7 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
         className={styles.backdropPoster}
       />
       <div className={styles.container}>
-        <WatchlistButton
-          movie={movie}
-          style={'big'}
-          existInWatchlist={existInWatchlist}
-          toggleMovieInWatchlist={toggleMovieInWatchlist}
-        />
+        {user && <WatchlistButton movie={movie} style={'small'} user={user} />}
         <h1>
           {movie.title} ({movie.release_date.split('-')[0]})
         </h1>

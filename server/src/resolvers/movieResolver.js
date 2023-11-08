@@ -53,7 +53,10 @@ const movieResolver = {
       return await Movie.find({ genre_ids: genreIdNumber }).skip(skip).limit(16);
     },
     async getMovieCountByGenre(_, { genreId }) {
-      // Filter movies based on the provided genreId
+      // If no genreId is provided, return the total number of movies
+      if (!genreId) return await Movie.countDocuments();
+
+      // If genreId is provided, return the number of movies with the provided genreId
       const genreIdNumber = parseInt(genreId, 10);
       return await Movie.countDocuments({ genre_ids: genreIdNumber });
     },

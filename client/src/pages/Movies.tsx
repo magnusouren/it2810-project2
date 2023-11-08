@@ -51,6 +51,7 @@ export const Movies = () => {
           page={page}
           onChange={handlePagination}
           color='primary'
+          size='small'
         />
       </h1>
       <FilterSort

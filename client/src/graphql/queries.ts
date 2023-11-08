@@ -56,6 +56,48 @@ export const GET_MOVIES_BY_TITLE = gql`
   }
 `;
 
+export const IS_IN_WATCHLIST = gql`
+  query Query($userId: String!, $movieId: Int!) {
+    movieIsInWatchlist(userID: $userId, movieID: $movieId)
+  }
+`;
+
+export const REMOVE_MOVIE_FROM_WATCHLIST = gql`
+  mutation Mutation($userId: String!, $movieId: Int!) {
+    removeMovieFromWatchlist(userID: $userId, movieID: $movieId) {
+      userID
+      movies {
+        _id
+      }
+    }
+  }
+`;
+
+export const ADD_MOVIE_TO_WATCHLIST = gql`
+  mutation Mutation($userId: String!, $movieId: Int!) {
+    addMovieToWatchlist(userID: $userId, movieID: $movieId) {
+      userID
+      movies {
+        _id
+      }
+    }
+  }
+`;
+
+export const GET_WATCHLIST_BY_USER_ID = gql`
+  query Query($userId: String!, $page: Int!) {
+    getWatchlistByUserID(userID: $userId, page: $page) {
+      userID
+      movies {
+        _id
+        title
+        genre_ids
+        poster_path
+      }
+    }
+  }
+`;
+
 export const GET_MOVIE_RATING_WITH_USERID = gql`
   query getMovieRatingWithUserID($userID: String!, $movieID: Int!) {
     getMovieRatingWithUserID(userID: $userID, movieID: $movieID) {
@@ -106,12 +148,12 @@ export const determineQueryAndVariables = (
     };
   }
   if (ratingSort) {
+    console.log('ratingSort', ratingSort);
     return {
       query: GET_MOVIES_BY_RATING,
       variables: { ...baseVariables, order: ratingSort },
     };
   }
-
   return {
     query: GET_MOVIES,
     variables: baseVariables,
