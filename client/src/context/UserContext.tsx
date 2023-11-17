@@ -44,21 +44,35 @@ export function useUser() {
  * @returns {JSX.Element}
  */
 export function UserProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | undefined>(getItem('user') as User | undefined);
+  // Inital user state is set to the user stored in localStorage.
+  // If no user exists in localStorage, the user is undefined.
+  // If the user loginState is false, the user is undefined.
+  let initialUser = getItem('user') as User | undefined;
+  initialUser = initialUser && initialUser.loginState ? initialUser : undefined;
+  const [user, setUser] = useState<User | undefined>(initialUser);
+
+  const generateUser = () => {
+    return { name: faker.person.fullName(), id: uuid(), loginState: true } as User;
+  };
 
   const login = () => {
-    const tempUser = { name: faker.person.fullName(), id: uuid() } as User;
-    if (!itemExists('user')) setItem('user', tempUser);
-    setUser(getItem('user'));
+    // Genereta a new user if no user exists in localStorage.
+    if (!itemExists('user')) setItem('user', generateUser());
+
+    // If there exists a user, set the loginState to true to allow refreshing the page.
+    const tempUser = { ...(getItem('user') as User), loginState: true };
+    setUser(tempUser);
+    setItem('user', tempUser);
   };
 
   const logout = () => {
     setUser(undefined);
+    setItem('user', { ...user, loginState: false });
   };
 
   const deleteUser = () => {
-    removeItem('user');
     setUser(undefined);
+    removeItem('user');
   };
 
   const value = {
