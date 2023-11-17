@@ -77,3 +77,79 @@ We will look into how much functionality we can add to the search functionallity
 #### Improvements
 
 TODO
+
+## P2-2
+
+### Design choice of filtering and sorting
+
+#### Feedback
+
+I would combine the sorting menus, since one (obviously) cannot use both at the same time. I don't see the advantage of having two different dropdown menus when they have the same functionality.
+
+![filtering and sortine](./img/filterSort.png)
+
+#### Our reflection
+
+We have not thought about this before. We have now combined the sorting menus into one. This should be done to make the page more user friendly.
+
+#### Improvements
+
+TODO
+
+### Searching for movies
+
+#### Feedback
+
+I wish there was a connection between search and filtering/sorting/pagination. Right now, they are separate, and it's not possible to use them interchangeably. This means, for example, I can't see which of the movies in a film series is the highest rated.
+
+#### Our reflection
+
+This is a good idea. We will look into how we can implement this if time allows it.
+
+#### Improvements
+
+TODO
+
+### Static genres-file to map genre-ids to genre-names
+
+#### Feedback
+
+It's missing fetching categories from the database. Here you are using a hardcoded 'categories.json'.
+
+#### Our reflection
+
+This is something we should fix. We should use the database to fetch the categories. When fetching a movie, we can populate the categories with the genre-ids, and then get data from the database to get the genre-names.
+
+#### Improvements
+
+Solved in [#65](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/65)
+
+TODO
+
+### Watchlist button
+
+#### Feedback
+
+The watchlist button is small, and it's not clear what it does. I would make it bigger and add a describing text.
+
+#### Our reflection
+
+We have not thought about this before. We should make the watchlist button bigger and add a text to it. In combination with the hidden link to watchlist page, it is not clear that it exists a watchlist page and functionality.
+
+#### Improvements
+
+TODO
+
+### Rating movies interract with the database
+
+#### Feedback
+
+The rating system is not connected to the database. This means that the ratings are not saved when the page is reloaded.
+
+#### Our reflection
+
+As it is now, we have saved the rating to the database, but it is not affecting the data about the movie. We should look into how we can make the rating affect the data about the movie.
+
+#### Improvements
+
+TODO
