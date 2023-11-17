@@ -3,10 +3,11 @@
 exports[`Search > Should match snapshot 1`] = `
 <div>
   <div
-    class="_searchBar_6ac984"
+    class="_searchBar_bce88e"
+    data-testid="searchbar-container"
   >
     <div
-      class="MuiFormControl-root MuiTextField-root _searchInput_6ac984 css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      class="MuiFormControl-root MuiTextField-root _searchInput_bce88e css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
     >
       <div
         class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedStart css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root"

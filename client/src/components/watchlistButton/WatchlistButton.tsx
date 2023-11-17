@@ -52,7 +52,7 @@ const Button: FC<WatchlistButtonProps> = ({ movie, style = 'small', user }) => {
   if (error) return <div>Error! {error.message}</div>;
 
   return (
-    <div className={style === 'big' ? styles.bigContainer : styles.smallContainer}>
+    <div className={style === 'big' ? styles.bigContainer : styles.smallContainer} data-testid='watchlist-button'>
       <ToggleButton
         value='check'
         selected={isInWatchlist}
@@ -60,6 +60,7 @@ const Button: FC<WatchlistButtonProps> = ({ movie, style = 'small', user }) => {
         color='primary'
         size='small'
         aria-label={isInWatchlist ? 'remove movie from watchlist' : 'add movie to watchlist'}
+        data-testid='watchlist-toggle-button'
       >
         {isInWatchlist ? <BookmarkRemove className={styles.remove} /> : <BookmarkAdd className={styles.add} />}
       </ToggleButton>

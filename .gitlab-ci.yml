@@ -9,34 +9,42 @@ before_script:
   - npm run setup:ci
 
 stages:
-  - test
+  - test-unit
+  - test-e2e
   # - test-server
   - lint
   - lint-css
   - build
 
+# Only showing coverage for unit tests
 unit-test-job:
-  stage: test
+  stage: test-unit
   script:
     - echo "Running unit tests..."
     - cd client
-    - npm ci
     - npm run coverage
   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   artifacts:
     when: always
     paths:
-      - ./client/coverage/junit.xml
+      - ./client/coverage/
     reports:
       junit: ./client/coverage/junit.xml
 
-# TODO: Fix server tests
+e2e-test-job:
+  stage: test-e2e
+  image: mcr.microsoft.com/playwright:v1.39.0-jammy
+  script:
+    - echo "Running e2e tests..."
+    - cd client
+    - npm run test:e2e:ci
+
+# Skipping since "libcrypto.so.1.1" is missing in image node:20
 # server-test-job:
 #   stage: test-server
 #   script:
 #     - echo "Running unit tests..."
 #     - cd server
-#     - npm install
 #     - npm run test
 
 lint-test-job 1/2:
@@ -58,6 +66,5 @@ build-client:
   script:
     - echo "Compiling the code..."
     - cd client
-    - npm ci
     - npm run build
     - echo "Compile complete."

@@ -27,9 +27,8 @@ export const Movies = () => {
   } = getCachedFilterValues();
 
   const sizeLimit = 16;
-  const defaultCount = 379;
 
-  const [count, setCount] = useState<number | undefined>(undefined);
+  const [count, setCount] = useState<number | undefined>(sizeLimit);
   const [page, setPage] = useState(cachedPage);
   const [genre, setGenre] = useState(cachedGenre);
   const [alphabeticalSort, setAlphabeticalSort] = useState<AlphabeticalSort>(cachedAS);
@@ -48,7 +47,7 @@ export const Movies = () => {
   });
 
   useEffect(() => {
-    if (data) {
+    if (data && data.getMovieCountByGenre) {
       setCount(data.getMovieCountByGenre);
     }
   }, [data]);
@@ -60,7 +59,7 @@ export const Movies = () => {
       <h1 className={styles.heading}>
         Movies
         <Pagination
-          count={Math.ceil((count || defaultCount) / sizeLimit)}
+          count={Math.ceil((count || sizeLimit) / sizeLimit)}
           page={page}
           onChange={handlePagination}
           color='primary'
@@ -86,11 +85,12 @@ export const Movies = () => {
           />
           <section className={styles.pagination}>
             <Pagination
-              count={Math.ceil((count || defaultCount) / sizeLimit)}
+              count={Math.ceil((count || sizeLimit) / sizeLimit)}
               page={page}
               onChange={handlePagination}
               color='primary'
               size='large'
+              data-testid='pagination-container'
             />
           </section>
         </>

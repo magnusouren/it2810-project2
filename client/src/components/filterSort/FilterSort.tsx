@@ -44,11 +44,11 @@ export const FilterSort: FC<FilterSortProps> = ({
   };
 
   return (
-    <div className={styles.filter}>
+    <div className={styles.filter} data-testid='filter-container'>
       <p>Filter:</p>
       <FormControl variant='filled' className={styles.categorySelect}>
         <InputLabel id='category'>Category</InputLabel>
-        <Select id='category' value={genre} onChange={handleCategoryChange}>
+        <Select id='category' value={genre} onChange={handleCategoryChange} data-testid='category-filter'>
           <MenuItem value=''>
             <em>None</em>
           </MenuItem>
@@ -64,11 +64,12 @@ export const FilterSort: FC<FilterSortProps> = ({
         <FormControl variant='filled' className={styles.leftSelect}>
           <InputLabel id='alphabetical-sort'>Alphabetical</InputLabel>
           <Select
-            id='alphabetical sort'
+            id='alphabetical-sort'
             labelId='alphabetical-sort'
             value={alphabeticalSort}
             onChange={handleAlphabeticalSortChange}
             disabled={!!ratingSort}
+            data-testid='alphabetical-sort'
           >
             <MenuItem value=''>
               <em>None</em>
@@ -83,7 +84,13 @@ export const FilterSort: FC<FilterSortProps> = ({
         </FormControl>
         <FormControl variant='filled' className={styles.rightSelect}>
           <InputLabel id='rating-sort'>Rating</InputLabel>
-          <Select id='rating-sort' value={ratingSort} onChange={handleRatingSortChange} disabled={!!alphabeticalSort}>
+          <Select
+            id='rating-sort'
+            value={ratingSort}
+            onChange={handleRatingSortChange}
+            disabled={!!alphabeticalSort}
+            data-testid='rating-sort'
+          >
             <MenuItem value=''>
               <em>None</em>
             </MenuItem>

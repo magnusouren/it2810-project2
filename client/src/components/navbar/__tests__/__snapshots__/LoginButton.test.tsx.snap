@@ -20,7 +20,7 @@ exports[`LoginButton > Should match snapshot 1`] = `
       />
     </svg>
     <p
-      class="_loginText_76f659"
+      class="_loginText_67d6a9"
     >
       Login
     </p>
@@ -33,7 +33,7 @@ exports[`LoginButton > Should match snapshot 1`] = `
 
 exports[`LoginButton > Should render a login button when the user is not logged in 1`] = `
 <p
-  class="_loginText_76f659"
+  class="_loginText_67d6a9"
 >
   Login
 </p>

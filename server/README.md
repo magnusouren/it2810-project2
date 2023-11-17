@@ -24,16 +24,33 @@ npm install
 Create a `.env` file in the root directory of the server directory. The file should contain the following variables:
 
 ```.env
-MONGODB_URI=<mongodb-uri>
+URI=<mongodb-uri>
 ```
 
-<b>NB:</b> Your MongoDB user should have read and write access to the `bingewatcher` database. Your IP address must also be whitelisted.
+For development, use the `test` database URI. This will also be used in the CI/CD pipeline. For production, use the `production` database URI.
+
+<b>NB:</b> Your MongoDB user should have read and write access to the `bingewatcher` database. Your user and URI must be granted by the current contributors of Team 16. Your IP address must also be whitelisted.
 
 ## Usage
 
 ```bash
 npm start
 ```
+
+Will start the server with the development database.
+
+```bash
+npm start:prod
+```
+
+Will start the server with the production database.
+<i>Note: You will need a `.env.production` file with the URI of the production database.</i>
+
+```bash
+npm run dev
+```
+
+Will start the server with the development database and restart the server when changes are made to the code.
 
 ## Structure
 
@@ -80,7 +97,7 @@ The queries and mutations are also located in the [schema.graphql](./src/schema.
 
 1. SSH into the VM with `ssh <username>@it2810-16.idi.ntnu.no`. Replace `<username>` with your username.
 2. Copy files from the `server` folder to the VM with `scp -r server <username>@it2810-16.idi.ntnu.no:/tmp/`. Replace `<username>` with your username. Remember to also transfer the `.env` file, or create a new one on the server.
-3. If there is already a version of the server on the VM, run `sudo rm -r /var/www/html/server` to remove the old files.
+3. If there is already a version of the server on the VM. Stop the old server by finding the id with : `ps -Af | grep node`. Run `kill -9 pid` to kill the process. Run `sudo rm -r /var/www/html/server` to remove the old files.
 4. Move files from `/tmp/server` to `/var/www/html` with `sudo mv /tmp/server/* /var/www/html/server`.
 5. Make sure the apache server can run node v.16+
 6. Run `nohup node src/index.js &` to start the server

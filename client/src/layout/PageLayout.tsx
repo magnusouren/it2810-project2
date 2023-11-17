@@ -46,7 +46,7 @@ export const PageLayout: FC = () => {
         </section>
       </main>
       {isVisible && (
-        <button onClick={scrollToTop} className={styles.scrollToTop}>
+        <button onClick={scrollToTop} className={styles.scrollToTop} data-testid='scroll-to-top-button'>
           <ArrowUpward />
           <p>Scroll to top</p>
         </button>

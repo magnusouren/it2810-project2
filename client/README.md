@@ -37,6 +37,10 @@ We have used Apollo Client to fetch data from the GraphQL API. Apollo Client pro
 
 We have used React Router to handle routing in the project. React Router provides a lot of useful features, such as nested routes, redirects, and more. The routes are defined in the [Routes.tsx](./src/Routes.tsx) file.
 
+- [Playwright](https://playwright.dev/) - End to end testing library
+
+We have used Playwright to write end to end tests for the project. Playwright provides a lot of useful features, such as taking screenshots, mocking requests, and most importantly testing different browsers. It is also really flexible, and can provide complex and clever configurations for many projects. The tests are located in the [e2e](./e2e) folder.
+
 ## Available NPM Scripts
 
 This section provides an overview of the available npm scripts for this project. These scripts help you manage development, testing, building, and other maintenance tasks for the project.
@@ -49,10 +53,22 @@ We have written unit tests for most of the functions in our components. The test
 
 We are missing some tests for this deployment. We have not written tests for the filter/search functionality, and we have not written tests for the context. We have also not written tests for the pages. This is because we did not have enough time to write tests for these parts of the project for this deployment. This is something we will do in the next deployment. We have also skipped some tests we have been struggling with. We will try to fix these tests in the next deployment.
 
-To run the tests, run the following command:
+To run all the tests, run the following command:
 
 ```cli
 npm run test
+```
+
+To run strictly unit tests, run the following command:
+
+```cli
+npm run test:unit
+```
+
+To run strictly end to end tests, run the following command:
+
+```cli
+npm run test:e2e
 ```
 
 To see the test coverage, run the following command:
