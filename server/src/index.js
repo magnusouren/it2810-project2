@@ -1,16 +1,34 @@
-import dotenv from 'dotenv';
-dotenv.config();
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { mergeResolvers } from '@graphql-tools/merge';
+import dotenv from 'dotenv';
 import { readFileSync } from 'fs';
 import mongoose from 'mongoose';
 
 import movieResolver from './resolvers/movieResolver.js';
 import ratingResolver from './resolvers/ratingResolver.js';
 import watchlistResolver from './resolvers/watchlistResolver.js';
-const mergedResolvers = mergeResolvers([movieResolver, ratingResolver, watchlistResolver]);
 
+// Load environment variables
+// Any other that production uses the .env file
+let ciUri = null;
+if (process.env.CI) {
+  console.log('CI environment detected');
+  if (process.argv.length > 2) {
+    // Use db URI provided as argument in CI environment
+    // Provided as argument to avoid storing it in the repository
+    // Format: npm start <URI>
+    ciUri = process.argv[2];
+  } else {
+    console.error('No URI provided for CI environment');
+  }
+} else if (process.env.NODE_ENV === 'production') {
+  dotenv.config({ path: './.env.production' });
+} else {
+  dotenv.config();
+}
+
+const mergedResolvers = mergeResolvers([movieResolver, ratingResolver, watchlistResolver]);
 const typeDefs = readFileSync('./src/schema.graphql', 'utf8');
 
 const server = new ApolloServer({
@@ -21,7 +39,7 @@ const server = new ApolloServer({
 
 function connectDBWithRetry() {
   mongoose
-    .connect(process.env.URI)
+    .connect(ciUri ? ciUri : process.env.URI)
     .then(() => {
       console.log('Connected to MongoDB');
     })
@@ -31,7 +49,7 @@ function connectDBWithRetry() {
     });
 }
 
-await startStandaloneServer(server, { listen: { port: 4000 } })
+await startStandaloneServer(server, { listen: { port: process.env.PORT || 4000 } })
   .then(({ url }) => {
     console.log(`🚀 Server ready at: ${url}`);
     // After the server is started, attempt to connect to the database

@@ -3,15 +3,16 @@
 exports[`MovieCard > should match snapshot 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_6d7af0 css-bhp9pd-MuiPaper-root-MuiCard-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_8de2c1 css-bhp9pd-MuiPaper-root-MuiCard-root"
+    data-testid="movie-card"
   >
     <a
-      class="_link_6d7af0"
+      class="_link_8de2c1"
       href="/movie/111111"
     >
       <img
         alt="Foo Bar poster."
-        class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-o69gx8-MuiCardMedia-root"
+        class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img movie-card-image css-o69gx8-MuiCardMedia-root"
         src="https://image.tmdb.org/t/p/w400/mockPosterURL.jpg"
       />
       <div

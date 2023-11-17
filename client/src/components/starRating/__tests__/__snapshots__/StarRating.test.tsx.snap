@@ -3,7 +3,7 @@
 exports[`StarRating > should match snapshot 1`] = `
 <div>
   <div
-    class="_rating_c26a0d"
+    class="_rating_30a570"
   >
     <h2
       tabindex="0"
@@ -734,7 +734,7 @@ exports[`StarRating > should match snapshot 1`] = `
       </label>
     </span>
     <p
-      class="_info_c26a0d"
+      class="_info_30a570"
     >
       Click on a star to select/change rating. The rating will be saved to your account.
     </p>

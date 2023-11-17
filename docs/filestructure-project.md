@@ -5,10 +5,12 @@ To maintain an organized structure in the project, files are organized as follow
 ```
 ├── .vscode                                 # IDE configuration files
 ├── client                                  # files for front end client
+│    ├── __e2e__                            # e2e test files
 │    ├── __mocks__                          # files containing mock data for tests
 │    ├── coverage                           # test coverage reports (ignored by git)
 │    ├── dist                               # build files (ignored by git)
 │    ├── node_modules                       # node modules (ignored by git)
+│    ├── playwright-report                  # reports from playwright e2e tests (ignored by git)
 │    ├── public                             # public files that will be copied to dist
 │    ├── src
 │    │   ├── assets                         # static files
@@ -22,6 +24,7 @@ To maintain an organized structure in the project, files are organized as follow
 │    │   ├── main.tsx                       # main file for the project
 │    │   ├── routes.tsx                     # project routing
 │    │   ├── types.ts                       # project types
+│    ├── test-results                       # test results from playwright (ignored by git)
 │    ├── storage                            # storage files for the project
 │    ├── configuration files                # front end configuration files
 ├── docs                                    # documentation files
@@ -37,10 +40,12 @@ To maintain an organized structure in the project, files are organized as follow
 
 - `.vscode`: Contains IDE configuration files.
 - `client`: Contains files for the front end client.
+  - `__e2e__`: Contains e2e test files.
   - `__mocks__`: Contains mock data for tests.
   - `coverage`: Contains test coverage reports and is typically ignored by version control (git).
   - `dist`: Contains build files and is ignored by version control (git).
   - `node_modules`: Contains Node.js modules and is ignored by version control (git).
+  - `playwright-report`: Contains reports from playwright e2e tests and is ignored by version control (git).
   - `public`: Contains public files that will be copied to dist.
   - `src`: The source code directory.
     - `assets`: Contains static files.
@@ -49,6 +54,7 @@ To maintain an organized structure in the project, files are organized as follow
     - `utils`: Contains shared utility files.
     - `main.tsx`: The main file for the project.
     - `routes.tsx`: Defines project routing.
+  - `test-results`: Contains test results from playwright and is ignored by version control (git).
   - `storage`: Contains storage files for the project.
 - `docs`: Contains documentation files.
 - `node_modules`: Contains Node.js modules and is ignored by version control (git).
@@ -56,6 +62,7 @@ To maintain an organized structure in the project, files are organized as follow
   - `node_modules`: Contains Node.js modules and is ignored by version control (git).
   - `src`: The source code directory.
     - `index.ts`: The main file for the server.
+  - `configuration` files: Contains project configuration files.
 - `configuration` files: Contains project configuration files.
 
 This structure helps keep the project organized and makes it easier to locate and manage different types of files and resources.

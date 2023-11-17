@@ -26,12 +26,13 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
   const { user } = userContext;
 
   return (
-    <Card className={styles.card}>
+    <Card className={styles.card} data-testid='movie-card'>
       <Link to={`/movie/${movie._id}`} state={movie} className={styles.link}>
         <CardMedia
           component='img'
           image={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
           alt={movie.title + ' poster.'}
+          className='movie-card-image'
         />
         <CardContent>
           <Typography gutterBottom component='div' aria-label={`title: ${movie.title}.`}>
@@ -46,7 +47,7 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
           </Typography>
         </CardContent>
       </Link>
-      {user && <WatchlistButton movie={movie} user={user} data-testid='watchlist-button' />}
+      {user && <WatchlistButton movie={movie} user={user} />}
     </Card>
   );
 };

@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
       <Toolbar className={styles.navbarToolbar}>
         <Link to='/' className={styles.navLink} data-testid='home-link'>
           <IconButton edge='start' color='inherit' aria-label='home-button'>
-            <img src={MovieIcon} width='40' alt='yeha' data-testid='HomeIcon' />
+            <img src={MovieIcon} width='40' alt='Bingewatcher icon' data-testid='HomeIcon' />
             <Typography variant='h5' className={styles.navbarTitle}>
               Bingewatcher
             </Typography>

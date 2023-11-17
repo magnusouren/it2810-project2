@@ -21,7 +21,7 @@ interface MovieListProps {
 export const MovieList: FC<MovieListProps> = ({ movies }) => {
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.container} data-testid='movies-list-container'>
         {movies.map((movie) => (
           <MovieCard key={movie._id} movie={movie} />
         ))}

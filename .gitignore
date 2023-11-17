@@ -25,3 +25,9 @@ dist-ssr
 *.sw?
 
 .env
+.env.*
+
+client/test-results/
+client/playwright-report/
+client/blob-report/
+client/playwright/.cache/

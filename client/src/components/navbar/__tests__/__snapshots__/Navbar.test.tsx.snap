@@ -6,10 +6,10 @@ exports[`Navbar > Should match snapshot 1`] = `
     class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic css-hip9hq-MuiPaper-root-MuiAppBar-root"
   >
     <div
-      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _navbarToolbar_3eb8eb css-hyum1k-MuiToolbar-root"
+      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _navbarToolbar_c9a110 css-hyum1k-MuiToolbar-root"
     >
       <a
-        class="_navLink_3eb8eb"
+        class="_navLink_c9a110"
         data-testid="home-link"
         href="/"
       >
@@ -20,13 +20,13 @@ exports[`Navbar > Should match snapshot 1`] = `
           type="button"
         >
           <img
-            alt="yeha"
+            alt="Bingewatcher icon"
             data-testid="HomeIcon"
-            src="/project2/src/assets/SVG/camera-white.svg"
+            src="/project2/assets/SVG/camera-white.svg"
             width="40"
           />
           <h5
-            class="MuiTypography-root MuiTypography-h5 _navbarTitle_3eb8eb css-ag7rrr-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-h5 _navbarTitle_c9a110 css-ag7rrr-MuiTypography-root"
           >
             Bingewatcher
           </h5>
@@ -53,7 +53,7 @@ exports[`Navbar > Should match snapshot 1`] = `
           />
         </svg>
         <p
-          class="_loginText_76f659"
+          class="_loginText_67d6a9"
         >
           Login
         </p>

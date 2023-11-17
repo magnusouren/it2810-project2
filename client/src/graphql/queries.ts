@@ -8,6 +8,7 @@ export const GET_MOVIES = gql`
       poster_path
       title
     }
+    getMovieCountByGenre(genreId: null)
   }
 `;
 
