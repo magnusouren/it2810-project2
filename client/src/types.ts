@@ -1,6 +1,7 @@
 export interface User {
   name: string;
   id: string;
+  loginState: boolean;
   ratings?: Rating[];
   watchlist?: Movie[];
 }

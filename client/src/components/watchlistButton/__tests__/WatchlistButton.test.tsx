@@ -8,6 +8,7 @@ import WatchlistButton from '../WatchlistButton';
 const mockUser: User = {
   id: '1234567890',
   name: 'Foo Bar',
+  loginState: true,
 };
 
 const mockMovie: Movie = {
