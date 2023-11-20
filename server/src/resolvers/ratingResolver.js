@@ -25,6 +25,9 @@ const ratingResolver = {
         if (!movieExists) {
           throw new Error('Movie does not exist');
         }
+        const doc = await Movie.findById(movieID);
+        let voteAvg = doc.vote_average;
+        let voteCount = doc.vote_count;
 
         let userRating = await Rating.findOne({ _id: userID });
 
@@ -38,13 +41,24 @@ const ratingResolver = {
 
         if (movieRatingIndex !== -1) {
           // Update the existing rating if the movieID is found
+          const previousRating = userRating.ratings[movieRatingIndex].rating;
+
+          const newTotalRating = doc.vote_average * doc.vote_count - previousRating + rating;
+          voteAvg = newTotalRating / doc.vote_count;
           userRating.ratings[movieRatingIndex].rating = rating;
         } else {
           // Otherwise, add a new rating entry
           userRating.ratings.push({ movieID: movieID, rating: rating });
+
+          // Update Movie model with the new rating
+          const newTotalRating = doc.vote_average * doc.vote_count + rating;
+          voteCount += 1;
+          voteAvg = newTotalRating / voteCount;
         }
 
         await userRating.save();
+        await Movie.findByIdAndUpdate(movieID, { vote_average: voteAvg, vote_count: voteCount });
+
         return userRating.ratings.filter((r) => r.movieID.toString() === movieID.toString())[0];
       } catch (err) {
         throw new Error(err);
