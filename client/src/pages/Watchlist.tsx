@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { Pagination } from '@mui/material';
 import { useState } from 'react';
 
+import { Spinner } from '../components/loading/Loading';
 import { MovieList } from '../components/movieList/MovieList';
 import { useUser } from '../context/UserContext';
 import { GET_WATCHLIST_BY_USER_ID } from '../graphql/queries';
@@ -32,11 +33,6 @@ export const Watchlist = () => {
     fetchPolicy: 'network-only',
   });
 
-  if (!data) return <div>Loading...</div>;
-
-  const length = data.getWatchlistCountByUserID;
-  const count = Math.ceil(length / sizeLimit);
-
   if (!user) {
     return (
       <>
@@ -45,6 +41,11 @@ export const Watchlist = () => {
       </>
     );
   }
+
+  if (!data) return <Spinner width='100%' height='300px' />;
+
+  const length = data.getWatchlistCountByUserID;
+  const count = Math.ceil(length / sizeLimit);
 
   if (length === 0)
     return (
