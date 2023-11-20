@@ -4,7 +4,7 @@ const MovieSchema = new mongoose.Schema(
   {
     _id: { type: Number, required: true },
     title: { type: String, required: true },
-    genre_ids: { type: [Number], required: true },
+    genre_ids: [{ type: Number, ref: 'Genre', required: true }],
     overview: { type: String, required: true },
     release_date: { type: String, required: true },
     adult: { type: Boolean, default: false },

@@ -14,7 +14,16 @@ const mockUser: User = {
 const mockMovie: Movie = {
   adult: false,
   backdrop_path: '/mockBackdropURL.jpg',
-  genre_ids: [12, 28], // Adventure, Action
+  genre_ids: [
+    {
+      _id: 12,
+      name: 'Adventure',
+    },
+    {
+      _id: 28,
+      name: 'Action',
+    },
+  ],
   _id: 111111,
   original_language: 'en',
   original_title: 'Foo Bar',

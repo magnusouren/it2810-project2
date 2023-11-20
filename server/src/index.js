@@ -5,9 +5,12 @@ import dotenv from 'dotenv';
 import { readFileSync } from 'fs';
 import mongoose from 'mongoose';
 
+import genreResolver from './resolvers/genreResolver.js';
 import movieResolver from './resolvers/movieResolver.js';
 import ratingResolver from './resolvers/ratingResolver.js';
 import watchlistResolver from './resolvers/watchlistResolver.js';
+
+const mergedResolvers = mergeResolvers([movieResolver, ratingResolver, watchlistResolver, genreResolver]);
 
 // Load environment variables
 // Any other that production uses the .env file
@@ -28,7 +31,6 @@ if (process.env.CI) {
   dotenv.config();
 }
 
-const mergedResolvers = mergeResolvers([movieResolver, ratingResolver, watchlistResolver]);
 const typeDefs = readFileSync('./src/schema.graphql', 'utf8');
 
 const server = new ApolloServer({

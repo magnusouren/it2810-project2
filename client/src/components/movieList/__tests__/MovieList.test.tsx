@@ -9,7 +9,10 @@ describe('MovieList', () => {
     {
       adult: false,
       backdrop_path: '/mockBackdropURL.jpg',
-      genre_ids: [12, 28], // Adventure, Action
+      genre_ids: [
+        { _id: 12, name: 'Adventure' },
+        { _id: 28, name: 'Action' },
+      ], // Adventure, Action
       _id: 111111,
       original_language: 'en',
       original_title: 'Foo Bar',
@@ -25,7 +28,10 @@ describe('MovieList', () => {
     {
       adult: false,
       backdrop_path: '/mockBackdropURL.jpg',
-      genre_ids: [12, 28], // Adventure, Action
+      genre_ids: [
+        { _id: 12, name: 'Adventure' },
+        { _id: 28, name: 'Action' },
+      ], // Adventure, Action
       _id: 222222,
       original_language: 'en',
       original_title: 'Foo Bar',

@@ -4,7 +4,10 @@ export const GET_MOVIES = gql`
   query getMovies($page: Int!) {
     getMovies(page: $page) {
       _id
-      genre_ids
+      genre_ids {
+        _id
+        name
+      }
       poster_path
       title
     }
@@ -12,11 +15,33 @@ export const GET_MOVIES = gql`
   }
 `;
 
+export const GET_MOVIE = gql`
+  query getMovieById($id: Int!) {
+    getMovieById(id: $id) {
+      _id
+      backdrop_path
+      genre_ids {
+        _id
+        name
+      }
+      overview
+      popularity
+      release_date
+      title
+      vote_average
+      vote_count
+    }
+  }
+`;
+
 export const GET_MOVIES_BY_GENRE = gql`
   query getMoviesByGenre($page: Int!, $genreId: Int!) {
     getMoviesByGenre(page: $page, genreId: $genreId) {
       _id
-      genre_ids
+      genre_ids {
+        _id
+        name
+      }
       poster_path
       title
     }
@@ -28,7 +53,10 @@ export const GET_MOVIES_BY_TITLE_AZ = gql`
   query getMoviesByTitleAZ($page: Int!, $order: String!, $genreId: Int) {
     getMoviesByTitleAZ(page: $page, order: $order, genreId: $genreId) {
       _id
-      genre_ids
+      genre_ids {
+        _id
+        name
+      }
       poster_path
       title
     }
@@ -40,7 +68,10 @@ export const GET_MOVIES_BY_RATING = gql`
   query getMoviesByRating($page: Int!, $order: String!, $genreId: Int) {
     getMoviesByRating(page: $page, order: $order, genreId: $genreId) {
       _id
-      genre_ids
+      genre_ids {
+        _id
+        name
+      }
       poster_path
       title
     }
@@ -92,7 +123,10 @@ export const GET_WATCHLIST_BY_USER_ID = gql`
       movies {
         _id
         title
-        genre_ids
+        genre_ids {
+          _id
+          name
+        }
         poster_path
       }
     }
@@ -123,6 +157,15 @@ export const GET_FILTER = gql`
       genre
       ratingSort
       page
+    }
+  }
+`;
+
+export const GET_GENERS = gql`
+  query getGenres {
+    getGenres {
+      _id
+      name
     }
   }
 `;

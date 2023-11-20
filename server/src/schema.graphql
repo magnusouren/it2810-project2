@@ -1,7 +1,7 @@
 type Movie {
   _id: ID!
   title: String!
-  genre_ids: [Int]!
+  genre_ids: [Genre]!
   overview: String!
   release_date: String!
   adult: Boolean
@@ -30,6 +30,11 @@ type UserWatchlist {
   movies: [Movie]
 }
 
+type Genre {
+  _id: Int!
+  name: String!
+}
+
 type Query {
   getMovies(page: Int!): [Movie]
   getMovieById(id: Int!): Movie
@@ -44,6 +49,7 @@ type Query {
   getWatchlistCountByUserID(userID: String!): Int
   movieIsInWatchlist(userID: String!, movieID: Int!): Boolean
   getMovieCountByGenre(genreId: Int): Int
+  getGenres(genreId: Int): [Genre]
 }
 
 type Mutation {

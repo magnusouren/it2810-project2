@@ -7,14 +7,14 @@ const movieResolver = {
     // Return the 16 first movies
     async getMovies(_, { page }) {
       const skip = (page - 1) * pageSize;
-      return await Movie.find().skip(skip).limit(pageSize);
+      return await Movie.find().skip(skip).limit(pageSize).populate('genre_ids');
     },
 
     async getMovieById(_, { id }) {
-      return await Movie.findById(id);
+      return await Movie.findById(id).populate('genre_ids');
     },
     async getMovieByTitle(_, { title }) {
-      return await Movie.findOne({ title });
+      return await Movie.findOne({ title }).populate('genre_ids');
     },
     async getMoviesByTitle(_, { title, limit }) {
       // Includes movies that contains the searchexpression
@@ -52,7 +52,7 @@ const movieResolver = {
       // Filter movies based on the provided genreId
       const genreIdNumber = parseInt(genreId, 10);
       const skip = (page - 1) * pageSize;
-      return await Movie.find({ genre_ids: genreIdNumber }).skip(skip).limit(pageSize);
+      return await Movie.find({ genre_ids: genreIdNumber }).skip(skip).limit(pageSize).populate('genre_ids');
     },
     async getMovieCountByGenre(_, { genreId }) {
       // If no genreId is provided, return the total number of movies
@@ -73,9 +73,13 @@ const movieResolver = {
 
       if (genreId) {
         const genreIdNumber = parseInt(genreId, 10);
-        return await Movie.find({ genre_ids: genreIdNumber }).sort({ title: sortOrder }).skip(skip).limit(pageSize);
+        return await Movie.find({ genre_ids: genreIdNumber })
+          .sort({ title: sortOrder })
+          .skip(skip)
+          .limit(pageSize)
+          .populate('genre_ids');
       } else {
-        return await Movie.find().sort({ title: sortOrder }).skip(skip).limit(pageSize);
+        return await Movie.find().sort({ title: sortOrder }).skip(skip).limit(pageSize).populate('genre_ids');
       }
     },
     // Sort movies based on the field "vote_average", ascending and descending, with page
@@ -92,9 +96,10 @@ const movieResolver = {
         return await Movie.find({ genre_ids: genreIdNumber })
           .sort({ vote_average: sortOrder })
           .skip(skip)
-          .limit(pageSize);
+          .limit(pageSize)
+          .populate('genre_ids');
       } else {
-        return await Movie.find().sort({ vote_average: sortOrder }).skip(skip).limit(pageSize);
+        return await Movie.find().sort({ vote_average: sortOrder }).skip(skip).limit(pageSize).populate('genre_ids');
       }
     },
   },

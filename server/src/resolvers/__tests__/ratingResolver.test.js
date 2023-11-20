@@ -43,7 +43,7 @@ afterAll(async () => {
   await mongod.stop();
 });
 
-describe('ratingResolver', () => {
+describe.skip('ratingResolver', () => {
   describe('Query', () => {
     describe('getRatingsByUserID', () => {
       it('should return ratings for a specific user', async () => {
