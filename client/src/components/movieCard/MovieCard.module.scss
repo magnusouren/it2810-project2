@@ -1,9 +1,13 @@
 .link {
   text-decoration: none;
-  color: black;
+  color: var(--color-text);
 }
 
 .card {
   position: relative;
   z-index: 1;
+}
+
+div.card {
+  background-color: var(--color-background);
 }

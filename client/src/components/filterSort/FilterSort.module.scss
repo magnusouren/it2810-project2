@@ -1,10 +1,20 @@
 .filter {
-  background-color: white;
+  background-color: var(--color-background);
+  color: var(--color-text);
   border-radius: 4px;
 
   .categorySelect {
     margin-bottom: 1rem;
     width: 100%;
+    background-color: var(--color-primary);
+
+    div {
+      color: var(--color-text);
+    }
+  }
+
+  label {
+    color: var(--color-text);
   }
 
   p {
@@ -13,7 +23,7 @@
 
   margin-bottom: 1.5rem;
   padding: 1rem;
-  box-shadow: 1px 5px 5px 0 rgb(85 85 85 / 30%);
+  box-shadow: var(--box-shadow);
 
   select {
     margin-left: 1rem;
@@ -23,12 +33,22 @@
     display: flex;
     gap: 1.5rem;
 
+    div {
+      color: var(--color-text);
+    }
+
     .leftSelect {
       width: 50%;
+      background-color: var(--color-primary);
     }
 
     .rightSelect {
       width: 50%;
+      background-color: var(--color-primary);
     }
+  }
+
+  svg {
+    color: var(--color-text);
   }
 }
