@@ -6,6 +6,11 @@ export interface User {
   watchlist?: Movie[];
 }
 
+export interface Genre {
+  _id: number;
+  name: string;
+}
+
 /**
  * The Movie type is based on the API response from
  * https://developers.themoviedb.org/3/movies/get-popular-movies
@@ -14,7 +19,7 @@ export interface User {
 export interface Movie {
   adult: boolean;
   backdrop_path: string;
-  genre_ids: number[];
+  genre_ids: Genre[];
   _id: number;
   original_language: string;
   original_title: string;

@@ -1,9 +1,10 @@
+import { useQuery } from '@apollo/client';
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { FC } from 'react';
 
 import { setCachedFilterValues } from '../../graphql/cachedFilterValues';
-import { AlphabeticalSort, RatingSort } from '../../types';
-import { getCategories } from '../../utils/categoryUtils';
+import { GET_GENERS } from '../../graphql/queries';
+import { AlphabeticalSort, Genre, RatingSort } from '../../types';
 import styles from './FilterSort.module.scss';
 
 interface FilterSortProps {
@@ -25,6 +26,8 @@ export const FilterSort: FC<FilterSortProps> = ({
   setRatingSort,
   setPage,
 }) => {
+  const { data } = useQuery(GET_GENERS);
+
   const handleCategoryChange = (event: SelectChangeEvent<string>) => {
     setGenre(event.target.value as string);
     setPage(1);
@@ -46,19 +49,21 @@ export const FilterSort: FC<FilterSortProps> = ({
   return (
     <div className={styles.filter} data-testid='filter-container'>
       <p>Filter:</p>
+
       <FormControl variant='filled' className={styles.categorySelect}>
         <InputLabel id='category'>Category</InputLabel>
         <Select id='category' value={genre} onChange={handleCategoryChange} data-testid='category-filter'>
           <MenuItem value=''>
             <em>None</em>
           </MenuItem>
-          {getCategories().map((category) => (
-            <MenuItem key={category.id} value={category.id}>
-              {category.name}
+          {data?.getGenres?.map((genre: Genre) => (
+            <MenuItem key={genre._id} value={genre._id}>
+              {genre.name}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
+
       <p>Sort:</p>
       <div className={styles.sort}>
         <FormControl variant='filled' className={styles.leftSelect}>

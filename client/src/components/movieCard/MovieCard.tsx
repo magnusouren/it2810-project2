@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { useUser } from '../../context/UserContext';
 import { Movie } from '../../types';
-import { getCategoryById } from '../../utils/categoryUtils';
 import WatchlistButton from '../watchlistButton/WatchlistButton';
 import styles from './MovieCard.module.scss';
 
@@ -41,9 +40,9 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
           <Typography
             variant='body2'
             color='text.secondary'
-            aria-label={`genres:${movie.genre_ids.map((genre) => getCategoryById(genre)?.name)}`}
+            aria-label={`genres:${movie.genre_ids.map((genre) => genre.name).join(', ')}`}
           >
-            {movie.genre_ids.map((genre) => getCategoryById(genre)?.name).join(', ')}
+            {movie.genre_ids.map((genre) => genre.name).join(', ')}
           </Typography>
         </CardContent>
       </Link>

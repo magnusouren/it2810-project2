@@ -8,9 +8,9 @@
     "start": "vite",
     "test": "npm run test:unit:no-watch && npm run test:e2e",
     "test:unit": "vitest --environment jsdom --root ./src/",
+    "test:unit:no-watch": "vitest run --root ./src/",
     "test:e2e": "playwright test",
     "test:e2e:ci": "playwright test --project=chromium",
-    "test:unit:no-watch": "vitest run --root ./src/",
     "coverage": "vitest run --root ./src/ --coverage --reporter=junit --outputFile.junit=./coverage/junit.xml",
     "build": "tsc && vite build",
     "preview": "vite preview"

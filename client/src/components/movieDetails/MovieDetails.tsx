@@ -3,8 +3,7 @@ import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useUser } from '../../context/UserContext';
-import { Movie } from '../../types';
-import { getCategoryNameById } from '../../utils/categoryUtils';
+import { Genre, Movie } from '../../types';
 import { StarRating } from '../starRating/StarRating';
 import WatchlistButton from '../watchlistButton/WatchlistButton';
 import styles from './MovieDetails.module.scss';
@@ -46,7 +45,7 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
         </h1>
         {user && <WatchlistButton movie={movie} style={'small'} user={user} />}
         <p className={styles.date} tabIndex={0}>
-          {movie.release_date} - {movie.genre_ids.map((id) => getCategoryNameById(id)).join(', ')}
+          {movie.release_date} - {movie.genre_ids.map((genre: Genre) => genre.name).join(', ')}
         </p>
         <div className={styles.content}>
           <div className={styles.textContent}>

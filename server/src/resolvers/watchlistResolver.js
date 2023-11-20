@@ -13,6 +13,9 @@ const watchlistResolver = {
             skip: (page - 1) * pageSize,
             limit: pageSize,
           },
+          populate: {
+            path: 'genre_ids',
+          },
         });
 
         return watchlist;

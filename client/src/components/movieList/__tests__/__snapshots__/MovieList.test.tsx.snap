@@ -29,7 +29,7 @@ exports[`MovieList > should match snapshot 1`] = `
             Foo Bar
           </div>
           <p
-            aria-label="genres:Adventure,Action"
+            aria-label="genres:Adventure, Action"
             class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
           >
             Adventure, Action
@@ -60,7 +60,7 @@ exports[`MovieList > should match snapshot 1`] = `
             Foo Bar
           </div>
           <p
-            aria-label="genres:Adventure,Action"
+            aria-label="genres:Adventure, Action"
             class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
           >
             Adventure, Action
