@@ -4,16 +4,25 @@
   margin-top: 15px;
   width: 100%;
   position: relative;
+  color: var(--color-text);
 
   .searchInput {
     width: 100%;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+
+    ::placeholder {
+      color: var(--color-text); // Placeholder text color
+    }
+
+    input {
+      color: var(--color-text);
+    }
   }
 
   .dropdown {
-    background-color: #e6e6e6;
-    color: black;
+    background-color: var(--color-dropdown);
+    color: var(--color-text);
     max-height: 500px;
     overflow-y: scroll;
     z-index: 2;
@@ -30,7 +39,7 @@
 
       &:focus,
       &:hover {
-        background-color: white;
+        background-color: var(--color-background);
         cursor: pointer;
       }
 
@@ -44,7 +53,7 @@
       padding: 5px;
 
       &:hover {
-        background-color: #e6e6e6;
+        background-color: var(--color-background);
         cursor: default;
       }
     }

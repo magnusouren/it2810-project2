@@ -1,9 +1,27 @@
 // Color palette
 
-$primary-color: #001f3f;
-$secondary-color: #ffd700;
-$tertiary-color: #e41b17;
-$quaternary-color: #ee964b;
-$quinary-color: #f95738;
-$body-color: #333;
-$accent-color: #ffa500;
+:root {
+  --color-background: white;
+  --color-body: #f9f9f9;
+  --color-text: black;
+  --color-text-secondary: #565656;
+  --color-primary: rgb(235 235 235);
+  --color-secondary: white;
+  --color-border: #001f3f;
+  --color-dropdown: #e6e6e6;
+  --color-select: #fff;
+  --box-shadow: 1px 5px 5px 0 rgb(85 85 85 / 30%);
+}
+
+body.dark-mode {
+  --color-body: #191919;
+  --color-background: #232323;
+  --color-text: #eee;
+  --color-text-secondary: #b7b7b7;
+  --color-primary: #030202;
+  --color-secondary: #191919;
+  --color-dropdown: #353535;
+  --color-border: #003162;
+  --color-select: #b7b7b7;
+  --box-shadow: 1px 5px 5px 0 rgb(0 0 0 / 30%);
+}

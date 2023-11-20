@@ -1,5 +1,3 @@
-@use '../../styles/colors.scss';
-
 .rating {
   h3 {
     line-height: 2em;
@@ -7,10 +5,15 @@
     margin-bottom: 1rem;
     margin-top: 2rem;
     font-size: 1.2rem;
+    color: var(--color-text);
 
     span {
       font-weight: 200;
     }
+  }
+
+  svg {
+    color: #fc0;
   }
 
   p {

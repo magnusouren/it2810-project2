@@ -1,4 +1,5 @@
 import './styles/index.scss';
+import './styles/colors.scss';
 
 import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client';
 import React from 'react';
@@ -17,7 +18,10 @@ export const client = new ApolloClient({
   link: serverURI,
 });
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+// Call root.render() to render your app
+root.render(
   <React.StrictMode>
     <UserProvider>
       <ApolloProvider client={client}>

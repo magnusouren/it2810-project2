@@ -3,6 +3,7 @@ export interface User {
   id: string;
   loginState: boolean;
   ratings?: Rating[];
+  darkMode?: boolean;
   watchlist?: Movie[];
 }
 

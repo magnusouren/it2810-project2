@@ -38,8 +38,8 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
             {movie.title}
           </Typography>
           <Typography
+            sx={{ color: 'var(--color-text-secondary)' }}
             variant='body2'
-            color='text.secondary'
             aria-label={`genres:${movie.genre_ids.map((genre) => genre.name).join(', ')}`}
           >
             {movie.genre_ids.map((genre) => genre.name).join(', ')}

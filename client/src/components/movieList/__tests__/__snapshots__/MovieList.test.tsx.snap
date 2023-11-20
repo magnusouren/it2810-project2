@@ -30,7 +30,7 @@ exports[`MovieList > should match snapshot 1`] = `
           </div>
           <p
             aria-label="genres:Adventure, Action"
-            class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-xx3zdw-MuiTypography-root"
           >
             Adventure, Action
           </p>
@@ -61,7 +61,7 @@ exports[`MovieList > should match snapshot 1`] = `
           </div>
           <p
             aria-label="genres:Adventure, Action"
-            class="MuiTypography-root MuiTypography-body2 css-r40f8v-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body2 css-xx3zdw-MuiTypography-root"
           >
             Adventure, Action
           </p>

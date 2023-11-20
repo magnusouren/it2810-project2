@@ -11,6 +11,8 @@ interface UserContextProps {
   login: () => void;
   logout: () => void;
   deleteUser: () => void;
+  darkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
 const UserContext = createContext<UserContextProps | null>(null);
@@ -54,6 +56,18 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const generateUser = () => {
     return { name: faker.person.fullName(), id: uuid(), loginState: true } as User;
   };
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    const storedDarkMode = localStorage.getItem('darkMode');
+    return storedDarkMode ? JSON.parse(storedDarkMode) : false;
+  });
+
+  const toggleDarkMode = () => {
+    setDarkMode((prevDarkMode) => {
+      const newDarkMode = !prevDarkMode;
+      localStorage.setItem('darkMode', JSON.stringify(newDarkMode));
+      return newDarkMode;
+    });
+  };
 
   const login = () => {
     // Genereta a new user if no user exists in localStorage.
@@ -81,6 +95,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
     login,
     logout,
     deleteUser,
+    darkMode,
+    toggleDarkMode,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
