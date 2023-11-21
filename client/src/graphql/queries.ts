@@ -153,9 +153,8 @@ export const ADD_RATING = gql`
 export const GET_FILTER = gql`
   query FilterData {
     filter @client {
-      alphabeticalSort
+      sort
       genre
-      ratingSort
       page
     }
   }
@@ -170,25 +169,22 @@ export const GET_GENERS = gql`
   }
 `;
 
-export const determineQueryAndVariables = (
-  page: number,
-  genre: string,
-  alphabeticalSort: string,
-  ratingSort: string,
-) => {
+export const determineQueryAndVariables = (page: number, genre: string, sort: string) => {
   const baseVariables = { page: page };
+  const alphabeticalSort = sort === 'a-z' || sort === 'z-a';
+  const ratingSort = sort === 'h-l' || sort === 'l-h';
 
   if (genre) {
     if (alphabeticalSort) {
       return {
         query: GET_MOVIES_BY_TITLE_AZ,
-        variables: { ...baseVariables, genreId: genre, order: alphabeticalSort },
+        variables: { ...baseVariables, genreId: genre, order: sort },
       };
     }
     if (ratingSort) {
       return {
         query: GET_MOVIES_BY_RATING,
-        variables: { ...baseVariables, genreId: genre, order: ratingSort },
+        variables: { ...baseVariables, genreId: genre, order: sort },
       };
     }
     return {
@@ -200,14 +196,13 @@ export const determineQueryAndVariables = (
   if (alphabeticalSort) {
     return {
       query: GET_MOVIES_BY_TITLE_AZ,
-      variables: { ...baseVariables, order: alphabeticalSort },
+      variables: { ...baseVariables, order: sort },
     };
   }
   if (ratingSort) {
-    console.log('ratingSort', ratingSort);
     return {
       query: GET_MOVIES_BY_RATING,
-      variables: { ...baseVariables, order: ratingSort },
+      variables: { ...baseVariables, order: sort },
     };
   }
   return {

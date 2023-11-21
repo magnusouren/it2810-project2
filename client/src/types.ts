@@ -48,6 +48,4 @@ export interface Rating {
   rating: number;
 }
 
-export type AlphabeticalSort = 'a-z' | 'z-a' | '';
-
-export type RatingSort = 'h-l' | 'l-h' | '';
+export type Sort = 'a-z' | 'z-a' | 'h-l' | 'l-h' | '';

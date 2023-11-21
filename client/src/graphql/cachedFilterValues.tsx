@@ -1,5 +1,5 @@
 import { client } from '../main';
-import { AlphabeticalSort, RatingSort } from '../types';
+import { Sort } from '../types';
 import { GET_FILTER } from './queries';
 
 type FilterResponse = {
@@ -7,9 +7,8 @@ type FilterResponse = {
 };
 
 type Filter = {
-  alphabeticalSort: AlphabeticalSort;
+  sort: Sort;
   genre: string;
-  ratingSort: RatingSort;
   page: number;
 };
 
@@ -24,7 +23,7 @@ export const getCachedFilterValues = () => {
   const filterResponse = cache.readQuery<FilterResponse>({
     query: GET_FILTER,
   });
-  const filter: Filter = filterResponse?.filter || { alphabeticalSort: '', genre: '', ratingSort: '', page: 1 };
+  const filter: Filter = filterResponse?.filter || { sort: '', genre: '', page: 1 };
 
   return filter;
 };
@@ -35,16 +34,15 @@ export const getCachedFilterValues = () => {
  *
  * @param {Filter} filter
  */
-export const setCachedFilterValues = ({ alphabeticalSort, genre, ratingSort, page }: Filter) => {
+export const setCachedFilterValues = ({ sort, genre, page }: Filter) => {
   const cache = client.cache;
 
   cache.writeQuery({
     query: GET_FILTER,
     data: {
       filter: {
-        alphabeticalSort: alphabeticalSort,
+        sort: sort,
         genre: genre,
-        ratingSort: ratingSort,
         page: page,
       },
     },
