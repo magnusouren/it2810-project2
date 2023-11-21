@@ -41,7 +41,7 @@ type Query {
   getMovieByTitle(title: String!): Movie
   getMoviesByTitle(title: String!, limit: Int!): [Movie]
   getMoviesByGenre(page: Int!, genreId: Int!): [Movie]
-  getMoviesByTitleAZ(page: Int!, genreId: Int, order: String): [Movie]
+  getMoviesByTitleAZ(page: Int!, genreId: Int, order: String!): [Movie]
   getMoviesByRating(page: Int!, genreId: Int, order: String!): [Movie]
   getMovieRatingWithUserID(userID: String!, movieID: Int!): Rating
   getRatingsByUserID(userID: Int!): [Ratings]

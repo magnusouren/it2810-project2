@@ -37,13 +37,13 @@ test('sorting alphabetically', async ({ page }) => {
   await expect(movieCards.first()).toContainText('Blue Beetle');
 
   // Sorting by A-Z
-  await page.getByTestId('alphabetical-sort').click();
+  await page.getByTestId('sort').click();
   await page.getByRole('option', { name: 'A-Z' }).click();
   const movieCards2 = page.locator('[data-testid="movie-card"]');
   await expect(movieCards2.first()).toContainText('After Everything');
 
   // Sorting by Z-A
-  await page.getByTestId('alphabetical-sort').click();
+  await page.getByTestId('sort').click();
   await page.getByRole('option', { name: 'Z-A' }).click();
   const movieCards3 = page.locator('[data-testid="movie-card"]');
   await expect(movieCards3.first()).toContainText('Transformers: Rise of the Beasts');
@@ -54,14 +54,14 @@ test('sorting by rating', async ({ page }) => {
   await expect(movieCards.first()).toContainText('Blue Beetle');
 
   // Sorting by High to Low
-  await page.getByTestId('rating-sort').click();
-  await page.getByRole('option', { name: 'High to Low' }).click();
+  await page.getByTestId('sort').click();
+  await page.getByRole('option', { name: 'Rating: High to Low' }).click();
   const movieCards2 = page.locator('[data-testid="movie-card"]');
   await expect(movieCards2.first()).toContainText('Spider-Man: Across the Spider-Verse');
 
   // Sorting by Low to High
-  await page.getByTestId('rating-sort').click();
-  await page.getByRole('option', { name: 'Low to High' }).click();
+  await page.getByTestId('sort').click();
+  await page.getByRole('option', { name: 'Rating: Low to High' }).click();
   const movieCards3 = page.locator('[data-testid="movie-card"]');
   await expect(movieCards3.first()).toContainText('Mondocane');
 });
@@ -78,15 +78,15 @@ test('sorting & filtering', async ({ page }) => {
   await expect(movieCards2.first()).toContainText('Gran Turismo');
 
   // Sorting by High to Low
-  await page.getByTestId('rating-sort').click();
-  await page.getByRole('option', { name: 'High to Low' }).click();
+  await page.getByTestId('sort').click();
+  await page.getByRole('option', { name: 'Rating: High to Low' }).click();
   const movieCards3 = page.locator('[data-testid="movie-card"]');
   await expect(movieCards3).toHaveCount(5);
   await expect(movieCards3.first()).toContainText('Oppenheimer');
 
   // Sorting by Low to High
-  await page.getByTestId('rating-sort').click();
-  await page.getByRole('option', { name: 'Low to High' }).click();
+  await page.getByTestId('sort').click();
+  await page.getByRole('option', { name: 'Rating: Low to High' }).click();
   const movieCards4 = page.locator('[data-testid="movie-card"]');
   await expect(movieCards4).toHaveCount(5);
   await expect(movieCards4.first()).toContainText('Mondocane');
@@ -98,15 +98,15 @@ test('global state of sorting & filtering', async ({ page }) => {
   await page.getByRole('option', { name: 'Drama' }).click();
 
   // Sorting by High to Low
-  await page.getByTestId('rating-sort').click();
-  await page.getByRole('option', { name: 'High to Low' }).click();
+  await page.getByTestId('sort').click();
+  await page.getByRole('option', { name: 'Rating: High to Low' }).click();
   const movieCards1 = page.locator('[data-testid="movie-card"]');
   await expect(movieCards1.first()).toContainText('Oppenheimer');
   movieCards1.first().click();
 
   // Go back to searches
   await page.getByLabel('link back to movie page').click();
-  await expect(page.getByTestId('rating-sort')).toHaveText('High to Low');
+  await expect(page.getByTestId('sort')).toHaveText('Rating: High to Low');
   await expect(page.getByTestId('category-filter')).toHaveText('Drama');
 });
 
@@ -114,7 +114,7 @@ test('movie added to watchlist', async ({ page }) => {
   await page.getByTestId('login-button').click();
   await page.getByTestId('menu').click();
   await page.getByTestId('watchlist-link').click();
-  await expect(page.locator('[data-testid="movie-card"]')).toHaveCount(0);
+  await expect(page.locator('[data-testid="movies-list-container"]')).toHaveCount(0);
 
   // Add movie to watchlist
   await page.getByTestId('home-link').click();
@@ -124,12 +124,24 @@ test('movie added to watchlist', async ({ page }) => {
   // Check watchlist
   await page.getByTestId('menu').click();
   await page.getByTestId('watchlist-link').click();
-  await expect(page.locator('[data-testid="movie-card"]')).toHaveCount(1);
+  await expect(page.locator('[data-testid="movies-list-container"]')).toHaveCount(1);
 
   // Remove movie from watchlist
   await page.getByTestId('watchlist-toggle-button').click();
   // First toggle button in case of mis-click
   await expect(page.getByTestId('watchlist-toggle-button')).toHaveAttribute('aria-label', 'add movie to watchlist');
   await page.reload();
-  await expect(page.locator('[data-testid="movie-card"]')).toHaveCount(0);
+  await expect(page.locator('[data-testid="movies-list-container"]')).toHaveCount(0);
+});
+
+test('reset filter', async ({ page }) => {
+  // Filtering on Drama
+  await page.getByLabel('Category').click();
+  await page.getByRole('option', { name: 'Drama' }).click();
+  const movieCards = page.locator('[data-testid="movie-card"]');
+  await expect(movieCards).toHaveCount(5);
+
+  // Reset filter
+  await page.getByTestId('reset-filter-button').click();
+  await expect(movieCards).toHaveCount(16);
 });

@@ -1,49 +1,40 @@
 import { useQuery } from '@apollo/client';
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { FC } from 'react';
 
 import { setCachedFilterValues } from '../../graphql/cachedFilterValues';
 import { GET_GENERS } from '../../graphql/queries';
-import { AlphabeticalSort, Genre, RatingSort } from '../../types';
+import { Genre, Sort } from '../../types';
 import styles from './FilterSort.module.scss';
 
 interface FilterSortProps {
   genre: string;
-  alphabeticalSort: AlphabeticalSort;
-  ratingSort: RatingSort;
+  sort: Sort;
   setGenre: React.Dispatch<React.SetStateAction<string>>;
   setPage: React.Dispatch<React.SetStateAction<number>>;
-  setAlphabeticalSort: React.Dispatch<React.SetStateAction<'' | 'a-z' | 'z-a'>>;
-  setRatingSort: React.Dispatch<React.SetStateAction<'' | 'h-l' | 'l-h'>>;
+  setSort: React.Dispatch<React.SetStateAction<'' | 'a-z' | 'z-a' | 'h-l' | 'l-h'>>;
 }
 
-export const FilterSort: FC<FilterSortProps> = ({
-  genre,
-  alphabeticalSort,
-  ratingSort,
-  setGenre,
-  setAlphabeticalSort,
-  setRatingSort,
-  setPage,
-}) => {
+export const FilterSort: FC<FilterSortProps> = ({ genre, sort, setGenre, setSort, setPage }) => {
   const { data } = useQuery(GET_GENERS);
 
   const handleCategoryChange = (event: SelectChangeEvent<string>) => {
     setGenre(event.target.value as string);
     setPage(1);
-    setCachedFilterValues({ alphabeticalSort, genre: event.target.value as string, ratingSort, page: 1 });
+    setCachedFilterValues({ sort, genre: event.target.value as string, page: 1 });
   };
 
-  const handleAlphabeticalSortChange = (event: SelectChangeEvent<string>) => {
-    setAlphabeticalSort(event.target.value as AlphabeticalSort);
+  const handleSortChange = (event: SelectChangeEvent<string>) => {
+    setSort(event.target.value as Sort);
     setPage(1);
-    setCachedFilterValues({ alphabeticalSort: event.target.value as AlphabeticalSort, genre, ratingSort, page: 1 });
+    setCachedFilterValues({ sort: event.target.value as Sort, genre, page: 1 });
   };
 
-  const handleRatingSortChange = (event: SelectChangeEvent<string>) => {
-    setRatingSort(event.target.value as RatingSort);
+  const handleReset = () => {
+    setGenre('');
+    setSort('');
     setPage(1);
-    setCachedFilterValues({ alphabeticalSort, genre, ratingSort: event.target.value as RatingSort, page: 1 });
+    setCachedFilterValues({ sort: '', genre: '', page: 1 });
   };
 
   return (
@@ -66,16 +57,9 @@ export const FilterSort: FC<FilterSortProps> = ({
 
       <p>Sort:</p>
       <div className={styles.sort}>
-        <FormControl variant='filled' className={styles.leftSelect}>
-          <InputLabel id='alphabetical-sort'>Alphabetical</InputLabel>
-          <Select
-            id='alphabetical-sort'
-            labelId='alphabetical-sort'
-            value={alphabeticalSort}
-            onChange={handleAlphabeticalSortChange}
-            disabled={!!ratingSort}
-            data-testid='alphabetical-sort'
-          >
+        <FormControl variant='filled' className={styles.categorySelect}>
+          <InputLabel id='sort'>Sort</InputLabel>
+          <Select id='sort' value={sort} onChange={handleSortChange} data-testid='sort'>
             <MenuItem value=''>
               <em>None</em>
             </MenuItem>
@@ -85,29 +69,20 @@ export const FilterSort: FC<FilterSortProps> = ({
             <MenuItem key={'z-a'} value={'z-a'}>
               Z-A
             </MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl variant='filled' className={styles.rightSelect}>
-          <InputLabel id='rating-sort'>Rating</InputLabel>
-          <Select
-            id='rating-sort'
-            value={ratingSort}
-            onChange={handleRatingSortChange}
-            disabled={!!alphabeticalSort}
-            data-testid='rating-sort'
-          >
-            <MenuItem value=''>
-              <em>None</em>
-            </MenuItem>
             <MenuItem key={'h-l'} value={'h-l'}>
-              High to Low
+              Rating: High to Low
             </MenuItem>
             <MenuItem key={'l-h'} value={'l-h'}>
-              Low to High
+              Rating: Low to High
             </MenuItem>
           </Select>
         </FormControl>
       </div>
+      {(genre || sort) && (
+        <Button onClick={handleReset} variant='contained' data-testid='reset-filter-button'>
+          Reset Filter
+        </Button>
+      )}
     </div>
   );
 };

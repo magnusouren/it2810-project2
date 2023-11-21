@@ -7,7 +7,7 @@ import { MovieList } from '../components/movieList/MovieList';
 import Search from '../components/search/Search';
 import { getCachedFilterValues, setCachedFilterValues } from '../graphql/cachedFilterValues';
 import { determineQueryAndVariables } from '../graphql/queries';
-import { AlphabeticalSort, RatingSort } from '../types';
+import { Sort } from '../types';
 import styles from './Movies.module.scss';
 
 /**
@@ -19,28 +19,22 @@ import styles from './Movies.module.scss';
  */
 export const Movies = () => {
   // Retrieving cached filter values to prefill the filter form
-  const {
-    alphabeticalSort: cachedAS,
-    genre: cachedGenre,
-    ratingSort: cachedRatingSort,
-    page: cachedPage,
-  } = getCachedFilterValues();
+  const { sort: cachedSort, genre: cachedGenre, page: cachedPage } = getCachedFilterValues();
 
   const sizeLimit = 16;
 
   const [count, setCount] = useState<number | undefined>(sizeLimit);
   const [page, setPage] = useState(cachedPage);
   const [genre, setGenre] = useState(cachedGenre);
-  const [alphabeticalSort, setAlphabeticalSort] = useState<AlphabeticalSort>(cachedAS);
-  const [ratingSort, setRatingSort] = useState<RatingSort>(cachedRatingSort);
+  const [sort, setSort] = useState<Sort>(cachedSort);
 
   const handlePagination = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-    setCachedFilterValues({ alphabeticalSort, genre, ratingSort, page: value });
+    setCachedFilterValues({ sort, genre, page: value });
   };
 
   // Creating the query and variables based on the filter values
-  const { query, variables } = determineQueryAndVariables(page, genre, alphabeticalSort, ratingSort);
+  const { query, variables } = determineQueryAndVariables(page, genre, sort);
 
   const { data, loading, error } = useQuery(query, {
     variables: variables,
@@ -49,8 +43,13 @@ export const Movies = () => {
   useEffect(() => {
     if (data && data.getMovieCountByGenre) {
       setCount(data.getMovieCountByGenre);
+    } else {
+      setCount(undefined);
     }
   }, [data]);
+
+  const startMovie = (page - 1) * sizeLimit + 1;
+  const endMovie = Math.min(page * sizeLimit, count || 0);
 
   return (
     <>
@@ -66,15 +65,13 @@ export const Movies = () => {
           size='small'
         />
       </h1>
-      <FilterSort
-        genre={genre}
-        alphabeticalSort={alphabeticalSort}
-        ratingSort={ratingSort}
-        setGenre={setGenre}
-        setPage={setPage}
-        setAlphabeticalSort={setAlphabeticalSort}
-        setRatingSort={setRatingSort}
-      />
+      {count && (
+        <p style={{ color: 'gray' }}>
+          Showing {startMovie}-{endMovie} movies of {count} total
+        </p>
+      )}
+      <br />
+      <FilterSort genre={genre} sort={sort} setGenre={setGenre} setPage={setPage} setSort={setSort} />
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
       {data && !loading && (
