@@ -34,16 +34,12 @@ test('pagination', async ({ page }) => {
 });
 
 test('shows working scroll to top button', async ({ page }) => {
-  // Get the second pagination navigation element and scroll to it
-  page.getByLabel('pagination navigation').nth(1).scrollIntoViewIfNeeded({ timeout: 1000 });
-
-  // If the scroll button still isn't visible, press "End" to scroll to the bottom of the page
-  // This depends on what elements have been loaded.
+  await page.goto('/project2/movie/852436');
+  await page.getByTestId('vote-count').scrollIntoViewIfNeeded({ timeout: 1000 });
+  await page.waitForTimeout(1000);
+  await page.keyboard.press('End');
   const scrollToTopButton = page.getByTestId('scroll-to-top-button');
-  if (!scrollToTopButton.isVisible()) {
-    page.keyboard.press('End');
-  }
   await expect(scrollToTopButton).toBeVisible();
-  scrollToTopButton.click();
+  await scrollToTopButton.click();
   await expect(scrollToTopButton).not.toBeVisible();
 });

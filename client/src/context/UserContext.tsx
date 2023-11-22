@@ -57,8 +57,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return { name: faker.person.fullName(), id: uuid(), loginState: true } as User;
   };
   const [darkMode, setDarkMode] = useState<boolean>(() => {
-    const storedDarkMode = localStorage.getItem('darkMode');
-    return storedDarkMode ? JSON.parse(storedDarkMode) : false;
+    const storedDarkMode = getItem('darkMode');
+    return storedDarkMode ? storedDarkMode : false;
   });
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => {
       const newDarkMode = !prevDarkMode;
-      localStorage.setItem('darkMode', JSON.stringify(newDarkMode));
+      setItem('darkMode', newDarkMode);
       return newDarkMode;
     });
   };
