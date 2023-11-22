@@ -24,3 +24,5 @@ Due to incompatability with the main image, we decided to skip the server tests 
 ## Linting
 
 The pipeline runs linting scripts for the entire projects, to ensure we maintain a consistent code style.
+
+### Back to [documentation](./README.md).

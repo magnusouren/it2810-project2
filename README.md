@@ -1,4 +1,4 @@
-# Binge Watcher
+# Bingewatcher
 
 Binge Watcher is a platform to search for movies and TV shows. The user can search for movies and TV shows, and add them to a watchlist. The user can also rate movies and TV shows, and see the average rating of each movie and TV show.
 
@@ -15,17 +15,14 @@ The project can be found at:
 This readme is intended to provide a brief overview of the project setup and available npm scripts.
 Other documentation can be found in the [docs](./docs) folder.
 
-### Feedback
-
-Feedback from the different deliveries during the project can be found in the [docs/feedback.md](./docs/feedback.md) file.
-
-### Requirements
-
-The requirements for the project, and explenations on our implementations can be found in the [docs/requirements.md](./docs/requirements.md) file.
-
 ## Project structure
 
 The project is divided into two main folders: `client`, `server`.
+
+### Root
+
+The `root` has its own `package.json` file, and is used to install dependencies common for the entire project. This includes Typescript, Eslint and Prettier.
+It also contains the `README.md` file, and the `docs` folder.
 
 ### Client
 
@@ -56,6 +53,26 @@ To set correct npm version, run:
 ```cli
 npm install -g npm@9.8.1
 ```
+
+## Setup
+
+To setup the project for development, run:
+
+```cli
+npm run setup
+```
+
+This will install all dependencies for the project.
+
+```cli
+npm run dev
+```
+
+This will start the project in development mode. The client and server will run concurrently. The project will run locally on a local port number. Any code changes will trigger automatic browser and server updates.
+
+**Note**: You will need a valid database connection to run the project. See the [server/README.md](./server/README.md) file for more information.
+
+<i>For specialized development, you can find explenations for all the scripts in the section below.</i>
 
 ## Available NPM Scripts
 
@@ -163,10 +180,8 @@ npm run format
 
 This script runs Prettier to format the code in TypeScript, JavaScript, SCSS, JSON, and CSS files in the project according to the configuration defined in the .prettierrc.cjs file.
 
-## CI Pipeline scripts
-
 ```cli
-npm run setup:ci
+npm run pipeline
 ```
 
-This script is used by the CI pipeline to install dependencies and build the project.
+This script will simulate the CI/CD pipeline locally.

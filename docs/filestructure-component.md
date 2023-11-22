@@ -29,3 +29,5 @@ Snapshot tests are a simple way to verify that the static content on the page ma
 ## Utils
 
 If the component has utility files, they should be located in `./utils.ts`. Tests for utility files will be located in Component-utils.test.ts. Any utilities that are not specific to the component should be placed in .src/utils in the root directory.
+
+### Back to [documentation](./README.md).

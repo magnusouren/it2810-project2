@@ -1,12 +1,5 @@
 # Server
 
-The server is written in Javascript and uses the following technologies:
-
-- [Node.js](https://nodejs.org/en/) - JavaScript runtime
-- [Mongoose](https://mongoosejs.com/) - MongoDB object modeling
-- [Apollo Server](https://www.apollographql.com/docs/apollo-server/) - GraphQL server
-- [GraphQL](https://graphql.org/) - Query language for APIs
-
 ## Connection
 
 The server are hosted on our virtual machine at NTNU. The server is available at the following URL:
@@ -40,7 +33,7 @@ npm start
 Will start the server with the development database.
 
 ```bash
-npm start:prod
+npm start:production
 ```
 
 Will start the server with the production database.
@@ -64,6 +57,17 @@ Files that are not located in a folder are located in the root directory of the 
 
 - `index.ts` - Contains the code necessary to start the server.
 - `schema.graphql` - Contains the schema and types for the GraphQL API.
+
+The folder/file structure for the server is also described in the [filestructure.md](../docs/filestructure-project.md) file.
+
+## Third party libraries
+
+The server is written in Javascript and uses the following technologies:
+
+- [Node.js](https://nodejs.org/en/) - JavaScript runtime
+- [Mongoose](https://mongoosejs.com/) - MongoDB object modeling
+- [Apollo Server](https://www.apollographql.com/docs/apollo-server/) - GraphQL server
+- [GraphQL](https://graphql.org/) - Query language for APIs
 
 ## Queries and mutations
 
