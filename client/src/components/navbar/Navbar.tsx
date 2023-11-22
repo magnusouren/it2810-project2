@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import MovieIcon from '../../assets/SVG/camera-white.svg';
-import DarkModeToggle from '../darkMode/DarkModeToggle';
 import LoginButton from './LoginButton';
 import styles from './Navbar.module.scss';
 
@@ -27,7 +26,6 @@ const Navbar: React.FC = () => {
             </Typography>
           </IconButton>
         </Link>
-        <DarkModeToggle />
         <LoginButton />
       </Toolbar>
     </AppBar>
