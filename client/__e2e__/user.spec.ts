@@ -12,7 +12,7 @@ test('generates a user', async ({ page }) => {
 test('watchlist toggles appear/disappear', async ({ page }) => {
   expect(page.getByTestId('watchlist-toggle-button')).not.toBeVisible();
   await page.getByTestId('login-button').click();
-  await expect(page.getByTestId('watchlist-toggle-button').first()).toBeVisible();
+  await expect(page.getByTestId('watchlist-toggle-button')).toHaveCount(16);
 });
 
 test('logs out and into the same user', async ({ page }) => {
@@ -53,4 +53,42 @@ test('generates a completely new user', async ({ page }) => {
   await page.getByTestId('login-button').click();
   expect(page.getByTestId('user-name')).toBeVisible();
   expect(await page.getByTestId('user-name').textContent()).not.toBe(username);
+});
+
+test('toggles dark mode', async ({ page }) => {
+  await page.getByTestId('login-button').click();
+  await page.getByTestId('menu').click();
+  await page.getByTestId('dark-mode-toggle').click();
+  expect(await page.getAttribute('html', 'data-theme')).toBe('dark');
+  await page.getByTestId('dark-mode-toggle').click();
+  expect(await page.getAttribute('html', 'data-theme')).toBe('light');
+});
+
+test('persistent dark mode', async ({ page }) => {
+  await page.getByTestId('login-button').click();
+  await page.getByTestId('menu').click();
+  await page.getByTestId('dark-mode-toggle').click();
+  expect(await page.getAttribute('html', 'data-theme')).toBe('dark');
+  await page.reload();
+  expect(await page.getAttribute('html', 'data-theme')).toBe('dark');
+});
+
+test('dark mode persistent when user logs out', async ({ page }) => {
+  await page.getByTestId('login-button').click();
+  await page.getByTestId('menu').click();
+  await page.getByTestId('dark-mode-toggle').click();
+  expect(await page.getAttribute('html', 'data-theme')).toBe('dark');
+  await page.getByTestId('logout').click();
+  expect(await page.getAttribute('html', 'data-theme')).toBe('dark');
+  await page.reload();
+  expect(await page.getAttribute('html', 'data-theme')).toBe('dark');
+});
+
+test('dark mode reset when user is deleted', async ({ page }) => {
+  await page.getByTestId('login-button').click();
+  await page.getByTestId('menu').click();
+  await page.getByTestId('dark-mode-toggle').click();
+  expect(await page.getAttribute('html', 'data-theme')).toBe('dark');
+  await page.getByTestId('delete-user').click();
+  expect(await page.getAttribute('html', 'data-theme')).toBe('light');
 });

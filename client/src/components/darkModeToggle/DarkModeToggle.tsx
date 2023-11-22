@@ -15,6 +15,7 @@ const DarkModeToggle: React.FC = () => {
         variant='outlined'
         className={styles.toggle}
         aria-label='dark mode toggle'
+        data-testid='dark-mode-toggle'
         onClick={toggleDarkMode}
         color='inherit'
       >

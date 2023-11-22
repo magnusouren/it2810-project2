@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useUser } from '../../context/UserContext';
-import DarkModeToggle from '../darkMode/DarkModeToggle';
+import DarkModeToggle from '../darkModeToggle/DarkModeToggle';
 import styles from './LoginButton.module.scss';
 
 /**

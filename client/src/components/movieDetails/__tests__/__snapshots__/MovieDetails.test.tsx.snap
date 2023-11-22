@@ -147,6 +147,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             <div
               aria-label="Amount of votes: 555"
               class="_score_bdc06c"
+              data-testid="vote-count"
               tabindex="0"
             >
               555
