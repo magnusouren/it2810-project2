@@ -3,7 +3,7 @@ import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } 
 import { FC } from 'react';
 
 import { setCachedFilterValues } from '../../graphql/cachedFilterValues';
-import { GET_GENERS } from '../../graphql/queries';
+import { GET_GENRES } from '../../graphql/queries';
 import { Genre, Sort } from '../../types';
 import styles from './FilterSort.module.scss';
 
@@ -16,7 +16,7 @@ interface FilterSortProps {
 }
 
 export const FilterSort: FC<FilterSortProps> = ({ genre, sort, setGenre, setSort, setPage }) => {
-  const { data } = useQuery(GET_GENERS);
+  const { data } = useQuery(GET_GENRES);
 
   const handleCategoryChange = (event: SelectChangeEvent<string>) => {
     setGenre(event.target.value as string);

@@ -13,6 +13,7 @@ type Movie {
   video: Boolean
   vote_average: Float
   vote_count: Int
+  isInWatchlist(userID: String): Boolean
 }
 
 type Ratings {
@@ -36,7 +37,7 @@ type Genre {
 }
 
 type Query {
-  getMovies(page: Int!): [Movie]
+  getMovies(page: Int!, userID: String): [Movie]
   getMovieById(id: Int!): Movie
   getMovieByTitle(title: String!): Movie
   getMoviesByTitle(title: String!, limit: Int!): [Movie]
@@ -50,6 +51,7 @@ type Query {
   movieIsInWatchlist(userID: String!, movieID: Int!): Boolean
   getMovieCountByGenre(genreId: Int): Int
   getGenres(genreId: Int): [Genre]
+  isInWatchlist(userID: String): Boolean
 }
 
 type Mutation {

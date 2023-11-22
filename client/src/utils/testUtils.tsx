@@ -25,7 +25,7 @@ export const renderWithRouterAndUserContext = (component: JSX.Element) =>
   );
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const renderWithProviders = (child: React.ReactNode, mocks: any[] = []) => {
+export const renderWithProviders = (child: React.ReactNode, mocks?: any[]) => {
   return render(
     <UserProvider>
       <MockedProvider mocks={mocks} addTypename={false}>

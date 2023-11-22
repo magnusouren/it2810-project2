@@ -1,6 +1,6 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 
-import { ADD_MOVIE_TO_WATCHLIST, IS_IN_WATCHLIST, REMOVE_MOVIE_FROM_WATCHLIST } from '../../../graphql/queries';
+import { ADD_MOVIE_TO_WATCHLIST, REMOVE_MOVIE_FROM_WATCHLIST } from '../../../graphql/queries';
 import { Movie, User } from '../../../types';
 import { renderWithProviders } from '../../../utils/testUtils';
 import WatchlistButton from '../WatchlistButton';
@@ -35,173 +35,34 @@ const mockMovie: Movie = {
   video: false,
   vote_average: 5,
   vote_count: 555,
+  isInWatchlist: true,
 };
 
 describe('WatchlistButton', () => {
-  it('Should match snapshot', () => {
-    const mocks = [
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: true,
-          },
-        },
-      },
-    ];
-    const { container } = renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />, mocks);
+  it('Should match snapshot when movie is in watchlist', () => {
+    const { container } = renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />);
     expect(container).toMatchSnapshot();
   });
 
-  it.skip('Should render a small button by default', () => {
-    const mocks = [
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: true,
-          },
-        },
-      },
-    ];
-    const { container } = renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />, mocks);
+  it('Should match snapshot when movie is not in watchlist', () => {
+    const { container } = renderWithProviders(
+      <WatchlistButton movie={{ ...mockMovie, isInWatchlist: false }} user={mockUser} />,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('Should match snapshot when style prop is big', () => {
+    const { container } = renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} style='big' />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it('Should render a small button by default', () => {
+    const { container } = renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />);
     expect(container.querySelector('.smallContainer')).toBeDefined();
-  });
-
-  it('Should render a big button when style prop is big', () => {
-    const mocks = [
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: true,
-          },
-        },
-      },
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: true,
-          },
-        },
-      },
-    ];
-    const { container } = renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} style='big' />, mocks);
-    expect(container.querySelector('.bigContainer')).toBeDefined();
-  });
-
-  it('Should render a BookmarkAdd icon when movie is not in watchlist', async () => {
-    const mocks = [
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: false,
-          },
-        },
-      },
-    ];
-    renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />, mocks);
-    await waitFor(() => expect(screen.getByRole('button')).toBeDefined());
-    expect(screen.getByRole('button').querySelector('.add')).toBeDefined();
   });
 
   it('Should call removeWatchlist mutation when button is clicked and movie is not in watchlist', async () => {
     const mocks = [
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: true,
-          },
-        },
-      },
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: false,
-          },
-        },
-      },
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: false,
-          },
-        },
-      },
-      {
-        request: {
-          query: ADD_MOVIE_TO_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            addMovieToWatchlist: {
-              userID: mockUser.id,
-              movies: [
-                {
-                  _id: 111111,
-                },
-              ],
-            },
-          },
-        },
-      },
       {
         request: {
           query: REMOVE_MOVIE_FROM_WATCHLIST,
@@ -222,7 +83,6 @@ describe('WatchlistButton', () => {
     ];
     renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />, mocks);
 
-    await waitFor(() => fireEvent.click(screen.getByRole('button')));
     expect(screen.getByRole('button').querySelector('.remove')).toBeDefined();
     expect(screen.getByRole('button').querySelector('.add')).toBeNull();
     fireEvent.click(screen.getByRole('button'));
@@ -230,50 +90,8 @@ describe('WatchlistButton', () => {
     expect(screen.getByRole('button').querySelector('.remove')).toBeNull();
   });
 
-  it.skip('Should render a BookmarkRemove icon when movie is in watchlist', async () => {
+  it('Should call addWatchlist mutation when button is clicked and movie is not in watchlist', async () => {
     const mocks = [
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: false,
-          },
-        },
-      },
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: false,
-          },
-        },
-      },
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: true,
-          },
-        },
-      },
       {
         request: {
           query: ADD_MOVIE_TO_WATCHLIST,
@@ -285,114 +103,19 @@ describe('WatchlistButton', () => {
         result: {
           data: {
             addMovieToWatchlist: {
-              userId: mockUser.id,
-              movies: [111111],
+              userID: mockUser.id,
+              movies: [mockMovie],
             },
           },
         },
       },
     ];
-    renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />, mocks);
-    await waitFor(() => fireEvent.click(screen.getByRole('button')));
+    renderWithProviders(<WatchlistButton movie={{ ...mockMovie, isInWatchlist: false }} user={mockUser} />, mocks);
 
+    expect(screen.getByRole('button').querySelector('.add')).toBeDefined();
     expect(screen.getByRole('button').querySelector('.remove')).toBeNull();
-    expect(screen.getByRole('button').querySelector('.add')).toBeDefined();
     fireEvent.click(screen.getByRole('button'));
+    expect(screen.getByRole('button').querySelector('.remove')).toBeDefined();
     expect(screen.getByRole('button').querySelector('.add')).toBeNull();
-    expect(screen.getByRole('button').querySelector('.remove')).toBeDefined();
-  });
-
-  it.skip('Should call removeMovie mutation when button is clicked and movie is in watchlist', async () => {
-    const mocks = [
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: false,
-          },
-        },
-      },
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: true,
-          },
-        },
-      },
-      {
-        request: {
-          query: REMOVE_MOVIE_FROM_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            addMovieToWatchlist: {
-              userId: mockUser.id,
-              movies: [],
-            },
-          },
-        },
-      },
-    ];
-    renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />, mocks);
-
-    await waitFor(() => fireEvent.click(screen.getByRole('button')));
-    expect(screen.getByRole('button').querySelector('.remove')).toBeDefined();
-    fireEvent.click(screen.getByRole('button'));
-    expect(screen.getByRole('button').querySelector('.add')).toBeDefined();
-  });
-
-  it.skip('Should render a loading indicator when query is loading', async () => {
-    const mocks = [
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        result: {
-          data: {
-            movieIsInWatchlist: true,
-          },
-        },
-      },
-    ];
-    renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />, mocks);
-    expect(screen.getByText('Loading...')).toBeDefined();
-  });
-
-  it.skip('Should render an error message when query fails', async () => {
-    const errorMocks = [
-      {
-        request: {
-          query: IS_IN_WATCHLIST,
-          variables: {
-            movieId: 111111,
-            userId: mockUser.id,
-          },
-        },
-        error: new Error('An error occurred'),
-      },
-    ];
-    renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />, errorMocks);
-    await waitFor(() => expect(screen.getByText('Error! An error occurred')).toBeDefined());
   });
 });

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { FilterSort } from '../components/filterSort/FilterSort';
 import { MovieList } from '../components/movieList/MovieList';
 import Search from '../components/search/Search';
+import { useUser } from '../context/UserContext';
 import { getCachedFilterValues, setCachedFilterValues } from '../graphql/cachedFilterValues';
 import { determineQueryAndVariables } from '../graphql/queries';
 import { Sort } from '../types';
@@ -23,6 +24,9 @@ export const Movies = () => {
 
   const sizeLimit = 16;
 
+  const userContext = useUser();
+  const { user } = userContext;
+
   const [count, setCount] = useState<number | undefined>(sizeLimit);
   const [page, setPage] = useState(cachedPage);
   const [genre, setGenre] = useState(cachedGenre);
@@ -34,7 +38,7 @@ export const Movies = () => {
   };
 
   // Creating the query and variables based on the filter values
-  const { query, variables } = determineQueryAndVariables(page, genre, sort);
+  const { query, variables } = determineQueryAndVariables(page, genre, sort, user?.id || '');
 
   const { data, loading, error } = useQuery(query, {
     variables: variables,

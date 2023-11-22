@@ -1,9 +1,9 @@
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { BookmarkAdd, BookmarkRemove } from '@mui/icons-material';
 import { ToggleButton } from '@mui/material';
-import { FC, memo, useEffect, useState } from 'react';
+import { FC, memo, useState } from 'react';
 
-import { ADD_MOVIE_TO_WATCHLIST, IS_IN_WATCHLIST, REMOVE_MOVIE_FROM_WATCHLIST } from '../../graphql/queries';
+import { ADD_MOVIE_TO_WATCHLIST, REMOVE_MOVIE_FROM_WATCHLIST } from '../../graphql/queries';
 import { Movie, User } from '../../types';
 import styles from './WatchlistButton.module.scss';
 
@@ -15,41 +15,61 @@ interface WatchlistButtonProps {
 
 const Button: FC<WatchlistButtonProps> = ({ movie, style = 'small', user }) => {
   const movieId = parseInt(movie._id.toString(), 10);
+  const baseVariables = { movieId: movieId, userId: user.id };
 
-  const { data, loading, error } = useQuery(IS_IN_WATCHLIST, {
-    variables: { movieId: movieId, userId: user.id },
-    fetchPolicy: 'network-only',
+  const [isInWatchlist, setIsInWatchlist] = useState<boolean>(movie.isInWatchlist ?? false);
+
+  const [removeMovieFromWatchlist, { error: removeError }] = useMutation(REMOVE_MOVIE_FROM_WATCHLIST, {
+    variables: baseVariables,
+    update(cache) {
+      cache.modify({
+        fields: {
+          getMovieById(existingMovie) {
+            if (existingMovie._id === movieId) {
+              return { ...existingMovie, isInWatchlist: false }; // Update the cache to reflect the change in the UI
+            }
+          },
+        },
+      });
+    },
   });
 
-  // Initialize toggle state based on query data using useEffect
-  const [isInWatchlist, setIsInWatchlist] = useState(false);
-  useEffect(() => {
-    if (data && typeof data.movieIsInWatchlist === 'boolean') {
-      setIsInWatchlist(data.movieIsInWatchlist);
-    }
-  }, [data]);
-
-  const [removeMovieFromWatchlist] = useMutation(REMOVE_MOVIE_FROM_WATCHLIST, {
-    variables: { movieId: movieId, userId: user.id },
-    refetchQueries: [{ query: IS_IN_WATCHLIST, variables: { movieId: movieId, userId: user.id } }],
+  const [addMovieToWatchlist, { error: addError }] = useMutation(ADD_MOVIE_TO_WATCHLIST, {
+    variables: baseVariables,
+    update(cache) {
+      cache.modify({
+        fields: {
+          getMovieById(existingMovie) {
+            if (existingMovie._id === movieId) {
+              return { ...existingMovie, isInWatchlist: true }; // Update the cache to reflect the change in the UI
+            }
+          },
+        },
+      });
+    },
   });
 
-  const [addMovieToWatchlist] = useMutation(ADD_MOVIE_TO_WATCHLIST, {
-    variables: { movieId: movieId, userId: user.id },
-    refetchQueries: [{ query: IS_IN_WATCHLIST, variables: { movieId: movieId, userId: user.id } }],
-  });
+  if (removeError) {
+    return <div>{removeError.message}</div>;
+  }
 
-  const handleClick = () => {
+  if (addError) {
+    return <div>{addError.message}</div>;
+  }
+
+  const handleClick = async () => {
     if (isInWatchlist) {
-      removeMovieFromWatchlist();
+      const response = await removeMovieFromWatchlist();
+      if (response?.data?.removeMovieFromWatchlist) {
+        setIsInWatchlist(false);
+      }
     } else {
-      addMovieToWatchlist();
+      const response = await addMovieToWatchlist();
+      if (response?.data?.addMovieToWatchlist) {
+        setIsInWatchlist(true);
+      }
     }
-    // Toggle state should not be used directly for mutations result since it's managed by Apollo's cache
   };
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error! {error.message}</div>;
 
   return (
     <div className={style === 'big' ? styles.bigContainer : styles.smallContainer} data-testid='watchlist-button'>
@@ -63,6 +83,9 @@ const Button: FC<WatchlistButtonProps> = ({ movie, style = 'small', user }) => {
         data-testid='watchlist-toggle-button'
       >
         {isInWatchlist ? <BookmarkRemove className={styles.remove} /> : <BookmarkAdd className={styles.add} />}
+        {style === 'big' && (
+          <span className={styles.text}>{isInWatchlist ? 'Remove from watchlist' : 'Add to watchlist'}</span>
+        )}
       </ToggleButton>
     </div>
   );
