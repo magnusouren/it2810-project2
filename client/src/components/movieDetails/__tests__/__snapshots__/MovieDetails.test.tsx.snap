@@ -239,7 +239,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
           >
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":r1:"
+              for=":rm:"
               style="width: 0%; overflow: hidden; position: absolute;"
             >
               <span
@@ -265,14 +265,14 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":r1:"
+              id=":rm:"
               name="star-rating"
               type="radio"
               value="0.5"
             />
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":r2:"
+              for=":rn:"
             >
               <span
                 class="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
@@ -297,7 +297,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":r2:"
+              id=":rn:"
               name="star-rating"
               type="radio"
               value="1"
@@ -308,7 +308,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
           >
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":r3:"
+              for=":ro:"
               style="width: 0%; overflow: hidden; position: absolute;"
             >
               <span
@@ -334,14 +334,14 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":r3:"
+              id=":ro:"
               name="star-rating"
               type="radio"
               value="1.5"
             />
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":r4:"
+              for=":rp:"
             >
               <span
                 class="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
@@ -366,7 +366,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":r4:"
+              id=":rp:"
               name="star-rating"
               type="radio"
               value="2"
@@ -377,7 +377,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
           >
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":r5:"
+              for=":rq:"
               style="width: 0%; overflow: hidden; position: absolute;"
             >
               <span
@@ -403,14 +403,14 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":r5:"
+              id=":rq:"
               name="star-rating"
               type="radio"
               value="2.5"
             />
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":r6:"
+              for=":rr:"
             >
               <span
                 class="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
@@ -435,7 +435,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":r6:"
+              id=":rr:"
               name="star-rating"
               type="radio"
               value="3"
@@ -446,7 +446,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
           >
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":r7:"
+              for=":rs:"
               style="width: 0%; overflow: hidden; position: absolute;"
             >
               <span
@@ -472,14 +472,14 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":r7:"
+              id=":rs:"
               name="star-rating"
               type="radio"
               value="3.5"
             />
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":r8:"
+              for=":rt:"
             >
               <span
                 class="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
@@ -504,7 +504,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":r8:"
+              id=":rt:"
               name="star-rating"
               type="radio"
               value="4"
@@ -515,7 +515,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
           >
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":r9:"
+              for=":ru:"
               style="width: 0%; overflow: hidden; position: absolute;"
             >
               <span
@@ -541,14 +541,14 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":r9:"
+              id=":ru:"
               name="star-rating"
               type="radio"
               value="4.5"
             />
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":ra:"
+              for=":rv:"
             >
               <span
                 class="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
@@ -573,7 +573,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":ra:"
+              id=":rv:"
               name="star-rating"
               type="radio"
               value="5"
@@ -584,7 +584,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
           >
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":rb:"
+              for=":r10:"
               style="width: 0%; overflow: hidden; position: absolute;"
             >
               <span
@@ -610,14 +610,14 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":rb:"
+              id=":r10:"
               name="star-rating"
               type="radio"
               value="5.5"
             />
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":rc:"
+              for=":r11:"
             >
               <span
                 class="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
@@ -642,7 +642,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":rc:"
+              id=":r11:"
               name="star-rating"
               type="radio"
               value="6"
@@ -653,7 +653,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
           >
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":rd:"
+              for=":r12:"
               style="width: 0%; overflow: hidden; position: absolute;"
             >
               <span
@@ -679,14 +679,14 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":rd:"
+              id=":r12:"
               name="star-rating"
               type="radio"
               value="6.5"
             />
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":re:"
+              for=":r13:"
             >
               <span
                 class="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
@@ -711,7 +711,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":re:"
+              id=":r13:"
               name="star-rating"
               type="radio"
               value="7"
@@ -722,7 +722,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
           >
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":rf:"
+              for=":r14:"
               style="width: 0%; overflow: hidden; position: absolute;"
             >
               <span
@@ -748,14 +748,14 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":rf:"
+              id=":r14:"
               name="star-rating"
               type="radio"
               value="7.5"
             />
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":rg:"
+              for=":r15:"
             >
               <span
                 class="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
@@ -780,7 +780,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":rg:"
+              id=":r15:"
               name="star-rating"
               type="radio"
               value="8"
@@ -791,7 +791,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
           >
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":rh:"
+              for=":r16:"
               style="width: 0%; overflow: hidden; position: absolute;"
             >
               <span
@@ -817,14 +817,14 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":rh:"
+              id=":r16:"
               name="star-rating"
               type="radio"
               value="8.5"
             />
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":ri:"
+              for=":r17:"
             >
               <span
                 class="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
@@ -849,7 +849,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":ri:"
+              id=":r17:"
               name="star-rating"
               type="radio"
               value="9"
@@ -860,7 +860,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
           >
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":rj:"
+              for=":r18:"
               style="width: 0%; overflow: hidden; position: absolute;"
             >
               <span
@@ -886,14 +886,14 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":rj:"
+              id=":r18:"
               name="star-rating"
               type="radio"
               value="9.5"
             />
             <label
               class="css-dqr9h-MuiRating-label"
-              for=":rk:"
+              for=":r19:"
             >
               <span
                 class="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
@@ -918,7 +918,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
             </label>
             <input
               class="MuiRating-visuallyHidden"
-              id=":rk:"
+              id=":r19:"
               name="star-rating"
               type="radio"
               value="10"

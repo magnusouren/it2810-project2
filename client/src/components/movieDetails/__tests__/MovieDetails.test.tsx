@@ -1,6 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
+import { GET_MOVIE_RATING_WITH_USERID } from '../../../graphql/queries';
 import { Movie } from '../../../types';
 import { renderWithProviders } from '../../../utils/testUtils';
 import { MovieDetails } from '../MovieDetails';
@@ -25,26 +26,44 @@ const movie: Movie = {
   vote_count: 555,
 };
 
+const getMovieRatingWithUserIDMock = {
+  request: {
+    query: GET_MOVIE_RATING_WITH_USERID,
+    variables: {
+      userID: '1',
+      movieID: 111111,
+    },
+  },
+  result: {
+    data: {
+      getMovieRatingWithUserID: {
+        rating: 5,
+      },
+    },
+  },
+};
+
 window.scrollTo = vi.fn().mockImplementation(() => {});
 
 describe('MovieDetails', () => {
   beforeEach(() => {
-    renderWithProviders({ child: <MovieDetails movie={movie} /> });
+    renderWithProviders({
+      child: <MovieDetails movie={movie} />,
+      mockUser: { id: '1', name: 'Foo Bar', loginState: true },
+      mocks: [getMovieRatingWithUserIDMock],
+    });
   });
 
   it('should match snapshot', () => {
     const { container } = renderWithProviders({
       child: <MovieDetails movie={movie} />,
       mockUser: { id: '1', name: 'Foo Bar', loginState: true },
+      mocks: [getMovieRatingWithUserIDMock],
     });
     expect(container).toMatchSnapshot();
   });
 
   it('should render watchlist button if user is logged in', async () => {
-    renderWithProviders({
-      child: <MovieDetails movie={movie} />,
-      mockUser: { id: '1', name: 'Foo Bar', loginState: true },
-    });
     await waitFor(() => {
       expect(screen.getByTestId('watchlist-toggle-button')).toBeDefined();
     });
