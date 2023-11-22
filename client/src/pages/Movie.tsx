@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
+import { Spinner } from '../components/loading/Loading';
 import { MovieDetails } from '../components/movieDetails/MovieDetails';
 import { useUser } from '../context/UserContext';
 import { GET_MOVIE } from '../graphql/queries';
@@ -9,14 +10,16 @@ export const Movie = () => {
   const { id: idParam } = useParams<{ id: string }>();
   const id = idParam ? parseInt(idParam) : undefined;
 
-  const userContext = useUser();
-  const { user } = userContext;
+  const { user } = useUser();
 
-  const { data } = useQuery(GET_MOVIE, {
+  const { data, loading, error } = useQuery(GET_MOVIE, {
     variables: { id: id, userId: user?.id },
   });
 
-  if (!data) return <div>Loading...</div>;
+  if (loading) return <Spinner width='100%' height='400px' />;
+
+  if (error)
+    return <div style={{ color: 'var(--color-text)' }}>Something went wrong while fetching movie details...</div>;
 
   return <MovieDetails movie={data.getMovieById} />;
 };

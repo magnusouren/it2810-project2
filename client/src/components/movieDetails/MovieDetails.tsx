@@ -22,8 +22,7 @@ interface MovieDetailsProps {
  */
 
 export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
-  const userContext = useUser();
-  const { user } = userContext;
+  const { user } = useUser();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,6 +37,7 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
         src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
         alt={movie.title + ' backdrop poster'}
         className={styles.backdropPoster}
+        loading='lazy'
       />
       <div className={styles.container}>
         <h1 tabIndex={0}>
