@@ -1,6 +1,7 @@
 import { AccountCircle as AccountCircleIcon } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { Box, IconButton, MenuItem } from '@mui/material';
+import Popover from '@mui/material/Popover';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -46,6 +47,16 @@ const LoginButton = () => {
     setAnchorEl(null);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === 'Tab') {
+      if (event.shiftKey) {
+        return;
+      } else {
+        handleMenuClose();
+      }
+    }
+  };
+
   return user ? (
     <>
       <IconButton color='inherit' onClick={handleMenuOpen} data-testid='menu'>
@@ -54,20 +65,39 @@ const LoginButton = () => {
         </p>
         <MenuIcon fontSize='large' sx={{ margin: '0 0 0 10px' }} />
       </IconButton>
-      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-        <Box sx={{ padding: '0 10px' }}>
-          <DarkModeToggle />
-        </Box>
-        <Link to='/watchlist' className={styles.navLink} data-testid='watchlist-link'>
-          <MenuItem onClick={handleMenuClose}>My Watchlist</MenuItem>
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={handleMenuClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <MenuItem>
+          <Box sx={{ padding: '0 10px' }}>
+            <DarkModeToggle />
+          </Box>
+        </MenuItem>
+        <Link to='/watchlist' className={styles.navLink} data-testid='watchlist-link' onClick={handleMenuClose}>
+          <MenuItem>My Watchlist</MenuItem>
         </Link>
-        <MenuItem onClick={handleLogout} data-testid='logout'>
-          Logout
-        </MenuItem>
-        <MenuItem onClick={handleDeleteUser} data-testid='delete-user'>
-          Delete user
-        </MenuItem>
-      </Menu>
+        <button className={styles.button} onClick={handleLogout} data-testid='logout'>
+          <MenuItem>Logout</MenuItem>
+        </button>
+        <button
+          className={styles.button}
+          onKeyDown={handleKeyDown}
+          onClick={handleDeleteUser}
+          data-testid='delete-user'
+        >
+          <MenuItem>Delete user</MenuItem>
+        </button>
+      </Popover>
     </>
   ) : (
     <IconButton color='inherit' onClick={handleLogin} data-testid='login-button'>
