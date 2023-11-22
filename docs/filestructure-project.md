@@ -32,7 +32,11 @@ To maintain an organized structure in the project, files are organized as follow
 ├── server                                  # files for back end server
 │    ├── node_modules                       # node modules (ignored by git)
 │    ├── src
-│    │   ├── index.ts                       # main file for the server
+│    │   ├── config                         # configuration for the server
+│    │   ├── models                         # models for graphql
+│    │   ├── resolvers                      # resolvers for graphql
+│    │   ├── index.js                       # main file for the server
+│    │   ├── schema.graphql                 # schema and types for graphql
 │    ├── configuration files                # server configuration files
 ├── configuration files                     # project configuration files
 
@@ -61,8 +65,14 @@ To maintain an organized structure in the project, files are organized as follow
 - `server`: Contains files for the back end server.
   - `node_modules`: Contains Node.js modules and is ignored by version control (git).
   - `src`: The source code directory.
-    - `index.ts`: The main file for the server.
+    - `config`: Contains the configuration for the server.
+    - `models`: Contains the models for Graphql.
+    - `resolvers`: Contains the resolvers for Graphql.
+    - `index.js`: The main file for the server.
+    - `schema.graphql`: Contains the schema and types for Graphql.
   - `configuration` files: Contains project configuration files.
 - `configuration` files: Contains project configuration files.
 
 This structure helps keep the project organized and makes it easier to locate and manage different types of files and resources.
+
+### Back to [documentation](./README.md).

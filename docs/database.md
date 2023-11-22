@@ -21,3 +21,5 @@ The production database contains 379 movies. It is connected to the server runni
 
 The test database contains significantly less movies than the production database. This is to keep the development environment simple and fast.
 The main goal behind the testing database is to have a predictable database to run the tests from. If the database is altered in any significant way, this will be noticed by the developer who can adjust the tests to fit with the new data.
+
+### Back to [documentation](./README.md).

@@ -2,6 +2,22 @@
 
 This folder contains the frontend code for the project. The frontend is built with React and TypeScript. The frontend is built with Vite, and uses Apollo Client to fetch data from the GraphQL API. Testing is done with Vitest and React Testing Library.
 
+## Run the client
+
+To run the client, run the following command:
+
+```cli
+npm run dev
+```
+
+**Note**: If you are not able to run a local server, make sure to point the URI in `main.tsx` to the correct URI. The main server is located at:
+
+> http://it2810-16.idi.ntnu.no:4000/
+
+For development and testing, use the testing server:
+
+> http://it2810-16.idi.ntnu.no:4001/
+
 ## Project structure
 
 The frontend-code is located in the `/src`-folder and is divided into the following folders:
@@ -45,6 +61,30 @@ We have used Playwright to write end to end tests for the project. Playwright pr
 
 This section provides an overview of the available npm scripts for this project. These scripts help you manage development, testing, building, and other maintenance tasks for the project.
 
+```cli
+npm install
+```
+
+Installs all packages stricly for the frontend. <br> **Note**: You will need to install the packages in root to enable Typescript and Eslint.
+
+```cli
+npm start
+```
+
+```cli
+npm run dev
+```
+
+Starts the project in development mode. The project will run locally on a local port number. Any code changes will trigger automatic browser updates.
+
+```cli
+npm run build
+```
+
+Builds the project for production. The project will be built into the `/dist` folder.
+
+<i>Testing scripts are documented below.</i>
+
 ## Testing
 
 We have used Vitest and React Testing Library to test our components. We have used snapshot testing to test that the components render correctly. We have also used unit testing to test the functions in our components.
@@ -59,10 +99,16 @@ To run all the tests, run the following command:
 npm run test
 ```
 
-To run strictly unit tests, run the following command:
+To run strictly unit tests (in watch mode), run the following command:
 
 ```cli
 npm run test:unit
+```
+
+To run strictly unit tests, run the following command:
+
+```cli
+npm run test:unit:no-watch
 ```
 
 To run strictly end to end tests, run the following command:
@@ -71,7 +117,7 @@ To run strictly end to end tests, run the following command:
 npm run test:e2e
 ```
 
-To see the test coverage, run the following command:
+To see the test coverage fron unit tests, run the following command:
 
 ```cli
 npm run coverage
