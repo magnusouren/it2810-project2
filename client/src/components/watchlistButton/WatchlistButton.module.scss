@@ -18,14 +18,18 @@
   button {
     width: 100%;
     height: 100%;
-    background-color: transparent;
+    background-color: var(--color-watchlist-button);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     color: black;
-    border: solid 0.5px black;
+    border: solid 0.5px var(--color-text);
+
+    &:hover {
+      background-color: rgb(235 232 232);
+    }
   }
 
   @media screen and (width <= breakpoints.$l) {

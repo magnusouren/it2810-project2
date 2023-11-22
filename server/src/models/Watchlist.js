@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const WatchlistSchema = new Schema(
   {
     userID: { type: String, required: true },
-    movies: [{ type: Number, ref: 'Movie', required: true }],
+    movies: [{ type: Number, ref: 'Movie' }],
   },
   { collection: 'watchlist' },
 );

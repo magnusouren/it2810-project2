@@ -62,15 +62,13 @@ export const Watchlist = () => {
     <>
       <h1 className={styles.heading}>
         Watchlist
-        {length > sizeLimit && <Pagination count={count} page={page} onChange={handlePagination} color='primary' />}
+        {<Pagination count={count} page={page} onChange={handlePagination} color='primary' />}
       </h1>
 
       <MovieList movies={data.getWatchlistByUserID.movies} />
-      {length > sizeLimit && (
-        <section className={styles.pagination}>
-          <Pagination count={count} page={page} onChange={handlePagination} color='primary' size='large' />
-        </section>
-      )}
+      <section className={styles.pagination}>
+        <Pagination count={count} page={page} onChange={handlePagination} color='primary' size='large' />
+      </section>
     </>
   );
 };
