@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 
 import { Movie } from '../../../types';
-import { renderWithRouterAndUserContext } from '../../../utils/testUtils';
+import { renderWithProviders } from '../../../utils/testUtils';
 import { MovieList } from '../MovieList';
 
 describe('MovieList', () => {
@@ -47,12 +47,12 @@ describe('MovieList', () => {
   ];
 
   it('should match snapshot', () => {
-    const { container } = renderWithRouterAndUserContext(<MovieList movies={movies} />);
+    const { container } = renderWithProviders({ child: <MovieList movies={movies} /> });
     expect(container).toMatchSnapshot();
   });
 
   it('should render a MovieCard for each movie in the list', () => {
-    renderWithRouterAndUserContext(<MovieList movies={movies} />);
+    renderWithProviders({ child: <MovieList movies={movies} /> });
 
     const movieCards = screen.getAllByRole('link');
     expect(movieCards).toHaveLength(2);

@@ -1,8 +1,14 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 
-import { Movie } from '../../../types';
-import { renderWithRouterAndUserContext } from '../../../utils/testUtils';
+import { Movie, User } from '../../../types';
+import { renderWithProviders } from '../../../utils/testUtils';
 import { MovieCard } from '../MovieCard';
+
+const mockUser: User = {
+  id: '1',
+  name: 'Foo Bar',
+  loginState: true,
+};
 
 describe('MovieCard', () => {
   const movie: Movie = {
@@ -25,27 +31,42 @@ describe('MovieCard', () => {
     vote_count: 555,
   };
 
-  it('should match snapshot', () => {
-    const { container } = renderWithRouterAndUserContext(<MovieCard movie={movie} />);
+  it('should match snapshot', async () => {
+    const { container } = renderWithProviders({ child: <MovieCard movie={movie} />, mockUser: mockUser });
+    await waitFor(() => {
+      expect(screen.getByTestId('watchlist-toggle-button')).toBeDefined();
+    });
     expect(container).toMatchSnapshot();
   });
 
+  it('should render the watchlist button when user is defined', async () => {
+    renderWithProviders({ child: <MovieCard movie={movie} />, mockUser: mockUser });
+    await waitFor(() => {
+      expect(screen.getByTestId('watchlist-toggle-button')).toBeDefined();
+    });
+  });
+
+  it('should not render the watchlist button when user is undefined', async () => {
+    renderWithProviders({ child: <MovieCard movie={movie} /> });
+    expect(screen.queryByTestId('watchlist-toggle-button')).toBeNull();
+  });
+
   it('should render the movie title', () => {
-    renderWithRouterAndUserContext(<MovieCard movie={movie} />);
+    renderWithProviders({ child: <MovieCard movie={movie} />, mockUser: mockUser });
 
     const titleElement = screen.getByText(movie.title);
     expect(titleElement).toBeDefined();
   });
 
   it('should render the movie genres', () => {
-    renderWithRouterAndUserContext(<MovieCard movie={movie} />);
+    renderWithProviders({ child: <MovieCard movie={movie} />, mockUser: mockUser });
 
     const genreElement = screen.getByText('Adventure, Action');
     expect(genreElement).toBeDefined();
   });
 
   it('should render the movie poster', () => {
-    renderWithRouterAndUserContext(<MovieCard movie={movie} />);
+    renderWithProviders({ child: <MovieCard movie={movie} />, mockUser: mockUser });
 
     const posterElement = screen.getByAltText(movie.title + ' poster.');
     expect(posterElement).toBeDefined();

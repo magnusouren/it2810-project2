@@ -1,8 +1,8 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { Movie } from '../../../types';
-import { renderWithRouterAndUserContext } from '../../../utils/testUtils';
+import { renderWithProviders } from '../../../utils/testUtils';
 import { MovieDetails } from '../MovieDetails';
 
 const movie: Movie = {
@@ -29,17 +29,29 @@ window.scrollTo = vi.fn().mockImplementation(() => {});
 
 describe('MovieDetails', () => {
   beforeEach(() => {
-    renderWithRouterAndUserContext(<MovieDetails movie={movie} />);
+    renderWithProviders({ child: <MovieDetails movie={movie} /> });
   });
 
   it('should match snapshot', () => {
-    const { container } = renderWithRouterAndUserContext(<MovieDetails movie={movie} />);
+    const { container } = renderWithProviders({
+      child: <MovieDetails movie={movie} />,
+      mockUser: { id: '1', name: 'Foo Bar', loginState: true },
+    });
     expect(container).toMatchSnapshot();
+  });
+
+  it('should render watchlist button if user is logged in', async () => {
+    renderWithProviders({
+      child: <MovieDetails movie={movie} />,
+      mockUser: { id: '1', name: 'Foo Bar', loginState: true },
+    });
+    await waitFor(() => {
+      expect(screen.getByTestId('watchlist-toggle-button')).toBeDefined();
+    });
   });
 
   it('renders the movie title and release year', () => {
     const titleElement = screen.getByText(movie.title + ' (' + movie.release_date.split('-')[0] + ')');
-
     expect(titleElement).toBeDefined();
   });
 

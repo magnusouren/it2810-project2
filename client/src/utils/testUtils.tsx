@@ -3,7 +3,8 @@ import { MockedProvider } from '@apollo/client/testing';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { UserProvider } from '../context/UserContext';
+import { User } from '../types';
+import MockUserProvider from './MockUserProvider';
 
 const link = new HttpLink({
   uri: 'http://localhost:4000', // Endepunktet til din GraphQL server
@@ -14,23 +15,29 @@ const client = new ApolloClient({
   link: link,
 });
 
-// Function to render a component wrapped inside a browserrouter for testing purposes
-export const renderWithRouterAndUserContext = (component: JSX.Element) =>
-  render(
-    <UserProvider>
-      <ApolloProvider client={client}>
-        <BrowserRouter>{component}</BrowserRouter>
-      </ApolloProvider>
-    </UserProvider>,
-  );
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const renderWithProviders = (child: React.ReactNode, mocks?: any[]) => {
-  return render(
-    <UserProvider>
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <BrowserRouter>{child}</BrowserRouter>
-      </MockedProvider>
-    </UserProvider>,
-  );
+type ProviderMocks = {
+  loginMock?: () => void;
+  logoutMock?: () => void;
+  deleteUserMock?: () => void;
+  toggleDarkModeMock?: () => void;
 };
+
+interface ProviderProps {
+  child: React.ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mocks?: any[];
+  mockUser?: User;
+  providerMocks?: ProviderMocks;
+}
+
+// Function to render a component wrapped inside a browserrouter for testing purposes
+export const renderWithProviders = ({ child, mockUser, mocks, providerMocks }: ProviderProps) =>
+  render(
+    <MockUserProvider mockUser={mockUser} {...providerMocks}>
+      <ApolloProvider client={client}>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <BrowserRouter>{child}</BrowserRouter>
+        </MockedProvider>
+      </ApolloProvider>
+    </MockUserProvider>,
+  );

@@ -13,17 +13,17 @@ let mongod;
 const { Query: ratingQuery, Mutation: ratingMutation } = ratingResolver;
 
 // Utility function for seeding ratings
-async function seedRatings(ratings) {
+const seedRatings = async (ratings) => {
   for (const rating of ratings) {
     await new Rating(rating).save();
   }
-}
+};
 
-async function seedMovies(movies) {
+const seedMovies = async (movies) => {
   for (const movie of movies) {
     await new Movie(movie).save();
   }
-}
+};
 
 // Before all tests, start the in-memory MongoDB server and connect to it
 beforeAll(async () => {
@@ -43,7 +43,7 @@ afterAll(async () => {
   await mongod.stop();
 });
 
-describe.skip('ratingResolver', () => {
+describe('ratingResolver', () => {
   describe('Query', () => {
     describe('getRatingsByUserID', () => {
       it('should return ratings for a specific user', async () => {
@@ -68,8 +68,6 @@ describe.skip('ratingResolver', () => {
   describe('Mutation', () => {
     describe('addRating', () => {
       it('should add a new rating for a movie by a user', async () => {
-        // Assume Movie with _id 'movie1' exists for the test
-        // ... (add a mock or seed for Movie model if necessary)
         await seedMovies([
           {
             _id: '9999',

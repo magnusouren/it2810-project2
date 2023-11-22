@@ -1,29 +1,23 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { vi } from 'vitest';
 
 import { ADD_RATING, GET_MOVIE_RATING_WITH_USERID } from '../../../graphql/queries';
+import { User } from '../../../types';
 import { renderWithProviders } from '../../../utils/testUtils';
 import { StarRating } from '../StarRating';
 
-// Define your user and mock responses
-const mockUserContext = {
-  user: {
-    id: '123',
-    name: 'Test User',
-  },
+// Define mockUser
+const mockUser: User = {
+  id: '123',
+  name: 'Test User',
+  loginState: true,
 };
-
-// Mock the useUser hook to provide user data
-vi.mock('../../context/UserContext', () => ({
-  useUser: () => ({ mockUserContext }),
-}));
 
 const mocks = [
   {
     request: {
       query: GET_MOVIE_RATING_WITH_USERID,
       variables: {
-        userID: undefined,
+        userID: mockUser.id,
         movieID: 1,
       },
     },
@@ -39,7 +33,7 @@ const mocks = [
     request: {
       query: ADD_RATING,
       variables: {
-        userID: mockUserContext.user.id,
+        userID: mockUser.id,
         movieID: 1,
         rating: 5,
       },
@@ -52,20 +46,38 @@ const mocks = [
       },
     },
   },
+  {
+    request: {
+      query: GET_MOVIE_RATING_WITH_USERID,
+      variables: {
+        userID: mockUser.id,
+        movieID: 1,
+      },
+    },
+    result: {
+      data: {
+        getMovieRatingWithUserID: {
+          rating: 5,
+        },
+      },
+    },
+  },
 ];
 
 describe('StarRating', () => {
   it('should match snapshot', async () => {
-    const { container } = renderWithProviders(<StarRating movieId={1} />, mocks);
+    const { container } = renderWithProviders({
+      child: <StarRating movieId={1} user={mockUser} />,
+      mocks: mocks,
+    });
     await waitFor(() => screen.getByText('Your selected rating:'));
     expect(container).toMatchSnapshot();
   });
 
-  it.skip('updates the rating when a star is clicked', async () => {
-    renderWithProviders(<StarRating movieId={1} />, mocks);
+  it('updates the rating when a star is clicked', async () => {
+    renderWithProviders({ child: <StarRating movieId={1} user={mockUser} />, mocks: mocks });
     const ratingElement = screen.getByLabelText('5 Stars');
     fireEvent.click(ratingElement);
-    // expect(screen.getByText('Your selected rating: 5 ')).toBeDefined();
-    await waitFor(() => screen.getByText('Your selected rating: 5'));
+    await waitFor(() => screen.getByText('5 of 10 stars'));
   });
 });
