@@ -87,7 +87,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
               class="_score_bdc06c"
               tabindex="0"
             >
-              5
+              5.0
                / 10
               <div>
                 <svg

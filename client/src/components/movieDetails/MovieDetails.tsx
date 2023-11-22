@@ -66,7 +66,7 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
                 tabIndex={0}
                 aria-label={`Average rating by other users: ${movie.vote_average} out of 10`}
               >
-                {movie.vote_average} / 10
+                {movie.vote_average.toFixed(1)} / 10
                 <div>
                   <Star fontSize='inherit' />
                 </div>

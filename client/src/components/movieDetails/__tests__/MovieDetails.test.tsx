@@ -59,7 +59,7 @@ describe('MovieDetails', () => {
   });
 
   it('renders the movie details', () => {
-    const ratingElement = screen.getByText(movie.vote_average + ' / 10');
+    const ratingElement = screen.getByText(movie.vote_average.toFixed(1) + ' / 10');
     const voteCountElement = screen.getByText(movie.vote_count);
     const popularityElement = screen.getByText(movie.popularity);
     expect(ratingElement).toBeDefined();

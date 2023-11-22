@@ -36,6 +36,15 @@ export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
           },
         },
       });
+      cache.modify({
+        fields: {
+          getMovieById(existingMovie) {
+            if (existingMovie._id === MId) {
+              return { ...existingMovie }; // Update the cache to reflect the change in the UI
+            }
+          },
+        },
+      });
     },
   });
 
