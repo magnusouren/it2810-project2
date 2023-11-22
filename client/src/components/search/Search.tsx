@@ -29,6 +29,7 @@ const Search: React.FC = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [limit, setLimit] = useState<number>(20);
+  const [tabIndex, setTabIndex] = useState<number>(1);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
@@ -54,6 +55,7 @@ const Search: React.FC = () => {
     setSearchTerm(e.target.value);
     setIsDropdownOpen(true);
     setLimit(20);
+    setTabIndex(1);
   }, []);
 
   // Use useCallback to prevent to many rerenders
@@ -86,6 +88,16 @@ const Search: React.FC = () => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent, movie: SearchResult) => {
+    if (e.key === 'Tab') {
+      if (e.shiftKey) {
+        setTabIndex(tabIndex - 1);
+        return;
+      }
+      setTabIndex(tabIndex + 1);
+      if (data?.getMoviesByTitle.length < limit && tabIndex === data?.getMoviesByTitle.length) {
+        setIsDropdownOpen(false);
+      }
+    }
     if (e.key === 'Enter') {
       handleMovieSelect(movie);
     }
@@ -134,7 +146,16 @@ const Search: React.FC = () => {
               className={styles.loadMore}
               onClick={loadMoreMovies}
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && loadMoreMovies()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  loadMoreMovies();
+                  setTabIndex(1);
+                } else if (e.key === 'Tab' && !e.shiftKey) {
+                  setIsDropdownOpen(false);
+                } else if (e.key == 'Tab' && e.shiftKey) {
+                  setTabIndex(tabIndex - 1);
+                }
+              }}
             >
               Load more movies...
             </li>
