@@ -91,10 +91,8 @@ type Query {
   getMoviesByTitleAZ(page: Int!, genreId: Int, order: String): [Movie]
   getMoviesByRating(page: Int!, genreId: Int, order: String!): [Movie]
   getMovieRatingWithUserID(userID: String!, movieID: Int!): Rating
-  getRatingsByUserID(userID: Int!): [Ratings]
   getWatchlistByUserID(userID: String!, page: Int!): UserWatchlist
   getWatchlistCountByUserID(userID: String!): Int
-  movieIsInWatchlist(userID: String!, movieID: Int!): Boolean
   getMovieCountByGenre(genreId: Int): Int
 }
 
