@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import { User } from '../types';
@@ -61,6 +61,14 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return storedDarkMode ? JSON.parse(storedDarkMode) : false;
   });
 
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [darkMode]);
+
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => {
       const newDarkMode = !prevDarkMode;
@@ -86,7 +94,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   const deleteUser = () => {
     setUser(undefined);
+    setDarkMode(false);
     removeItem('user');
+    removeItem('darkMode');
   };
 
   const value = {
