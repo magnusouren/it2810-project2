@@ -51,9 +51,11 @@ const movieResolver = {
       return movies;
     },
     async getMoviesByGenre(_, { page, genreId }) {
+      const skip = (page - 1) * pageSize;
+
       // Filter movies based on the provided genreId
       const genreIdNumber = parseInt(genreId, 10);
-      const skip = (page - 1) * pageSize;
+
       return await Movie.find({ genre_ids: genreIdNumber }).skip(skip).limit(pageSize).populate('genre_ids');
     },
     async getMovieCountByGenre(_, { genreId }) {

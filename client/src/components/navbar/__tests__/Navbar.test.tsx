@@ -1,22 +1,22 @@
 import { act, screen } from '@testing-library/react';
 
-import { renderWithRouterAndUserContext } from '../../../utils/testUtils';
+import { renderWithProviders } from '../../../utils/testUtils';
 import Navbar from '../Navbar';
 
 describe('Navbar', () => {
   it('Should match snapshot', () => {
-    const { container } = renderWithRouterAndUserContext(<Navbar />);
+    const { container } = renderWithProviders({ child: <Navbar /> });
     expect(container).toMatchSnapshot();
   });
 
   it('Should show home icon', () => {
-    renderWithRouterAndUserContext(<Navbar />);
+    renderWithProviders({ child: <Navbar /> });
 
     expect(screen.getByTestId('HomeIcon')).toBeDefined();
   });
 
   it('Should navigate to / (home) when home icon is clicked', async () => {
-    renderWithRouterAndUserContext(<Navbar />);
+    renderWithProviders({ child: <Navbar /> });
     act(() => {
       screen.getByTestId('home-link').click();
     });

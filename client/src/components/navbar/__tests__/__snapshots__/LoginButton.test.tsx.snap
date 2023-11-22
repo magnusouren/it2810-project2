@@ -1,6 +1,38 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`LoginButton > Should match snapshot 1`] = `
+exports[`LoginButton > Should match snapshot when logged inn 1`] = `
+<div>
+  <button
+    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeMedium css-zylse7-MuiButtonBase-root-MuiIconButton-root"
+    data-testid="menu"
+    tabindex="0"
+    type="button"
+  >
+    <p
+      class="_loginText_67d6a9"
+      data-testid="user-name"
+    >
+      Foo Bar
+    </p>
+    <svg
+      aria-hidden="true"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-156hki5-MuiSvgIcon-root"
+      data-testid="MenuIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+      />
+    </svg>
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;
+
+exports[`LoginButton > Should match snapshot when logged out 1`] = `
 <div>
   <button
     class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeMedium css-zylse7-MuiButtonBase-root-MuiIconButton-root"

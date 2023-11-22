@@ -8,8 +8,8 @@ import { MovieList } from '../components/movieList/MovieList';
 import Search from '../components/search/Search';
 import { useUser } from '../context/UserContext';
 import { getCachedFilterValues, setCachedFilterValues } from '../graphql/cachedFilterValues';
-import { determineQueryAndVariables } from '../graphql/queries';
 import { Sort } from '../types';
+import { determineQueryAndVariables } from '../utils/moviesUtils';
 import styles from './Movies.module.scss';
 
 /**

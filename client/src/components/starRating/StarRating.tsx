@@ -2,16 +2,16 @@ import { useMutation, useQuery } from '@apollo/client';
 import Rating from '@mui/material/Rating';
 import { FC } from 'react';
 
-import { useUser } from '../../context/UserContext';
 import { ADD_RATING, GET_MOVIE_RATING_WITH_USERID } from '../../graphql/queries';
+import { User } from '../../types';
 import styles from './StarRating.module.scss';
 
 interface StarRatingProps {
   movieId: number;
+  user: User;
 }
 
-export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
-  const { user } = useUser();
+export const StarRating: FC<StarRatingProps> = ({ movieId, user }) => {
   const MId: number = parseInt(movieId.toString()); // tmp fix because of data type mismatch
 
   const { data: ratingData, refetch } = useQuery(GET_MOVIE_RATING_WITH_USERID, {

@@ -89,6 +89,10 @@ const Search: React.FC = () => {
     if (e.key === 'Enter') {
       handleMovieSelect(movie);
     }
+    if (e.key === 'Escape') {
+      setIsDropdownOpen(false);
+      setSearchTerm('');
+    }
   };
 
   return (
@@ -99,6 +103,7 @@ const Search: React.FC = () => {
         placeholder='Search by title...'
         value={searchTerm}
         onChange={handleInputChange}
+        onKeyDown={(e) => handleKeyDown(e, data?.getMoviesByTitle[0])}
         className={styles.searchInput}
         InputProps={{
           startAdornment: (

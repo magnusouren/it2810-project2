@@ -1,4 +1,4 @@
-import Genre from '../models/Genres.js';
+import Genre from '../models/Genre.js';
 
 const genreResolver = {
   Query: {

@@ -15,7 +15,7 @@ interface UserContextProps {
   toggleDarkMode: () => void;
 }
 
-const UserContext = createContext<UserContextProps | null>(null);
+export const UserContext = createContext<UserContextProps | null>(null);
 
 /**
  * Custom hook to manage user state.

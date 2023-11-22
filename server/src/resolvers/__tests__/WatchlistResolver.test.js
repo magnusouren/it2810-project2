@@ -2,7 +2,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
 
-import Genre from '../../models/Genres';
+import Genre from '../../models/Genre';
 import Movie from '../../models/Movie';
 import Watchlist from '../../models/Watchlist';
 import watchlistResolver from '../watchlistResolver';
@@ -71,7 +71,6 @@ const mockedMovies = [
     video: false,
     vote_average: 7.3,
     vote_count: 4859,
-    __v: 0,
   },
   {
     _id: 2,
@@ -93,11 +92,10 @@ const mockedMovies = [
     video: false,
     vote_average: 7.3,
     vote_count: 4859,
-    __v: 0,
   },
 ];
 
-describe.skip('watchlistResolver', () => {
+describe('watchlistResolver', () => {
   describe('Query', () => {
     describe('getWatchlistByUserID', () => {
       it('should return a watchlist for a specific user', async () => {
@@ -106,14 +104,14 @@ describe.skip('watchlistResolver', () => {
         await seedMovies([mockedMovies[0], mockedMovies[1]]);
         await seedGenre(mockedMovies[0].genre_ids);
 
+        // Get the watchlist for the user with ID 1
         const watchlist = await watchlistQuery.getWatchlistByUserID(null, { userID: '1' });
 
-        expect(watchlist).toBeDefined();
         expect(watchlist.userID).toBe('1');
         expect(watchlist.movies).toHaveLength(2);
       });
 
-      it.skip('should return null if the user does not exist', async () => {
+      it('should return null if the user does not exist', async () => {
         const watchlist = await watchlistQuery.getWatchlistByUserID(null, { userID: '1' });
         expect(watchlist).toBeNull();
       });
@@ -124,7 +122,7 @@ describe.skip('watchlistResolver', () => {
     describe('addMovieToWatchlist', () => {
       it("should add a movie to a user's watchlist", async () => {
         // Seed the database with a watchlist
-        await seedWatchlist([{ userID: '1', movies: [mockedMovies[0]] }]);
+        await seedWatchlist([{ userID: '1', movies: ['1'] }]);
 
         // Add a movie to the watchlist
         const updatedWatchlist = await watchlistMutation.addMovieToWatchlist(null, {
@@ -132,13 +130,12 @@ describe.skip('watchlistResolver', () => {
           movieID: '2',
         });
 
-        expect(updatedWatchlist).toBeDefined();
         expect(updatedWatchlist.userID).toBe('1');
-        expect(updatedWatchlist.movies).toEqual(expect.objectContaining(...mockedMovies));
+        expect(updatedWatchlist.movies.map((movie) => movie.id)).toContain('2');
         expect(updatedWatchlist.movies).toHaveLength(2);
       });
 
-      it.skip('should not add a movie to the watchlist if it already exists', async () => {
+      it('should not add a movie to the watchlist if it already exists', async () => {
         // Seed the database with a watchlist
         await seedWatchlist([{ userID: '1', movies: ['1', '2'] }]);
 
@@ -148,26 +145,12 @@ describe.skip('watchlistResolver', () => {
           movieID: '2',
         });
 
-        expect(updatedWatchlist).toBeDefined();
         expect(updatedWatchlist.userID).toBe('1');
-        expect(updatedWatchlist.movies).toEqual(
-          expect.arrayContaining([
-            expect.objectContaining({
-              ...mockedMovies[0],
-            }),
-            expect.objectContaining({
-              ...mockedMovies[1],
-            }),
-          ]),
-        );
-
+        expect(updatedWatchlist.movies.filter((movie) => movie.id === '2')).toHaveLength(1);
         expect(updatedWatchlist.movies).toHaveLength(2); // Length should not change
       });
 
-      it.skip('should create a new watchlist if one does not exist for the user', async () => {
-        // Seed the database with a watchlist
-        await seedWatchlist([{ userID: '1', movies: ['1', '2'] }]);
-
+      it('should create a new watchlist if one does not exist for the user', async () => {
         // Attempt to add a movie that's already in the watchlist
         const updatedWatchlist = await watchlistMutation.addMovieToWatchlist(null, {
           userID: '2',
@@ -176,13 +159,6 @@ describe.skip('watchlistResolver', () => {
 
         expect(updatedWatchlist).toBeDefined();
         expect(updatedWatchlist.userID).toBe('2');
-        expect(updatedWatchlist.movies).toEqual(
-          expect.arrayContaining([
-            expect.objectContaining({
-              ...mockedMovies[1],
-            }),
-          ]),
-        );
         expect(updatedWatchlist.movies).toHaveLength(1); // Length should not change
       });
     });

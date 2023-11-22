@@ -40,24 +40,30 @@ const mockMovie: Movie = {
 
 describe('WatchlistButton', () => {
   it('Should match snapshot when movie is in watchlist', () => {
-    const { container } = renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />);
+    const { container } = renderWithProviders({
+      child: <WatchlistButton movie={mockMovie} user={mockUser} />,
+    });
     expect(container).toMatchSnapshot();
   });
 
   it('Should match snapshot when movie is not in watchlist', () => {
-    const { container } = renderWithProviders(
-      <WatchlistButton movie={{ ...mockMovie, isInWatchlist: false }} user={mockUser} />,
-    );
+    const { container } = renderWithProviders({
+      child: <WatchlistButton movie={{ ...mockMovie, isInWatchlist: false }} user={mockUser} />,
+    });
     expect(container).toMatchSnapshot();
   });
 
   it('Should match snapshot when style prop is big', () => {
-    const { container } = renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} style='big' />);
+    const { container } = renderWithProviders({
+      child: <WatchlistButton movie={mockMovie} user={mockUser} style='big' />,
+    });
     expect(container).toMatchSnapshot();
   });
 
   it('Should render a small button by default', () => {
-    const { container } = renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />);
+    const { container } = renderWithProviders({
+      child: <WatchlistButton movie={mockMovie} user={mockUser} />,
+    });
     expect(container.querySelector('.smallContainer')).toBeDefined();
   });
 
@@ -81,7 +87,7 @@ describe('WatchlistButton', () => {
         },
       },
     ];
-    renderWithProviders(<WatchlistButton movie={mockMovie} user={mockUser} />, mocks);
+    renderWithProviders({ child: <WatchlistButton movie={mockMovie} user={mockUser} />, mocks: mocks });
 
     expect(screen.getByRole('button').querySelector('.remove')).toBeDefined();
     expect(screen.getByRole('button').querySelector('.add')).toBeNull();
@@ -110,7 +116,11 @@ describe('WatchlistButton', () => {
         },
       },
     ];
-    renderWithProviders(<WatchlistButton movie={{ ...mockMovie, isInWatchlist: false }} user={mockUser} />, mocks);
+
+    renderWithProviders({
+      child: <WatchlistButton movie={{ ...mockMovie, isInWatchlist: false }} user={mockUser} />,
+      mocks: mocks,
+    });
 
     expect(screen.getByRole('button').querySelector('.add')).toBeDefined();
     expect(screen.getByRole('button').querySelector('.remove')).toBeNull();

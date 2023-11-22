@@ -93,7 +93,7 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
             </div>
           </div>
         </div>
-        {user && <StarRating movieId={movie._id} />}
+        {user && <StarRating movieId={movie._id} user={user} />}
       </div>
     </div>
   );
