@@ -1,10 +1,12 @@
 import Movie from '../models/Movie.js';
+import Watchlist from '../models/Watchlist.js';
 
 const pageSize = 16;
 
 const movieResolver = {
   Query: {
     // Return the 16 first movies
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async getMovies(_, { page }) {
       const skip = (page - 1) * pageSize;
       return await Movie.find().skip(skip).limit(pageSize).populate('genre_ids');
@@ -100,6 +102,26 @@ const movieResolver = {
           .populate('genre_ids');
       } else {
         return await Movie.find().sort({ vote_average: sortOrder }).skip(skip).limit(pageSize).populate('genre_ids');
+      }
+    },
+  },
+  Movie: {
+    isInWatchlist: async (movie, { userID }) => {
+      const movieID = movie._id;
+      try {
+        // Finds the watchlist for the given userID
+        const watchlist = await Watchlist.findOne({ userID: userID });
+
+        // If user doesn't exist, return false
+        if (!watchlist) {
+          return false;
+        }
+
+        // Returns true if the movieID is in the watchlist
+        return watchlist.movies.includes(movieID);
+      } catch (error) {
+        console.error(error);
+        throw new Error('Error checking if movie is in watchlist');
       }
     },
   },

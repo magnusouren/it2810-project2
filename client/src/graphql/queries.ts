@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_MOVIES = gql`
-  query getMovies($page: Int!) {
-    getMovies(page: $page) {
+  query getMovies($page: Int!, $userId: String) {
+    getMovies(page: $page, userID: $userId) {
       _id
       genre_ids {
         _id
@@ -10,13 +10,14 @@ export const GET_MOVIES = gql`
       }
       poster_path
       title
+      isInWatchlist(userID: $userId)
     }
     getMovieCountByGenre(genreId: null)
   }
 `;
 
 export const GET_MOVIE = gql`
-  query getMovieById($id: Int!) {
+  query getMovieById($id: Int!, $userId: String) {
     getMovieById(id: $id) {
       _id
       backdrop_path
@@ -30,12 +31,13 @@ export const GET_MOVIE = gql`
       title
       vote_average
       vote_count
+      isInWatchlist(userID: $userId)
     }
   }
 `;
 
 export const GET_MOVIES_BY_GENRE = gql`
-  query getMoviesByGenre($page: Int!, $genreId: Int!) {
+  query getMoviesByGenre($page: Int!, $genreId: Int!, $userId: String!) {
     getMoviesByGenre(page: $page, genreId: $genreId) {
       _id
       genre_ids {
@@ -44,19 +46,21 @@ export const GET_MOVIES_BY_GENRE = gql`
       }
       poster_path
       title
+      isInWatchlist(userID: $userId)
     }
     getMovieCountByGenre(genreId: $genreId)
   }
 `;
 
 export const GET_MOVIES_BY_TITLE_AZ = gql`
-  query getMoviesByTitleAZ($page: Int!, $order: String!, $genreId: Int) {
+  query getMoviesByTitleAZ($page: Int!, $order: String!, $genreId: Int, $userId: String) {
     getMoviesByTitleAZ(page: $page, order: $order, genreId: $genreId) {
       _id
       genre_ids {
         _id
         name
       }
+      isInWatchlist(userID: $userId)
       poster_path
       title
     }
@@ -65,7 +69,7 @@ export const GET_MOVIES_BY_TITLE_AZ = gql`
 `;
 
 export const GET_MOVIES_BY_RATING = gql`
-  query getMoviesByRating($page: Int!, $order: String!, $genreId: Int) {
+  query getMoviesByRating($page: Int!, $order: String!, $genreId: Int, $userId: String) {
     getMoviesByRating(page: $page, order: $order, genreId: $genreId) {
       _id
       genre_ids {
@@ -74,6 +78,7 @@ export const GET_MOVIES_BY_RATING = gql`
       }
       poster_path
       title
+      isInWatchlist(userID: $userId)
     }
     getMovieCountByGenre(genreId: $genreId)
   }
@@ -85,12 +90,6 @@ export const GET_MOVIES_BY_TITLE = gql`
       _id
       title
     }
-  }
-`;
-
-export const IS_IN_WATCHLIST = gql`
-  query Query($userId: String!, $movieId: Int!) {
-    movieIsInWatchlist(userID: $userId, movieID: $movieId)
   }
 `;
 
@@ -128,6 +127,7 @@ export const GET_WATCHLIST_BY_USER_ID = gql`
           name
         }
         poster_path
+        isInWatchlist(userID: $userId)
       }
     }
     getWatchlistCountByUserID(userID: $userId)
@@ -150,6 +150,15 @@ export const ADD_RATING = gql`
   }
 `;
 
+export const GET_GENRES = gql`
+  query getGenres {
+    getGenres {
+      _id
+      name
+    }
+  }
+`;
+
 export const GET_FILTER = gql`
   query FilterData {
     filter @client {
@@ -160,17 +169,8 @@ export const GET_FILTER = gql`
   }
 `;
 
-export const GET_GENERS = gql`
-  query getGenres {
-    getGenres {
-      _id
-      name
-    }
-  }
-`;
-
-export const determineQueryAndVariables = (page: number, genre: string, sort: string) => {
-  const baseVariables = { page: page };
+export const determineQueryAndVariables = (page: number, genre: string, sort: string, userId: string) => {
+  const baseVariables = { page: page, userId: userId };
   const alphabeticalSort = sort === 'a-z' || sort === 'z-a';
   const ratingSort = sort === 'h-l' || sort === 'l-h';
 
@@ -207,6 +207,6 @@ export const determineQueryAndVariables = (page: number, genre: string, sort: st
   }
   return {
     query: GET_MOVIES,
-    variables: baseVariables,
+    variables: { ...baseVariables },
   };
 };

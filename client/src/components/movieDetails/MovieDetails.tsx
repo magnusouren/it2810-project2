@@ -43,7 +43,7 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
         <h1 tabIndex={0}>
           {movie.title} ({movie.release_date.split('-')[0]})
         </h1>
-        {user && <WatchlistButton movie={movie} style={'small'} user={user} />}
+        {user && <WatchlistButton movie={movie} style={'big'} user={user} />}
         <p className={styles.date} tabIndex={0}>
           {movie.release_date} - {movie.genre_ids.map((genre: Genre) => genre.name).join(', ')}
         </p>

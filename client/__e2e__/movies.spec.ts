@@ -145,3 +145,32 @@ test('reset filter', async ({ page }) => {
   await page.getByTestId('reset-filter-button').click();
   await expect(movieCards).toHaveCount(16);
 });
+
+test('movie added to watchlist from icon on moviecard in movielist', async ({ page }) => {
+  await page.getByTestId('login-button').click();
+
+  // Add movie to watchlist
+  await page.getByTestId('home-link').click();
+  const buttons = page.locator('[data-testid="watchlist-toggle-button"]');
+  await buttons.first().click();
+
+  // Go to movie page
+  const movieCards = page.locator('[data-testid="movie-card"]');
+  await movieCards.first().click();
+
+  // Check watchlist button
+  await expect(page.getByTestId('watchlist-toggle-button')).toHaveAttribute(
+    'aria-label',
+    'remove movie from watchlist',
+  );
+
+  // Check watchlist
+  await page.getByTestId('menu').click();
+  await page.getByTestId('watchlist-link').click();
+  await expect(page.locator('[data-testid="movie-card"]')).toHaveCount(1);
+
+  // Remove movie from watchlist
+  await page.getByTestId('watchlist-toggle-button').click();
+  await expect(page.getByTestId('watchlist-toggle-button')).toHaveAttribute('aria-label', 'add movie to watchlist');
+  await page.reload();
+});
