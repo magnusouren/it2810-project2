@@ -13,22 +13,33 @@ import watchlistResolver from './resolvers/watchlistResolver.js';
 const mergedResolvers = mergeResolvers([movieResolver, ratingResolver, watchlistResolver, genreResolver]);
 
 // Load environment variables
-// Any other that production uses the .env file
-let ciUri = null;
-if (process.env.CI) {
-  console.log('CI environment detected');
-  if (process.argv.length > 2) {
-    // Use db URI provided as argument in CI environment
-    // Provided as argument to avoid storing it in the repository
-    // Format: npm start <URI>
-    ciUri = process.argv[2];
-  } else {
-    console.error('No URI provided for CI environment');
-  }
-} else if (process.env.NODE_ENV === 'production') {
+// Any other than production uses the .env file
+if (process.env.NODE_ENV === 'production') {
   dotenv.config({ path: './.env.production' });
+  console.log('Production environment detected');
 } else {
   dotenv.config();
+}
+
+function readURIArgument() {
+  if (process.argv.length > 2) {
+    return process.argv[2];
+  } else {
+    console.error('No URI provided...');
+  }
+}
+
+// Load database URI
+let URI = null;
+if (process.env.CI) {
+  console.log('CI environment detected');
+  URI = readURIArgument();
+} else if (process.env.NODE_ENV === 'manual') {
+  console.log('Manual environment detected');
+  URI = readURIArgument();
+} else {
+  // Use db URI from .env file
+  URI = process.env.URI;
 }
 
 const typeDefs = readFileSync('./src/schema.graphql', 'utf8');
@@ -41,22 +52,25 @@ const server = new ApolloServer({
 
 function connectDBWithRetry() {
   mongoose
-    .connect(ciUri ? ciUri : process.env.URI)
+    .connect(URI)
     .then(() => {
       console.log('Connected to MongoDB');
     })
-    .catch((err) => {
-      console.error('MongoDB connection unsuccessful, retry after 5 seconds:', err);
-      setTimeout(connectDBWithRetry, 5000); // Retry after 5 seconds
+    .catch(() => {
+      console.error('MongoDB connection unsuccessful, retry in 60 seconds:');
+      setTimeout(connectDBWithRetry, 60000); // Retry after 60 seconds
     });
 }
-
-await startStandaloneServer(server, { listen: { port: process.env.PORT || 4000 } })
-  .then(({ url }) => {
-    console.log(`🚀 Server ready at: ${url}`);
-    // After the server is started, attempt to connect to the database
-    connectDBWithRetry();
-  })
-  .catch((err) => {
-    console.error('Error starting the server:', err);
-  });
+if (!URI) {
+  console.error('No URI provided for database connection. Please set the URI to start the server.');
+} else {
+  await startStandaloneServer(server, { listen: { port: process.env.PORT || 4000 } })
+    .then(({ url }) => {
+      console.log(`🚀 Server ready at: ${url}`);
+      // After the server is started, attempt to connect to the database
+      connectDBWithRetry();
+    })
+    .catch((err) => {
+      console.error('Error starting the server:', err);
+    });
+}

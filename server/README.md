@@ -2,9 +2,13 @@
 
 ## Connection
 
-The server are hosted on our virtual machine at NTNU. The server is available at the following URL:
+The servers are hosted on our virtual machine at NTNU. The main server is available at the following URL:
 
-> http://it2810-26.idi.ntnu.no:4000/
+> http://it2810-16.idi.ntnu.no:4000/
+
+An additional development and testing server is available at the following URL:
+
+> http://it2810-16.idi.ntnu.no:4001/
 
 ## Installation
 
@@ -17,7 +21,7 @@ npm install
 Create a `.env` file in the root directory of the server directory. The file should contain the following variables:
 
 ```.env
-URI=<mongodb-uri>
+URI = <mongodb-uri>
 ```
 
 For development, use the `test` database URI. This will also be used in the CI/CD pipeline. For production, use the `production` database URI.
@@ -44,6 +48,12 @@ npm run dev
 ```
 
 Will start the server with the development database and restart the server when changes are made to the code.
+
+<i>To configure the URI of the database manually, add the URI as an argument to the `npm start` command in manual environment:</i>
+
+```bash
+NODE_ENV=manual npm start mongodb://localhost:27017/bingewatcher
+```
 
 ## Structure
 
@@ -97,11 +107,24 @@ type Mutation {
 
 The queries and mutations are also located in the [schema.graphql](./src/schema.graphql) file.
 
+## CI/CD
+
+To start the server in a CI environment add the database URI as an argument to the `npm start` command trough a secret.
+Say the secret is called `DB_URI`, the CI config should call: `npm start $DB_URI`.
+
+To simulate the command locally, run:
+
+```bash
+CI=true npm start $DB_URI
+```
+
 ## Move to production
 
 1. SSH into the VM with `ssh <username>@it2810-16.idi.ntnu.no`. Replace `<username>` with your username.
 2. Copy files from the `server` folder to the VM with `scp -r server <username>@it2810-16.idi.ntnu.no:/tmp/`. Replace `<username>` with your username. Remember to also transfer the `.env` file, or create a new one on the server.
-3. If there is already a version of the server on the VM. Stop the old server by finding the id with : `ps -Af | grep node`. Run `kill -9 pid` to kill the process. Run `sudo rm -r /var/www/html/server` to remove the old files.
-4. Move files from `/tmp/server` to `/var/www/html` with `sudo mv /tmp/server/* /var/www/html/server`.
+3. If there is already a version of the server on the VM. Stop the old server by finding the id with : `ps -Af | grep node`. Run `kill -9 pid` to kill the process. Run `sudo rm -r /var/www/server` to remove the old files.
+4. Move files from `/tmp/server` to `/var/www/` with `sudo mv /tmp/server/* /var/www/server`.
 5. Make sure the apache server can run node v.16+
-6. Run `nohup node src/index.js &` to start the server
+6. Navigate to the server and run `NODE_ENV=production nohup node src/index.js &` to start the server
+   - To start a server at a spesific port, run `PORT=<port> nohup node src/index.js &`. Replace `<port>` with the port you want to use. <i>Any information you want displayed with the process name can be added before the ampersand.</i>
+   - If you do not have .env on the server, or just want to set the URI manually, run `NODE_ENV=manual nohup node src/index.js <uri> &`. Replace `<uri>` with the URI you want to use. <i>This can be combined with port configuration.</i>
