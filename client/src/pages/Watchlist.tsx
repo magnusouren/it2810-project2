@@ -18,17 +18,14 @@ import styles from './Movies.module.scss';
 
 export const Watchlist = () => {
   const sizeLimit = 16;
-
   const [page, setPage] = useState(1);
+  const { user } = useUser();
 
   const handlePagination = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
-  const userContext = useUser();
-  const { user } = userContext;
-
-  const { data } = useQuery(GET_WATCHLIST_BY_USER_ID, {
+  const { data, loading, error } = useQuery(GET_WATCHLIST_BY_USER_ID, {
     variables: { userId: user?.id, page: page },
     fetchPolicy: 'network-only',
   });
@@ -42,7 +39,9 @@ export const Watchlist = () => {
     );
   }
 
-  if (!data) return <Spinner width='100%' height='300px' />;
+  if (loading) return <Spinner width='100%' height='300px' />;
+
+  if (error) return <p>Something went wrong fetching your watchlist.</p>;
 
   const length = data.getWatchlistCountByUserID;
   const count = Math.ceil(length / sizeLimit);

@@ -13,6 +13,7 @@ exports[`MovieCard > should match snapshot 1`] = `
       <img
         alt="Foo Bar poster."
         class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img movie-card-image css-o69gx8-MuiCardMedia-root"
+        loading="lazy"
         src="https://image.tmdb.org/t/p/w400/mockPosterURL.jpg"
       />
       <div

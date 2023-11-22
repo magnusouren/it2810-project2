@@ -1,3 +1,4 @@
+import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 /**
@@ -10,7 +11,11 @@ import { Link } from 'react-router-dom';
 
 export const NotFound = () => (
   <div>
-    <h1>404 - Not Found!</h1>
-    <Link to='/'>Go Home</Link>
+    <h1 style={{ color: 'var(--color-text)' }}>We are sorry, but this is not a valid route...</h1>
+    <Link to='/'>
+      <Button variant='contained' aria-label='go home'>
+        Back to exploring!
+      </Button>
+    </Link>
   </div>
 );

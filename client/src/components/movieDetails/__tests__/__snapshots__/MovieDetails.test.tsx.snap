@@ -29,6 +29,7 @@ exports[`MovieDetails > should match snapshot 1`] = `
     <img
       alt="Foo Bar backdrop poster"
       class="_backdropPoster_bdc06c"
+      loading="lazy"
       src="https://image.tmdb.org/t/p/original//mockBackdropURL.jpg"
     />
     <div

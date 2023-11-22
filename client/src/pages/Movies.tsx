@@ -3,6 +3,7 @@ import { Pagination } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { FilterSort } from '../components/filterSort/FilterSort';
+import { Spinner } from '../components/loading/Loading';
 import { MovieList } from '../components/movieList/MovieList';
 import Search from '../components/search/Search';
 import { useUser } from '../context/UserContext';
@@ -76,8 +77,8 @@ export const Movies = () => {
       )}
       <br />
       <FilterSort genre={genre} sort={sort} setGenre={setGenre} setPage={setPage} setSort={setSort} />
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
+      {loading && <Spinner width='100%' height='500px' />}
+      {error && <p>Something went wrong while fetching movies.</p>}
       {data && !loading && (
         <>
           {data.length === 0 && <p className={styles.noMovies}>No movies found</p>}

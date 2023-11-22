@@ -21,8 +21,7 @@ interface MovieProps {
  */
 
 export const MovieCard: FC<MovieProps> = ({ movie }) => {
-  const userContext = useUser();
-  const { user } = userContext;
+  const { user } = useUser();
 
   return (
     <Card className={styles.card} data-testid='movie-card'>
@@ -32,6 +31,7 @@ export const MovieCard: FC<MovieProps> = ({ movie }) => {
           image={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
           alt={movie.title + ' poster.'}
           className='movie-card-image'
+          loading='lazy'
         />
         <CardContent>
           <Typography gutterBottom component='div' aria-label={`title: ${movie.title}.`}>

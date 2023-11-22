@@ -11,8 +11,7 @@ interface StarRatingProps {
 }
 
 export const StarRating: FC<StarRatingProps> = ({ movieId }) => {
-  const userContext = useUser();
-  const { user } = userContext;
+  const { user } = useUser();
   const MId: number = parseInt(movieId.toString()); // tmp fix because of data type mismatch
 
   const { data: ratingData, refetch } = useQuery(GET_MOVIE_RATING_WITH_USERID, {

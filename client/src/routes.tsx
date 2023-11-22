@@ -15,7 +15,9 @@ export const Router = createBrowserRouter(
         <Route path='/movie/:id' element={<Movie />} />
         <Route path='/watchlist' element={<Watchlist />} />
       </Route>
-      <Route path='*' element={<NotFound />} />
+      <Route element={<PageLayout />}>
+        <Route path='*' element={<NotFound />} />
+      </Route>
     </>,
   ),
   { basename: '/project2' },
