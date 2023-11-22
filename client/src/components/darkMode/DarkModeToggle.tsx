@@ -26,7 +26,17 @@ const DarkModeToggle: React.FC = () => {
         onClick={toggleDarkMode}
         color='inherit'
       >
-        Change mode {darkMode ? <DarkModeIcon /> : <WbSunnyIcon />}
+        {darkMode ? (
+          <>
+            Light mode
+            <WbSunnyIcon />
+          </>
+        ) : (
+          <>
+            Dark mode
+            <DarkModeIcon />
+          </>
+        )}
       </Button>
     </>
   );

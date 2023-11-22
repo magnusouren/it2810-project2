@@ -1,9 +1,11 @@
-import { AccountCircle as AccountCircleIcon, PlaylistPlay as PlaylistPlayIcon } from '@mui/icons-material';
-import { IconButton, Menu, MenuItem } from '@mui/material';
+import { AccountCircle as AccountCircleIcon } from '@mui/icons-material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useUser } from '../../context/UserContext';
+import DarkModeToggle from '../darkMode/DarkModeToggle';
 import styles from './LoginButton.module.scss';
 
 /**
@@ -51,9 +53,12 @@ const LoginButton = () => {
         <p className={styles.loginText} data-testid='user-name'>
           {user.name}
         </p>
-        <PlaylistPlayIcon />
+        <MenuIcon fontSize='large' sx={{ margin: '0 0 0 10px' }} />
       </IconButton>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+        <Box sx={{ padding: '0 10px' }}>
+          <DarkModeToggle />
+        </Box>
         <Link to='/watchlist' className={styles.navLink} data-testid='watchlist-link'>
           <MenuItem onClick={handleMenuClose}>My Watchlist</MenuItem>
         </Link>
@@ -67,8 +72,8 @@ const LoginButton = () => {
     </>
   ) : (
     <IconButton color='inherit' onClick={handleLogin} data-testid='login-button'>
-      <AccountCircleIcon />
       <p className={styles.loginText}>Login</p>
+      <AccountCircleIcon fontSize='large' sx={{ margin: '0 0 0 6px' }} />
     </IconButton>
   );
 };
