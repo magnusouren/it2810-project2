@@ -74,7 +74,12 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
               <p>Avg. Rating</p>
             </div>
             <div className={styles.detail}>
-              <div className={styles.score} tabIndex={0} aria-label={`Amount of votes: ${movie.vote_count}`}>
+              <div
+                className={styles.score}
+                data-testid='vote-count'
+                tabIndex={0}
+                aria-label={`Amount of votes: ${movie.vote_count}`}
+              >
                 {movie.vote_count}
                 <div>
                   <PeopleAlt fontSize='inherit' />

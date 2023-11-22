@@ -72,6 +72,7 @@ export const StarRating: FC<StarRatingProps> = ({ movieId, user }) => {
         precision={0.5}
         max={10}
         value={fetchedRating}
+        data-testid='star-rating'
         onChange={(_event, newValue) => {
           handleRating(newValue);
         }}

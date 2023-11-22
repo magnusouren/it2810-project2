@@ -63,7 +63,7 @@ test('sorting by rating', async ({ page }) => {
   await page.getByTestId('sort').click();
   await page.getByRole('option', { name: 'Rating: Low to High' }).click();
   const movieCards3 = page.locator('[data-testid="movie-card"]');
-  await expect(movieCards3.first()).toContainText('Mondocane');
+  await expect(movieCards3.first()).toContainText('Let Her Kill You');
 });
 
 test('sorting & filtering', async ({ page }) => {
@@ -173,4 +173,45 @@ test('movie added to watchlist from icon on moviecard in movielist', async ({ pa
   await page.getByTestId('watchlist-toggle-button').click();
   await expect(page.getByTestId('watchlist-toggle-button')).toHaveAttribute('aria-label', 'add movie to watchlist');
   await page.reload();
+});
+
+test('reviews affect score', async ({ page }) => {
+  // Login
+  await page.getByTestId('login-button').click();
+
+  // Using a movie with bad reviews to ensure the sorting tests stays the same
+  await page.goto('/project2/movie/852436');
+  const firstCount = Number(await page.getByTestId('vote-count').innerText());
+  await page
+    .locator('label')
+    .filter({ hasText: /^4 Stars$/ })
+    .click();
+
+  // Give the page time to update
+  await page.waitForTimeout(1000);
+  const secondCount = Number(await page.getByTestId('vote-count').innerText());
+  expect(secondCount).toBeGreaterThan(firstCount);
+
+  // Check that the the count stays the same if clicking again
+  await page
+    .locator('label')
+    .filter({ hasText: /^3 Stars$/ })
+    .click();
+  // Give the page time to update
+  await page.waitForTimeout(1000);
+  const thirdCount = Number(await page.getByTestId('vote-count').innerText());
+  expect(thirdCount).toBe(secondCount);
+
+  // Check that the count stays the same after reloading the page and clicking again
+  page.reload();
+  const fourthCount = Number(await page.getByTestId('vote-count').innerText());
+  expect(fourthCount).toBe(secondCount);
+  // Give the page time to update
+  await page
+    .locator('label')
+    .filter({ hasText: /^4 Stars$/ })
+    .click();
+  await page.waitForTimeout(1000);
+  const fifthCount = Number(await page.getByTestId('vote-count').innerText());
+  expect(fifthCount).toBe(secondCount);
 });

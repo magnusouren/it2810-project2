@@ -25,6 +25,7 @@ exports[`StarRating > should match snapshot 1`] = `
     </h3>
     <span
       class="MuiRating-root MuiRating-sizeLarge css-jue3ft-MuiRating-root"
+      data-testid="star-rating"
     >
       <span
         class="MuiRating-decimal css-34he1w-MuiRating-decimal"

@@ -1,6 +1,7 @@
 // Color palette
 
-:root {
+:root,
+[data-theme='light'] {
   --color-background: white;
   --color-body: #f9f9f9;
   --color-text: black;
@@ -13,7 +14,7 @@
   --box-shadow: 1px 5px 5px 0 rgb(85 85 85 / 30%);
 }
 
-body.dark-mode {
+[data-theme='dark'] {
   --color-body: #191919;
   --color-background: #232323;
   --color-text: #eee;
