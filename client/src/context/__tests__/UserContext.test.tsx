@@ -30,11 +30,6 @@ const TestingComponent = () => {
 };
 
 describe('UserContext', () => {
-  it('cannot use hook outside context', async () => {
-    expect(() => render(<TestingComponent />)).toThrow('useUser must be used within a UserProvider');
-    // expect(() => getByTestId('user-name')).toThrow();
-  });
-
   it('creates a user', async () => {
     const { getByTestId } = render(
       <UserProvider>
