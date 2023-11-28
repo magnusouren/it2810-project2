@@ -71,7 +71,7 @@ export const Movies = () => {
         />
       </h1>
       {count && (
-        <p style={{ color: 'gray' }}>
+        <p>
           Showing {startMovie}-{endMovie} movies of {count} total
         </p>
       )}
