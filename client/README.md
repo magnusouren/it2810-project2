@@ -2,38 +2,21 @@
 
 This folder contains the frontend code for the project. The frontend is built with React and TypeScript. The frontend is built with Vite, and uses Apollo Client to fetch data from the GraphQL API. Testing is done with Vitest and React Testing Library.
 
-## Run the client
+This readme is intended to provide a brief overview of the project setup and available npm scripts. More detailed documentation can be found in the [docs](../docs) folder.
 
-To run the client, run the following command:
+## Client structure
 
-```cli
-npm run dev
-```
-
-**Note**: If you are not able to run a local server, make sure to point the URI in `main.tsx` to the correct URI. The main server is located at:
-
-> http://it2810-16.idi.ntnu.no:4000/
-
-For development and testing, use the testing server:
-
-> http://it2810-16.idi.ntnu.no:4001/
-
-## Project structure
-
-The frontend-code is located in the `/src`-folder and is divided into the following folders:
-
-- `/assets` - Contains all the assets used in the project.
-- `/components` - Contains all the components used in the project.
-- `/context` - Contains the context used in the project.
-- `/graphql` - Contains the GraphQL queries and mutations used in the project.
-- `/layout` - Contains the layout used in the project.
-- `/pages` - Contains all the pages used in the project.
-- `/styles` - Contains the global styles used in the project.
-- `/utils` - Contains the utility functions used in the project.
+The client structure is described in [filestructure-project.md](../docs/filestructure-project.md).
 
 ## Folder/file structure
 
-The folder/file structure for components the frontend is described in the [filestructure.md](../docs/filestructure-component.md) file.
+The folder/file structure for components the frontend is described in [filestructure.md](../docs/filestructure-component.md).
+
+## Testing
+
+The testing strategy for the frontend is described in [testing.md](../docs/testing.md).
+
+This project uses Playwright for end to end testing. Before running end to end tests, you must [install playwright](../docs/playwright.md).
 
 ## Third party libraries
 
@@ -47,7 +30,7 @@ We have used .SCSS files to style our components. This makes it easier to style 
 
 - [Apollo Client](https://www.apollographql.com/docs/react/) - GraphQL client
 
-We have used Apollo Client to fetch data from the GraphQL API. Apollo Client provides a lot of useful features, such as caching, error handling, and more.
+We have used Apollo Client to fetch data from the GraphQL API. Apollo Client provides a lot of useful features, such as caching, error handling, and more. As the server also uses Apollo, it was a natural choice to use Apollo Client.
 
 - [React Router](https://reactrouter.com/) - Routing library
 
@@ -57,78 +40,67 @@ We have used React Router to handle routing in the project. React Router provide
 
 We have used Playwright to write end to end tests for the project. Playwright provides a lot of useful features, such as taking screenshots, mocking requests, and most importantly testing different browsers. It is also really flexible, and can provide complex and clever configurations for many projects. The tests are located in the [e2e](./e2e) folder.
 
-## Available NPM Scripts
+## Run the client
 
-This section provides an overview of the available npm scripts for this project. These scripts help you manage development, testing, building, and other maintenance tasks for the project.
+If you have not already done so, run the following command to install all dependencies:
 
 ```cli
 npm install
 ```
 
-Installs all packages stricly for the frontend. <br> **Note**: You will need to install the packages in root to enable Typescript and Eslint.
+> <i>Note: You will need to install the packages in root to enable Typescript and linting.</i>
 
-```cli
-npm start
-```
+To run the client, run the following command:
 
 ```cli
 npm run dev
 ```
 
-Starts the project in development mode. The project will run locally on a local port number. Any code changes will trigger automatic browser updates.
+This will start the client on a local port number. Any code changes will trigger automatic browser updates.
 
-```cli
-npm run build
-```
+As standard, it will use the testing server located at:
 
-Builds the project for production. The project will be built into the `/dist` folder.
+> http://it2810-16.idi.ntnu.no:4001/
 
-<i>Testing scripts are documented below.</i>
+<hr />
 
-## Testing
+If you wish to use the main server, change the URI in `main.tsx` to:
 
-We have used Vitest and React Testing Library to test our components. We have used snapshot testing to test that the components render correctly. We have also used unit testing to test the functions in our components.
+> http://it2810-16.idi.ntnu.no:4000/
 
-We have written unit tests for most of the functions in our components. The test is written to test one function at a time. Most of the test are written to simmulate a user interaction with the component. The test is named after the function it is testing. This makes it easier to identify which function is failing if a test fails.
+> <i>Be aware that you are not allowed to run end to end tests using the production server.</i>
 
-We are missing some tests for this deployment. We have not written tests for the filter/search functionality, and we have not written tests for the context. We have also not written tests for the pages. This is because we did not have enough time to write tests for these parts of the project for this deployment. This is something we will do in the next deployment. We have also skipped some tests we have been struggling with. We will try to fix these tests in the next deployment.
+If you wish to run a local server, ensure you have a valid database connection, and point the URI in `main.tsx` to:
 
-To run all the tests, run the following command:
+> http://localhost:4000/
 
-```cli
-npm run test
-```
+To set up the server, follow instructions in server [README.md](../server/README.md#configuration).
 
-To run strictly unit tests (in watch mode), run the following command:
+## Available NPM Scripts
 
-```cli
-npm run test:unit
-```
+This section provides an overview of the available npm scripts for this project. These scripts help you manage development, testing, building, and other maintenance tasks for the project.
 
-To run strictly unit tests, run the following command:
+### Setup
 
-```cli
-npm run test:unit:no-watch
-```
+| <div style="width:200px">Command</div> | Description                                                                                                                                           |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm install`                          | Installs dependencies for `client`. <br> **Note**: You will need to install the packages in root to enable Typescript and Eslint.                     |
+| `npm start`                            | Does the same as `npm run dev`                                                                                                                        |
+| `npm run dev`                          | Starts the project in development mode. The project will run locally on a local port number. Any code changes will trigger automatic browser updates. |
 
-To run strictly end to end tests, run the following command:
+### Test
 
-```cli
-npm run test:e2e
-```
+| <div style="width:200px">Command</div> | Description                                                                                                                                                                                                      |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run test`                         | Runs all tests. <br /><b>Note:</b> You must [set up Playwright](../docs/playwright.md) for this to work.                                                                                                         |
+| `npm run test:unit`                    | Runs strictly unit tests (in watch mode)                                                                                                                                                                         |
+| `npm run test:unit:no-watch`           | Strictly runs unit tests.                                                                                                                                                                                        |
+| `npm run coverage`                     | This script runs unit tests with code coverage using Vitest. After completion, it will generate code coverage reports that you can find in your project. You can find the reports [here](./coverage/index.html). |
+| `npm run test:e2e`                     | Runs end to end tests. <br /><b>Note:</b> You must [set up Playwright](../docs/playwright.md) for this to work.                                                                                                  |
 
-To see the test coverage fron unit tests, run the following command:
+### Production
 
-```cli
-npm run coverage
-```
-
-## Move to production
-
-1. Change the `URI` in `main.ts` to the production URI.
-2. Build the project with `npm run build`.
-3. Run `npm run preview` to preview the application before deployment.
-4. SSH into the VM with `ssh <username>@it2810-16.idi.ntnu.no`. Replace `<username>` with your username.
-5. Copy files from the dist folder to the VM with `scp -r dist <username>@it2810-16.idi.ntnu.no:/tmp/`. Replace `<username>` with your username.
-6. If there is already a version of the project on the VM, run `sudo rm -r /var/www/html/project2` to remove the old files.
-7. Move files from `/tmp/dist` to `/var/www/html` with `sudo mv /tmp/dist/* /var/www/html/project2`.
+| <div style="width:200px">Command</div> | Description                                                                                                                                                  |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run build`                        | Compiles and builds the project for production. The project will be built into the `/dist` folder.                                                           |
+| `npm run preview`                      | This script starts Vite in preview mode, allowing you to preview the production build locally before deployment. Please use this before deploying to the VM. |
