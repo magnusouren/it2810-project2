@@ -85,8 +85,8 @@ export const GET_MOVIES_BY_RATING = gql`
 `;
 
 export const GET_MOVIES_BY_TITLE = gql`
-  query getMoviesByTitle($title: String!, $limit: Int!) {
-    getMoviesByTitle(title: $title, limit: $limit) {
+  query getMoviesByTitle($title: String!, $limit: Int!, $offset: Int!) {
+    getMoviesByTitle(title: $title, limit: $limit, offset: $offset) {
       _id
       title
     }

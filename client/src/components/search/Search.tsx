@@ -29,6 +29,12 @@ export const Search: React.FC = () => {
   const [tabIndex, setTabIndex] = useState<number>(1);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
+  const [hideLoadMore, setHideLoadMore] = useState<boolean>(false);
+
+  const [offset, setOffset] = useState<number>(0);
+  const movieFetchLimit = 20;
+
+  const movieRefs = useRef<(HTMLLIElement | null)[]>([]);
 
   // Use useEffect to debounce search term after user input to prevent too many queries
   useEffect(() => {
@@ -42,10 +48,33 @@ export const Search: React.FC = () => {
   }, [searchTerm]);
 
   // Use useQuery to fetch movies by title
-  const { data } = useQuery(GET_MOVIES_BY_TITLE, {
-    variables: { title: debouncedSearchTerm, limit: limit },
+  const { data, fetchMore } = useQuery(GET_MOVIES_BY_TITLE, {
+    variables: { title: debouncedSearchTerm, limit: movieFetchLimit, offset: 0 },
     skip: !debouncedSearchTerm, // Skips the query if searchTerm is empty
   });
+
+  useEffect(() => {
+    movieRefs.current = movieRefs.current.slice(0, data?.getMoviesByTitle.length);
+  }, [data]);
+
+  // Loads the next 20 movies when user scrolls to the bottom of the dropdown and clicks the load more button
+  const loadMoreMovies = async () => {
+    const newOffset = offset + movieFetchLimit;
+    setOffset(newOffset);
+    await fetchMore({
+      variables: { limit: movieFetchLimit, offset: newOffset },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (fetchMoreResult?.getMoviesByTitle?.length === 0) setHideLoadMore(true);
+        if (!fetchMoreResult) return prev;
+        return Object.assign({}, prev, {
+          getMoviesByTitle: [...prev.getMoviesByTitle, ...fetchMoreResult.getMoviesByTitle],
+        });
+      },
+    });
+    await setTimeout(() => {
+      movieRefs.current[newOffset]?.focus();
+    }, 0);
+  };
 
   // Use useCallback to prevent to many rerenders
   const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -79,10 +108,6 @@ export const Search: React.FC = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
-  const loadMoreMovies = () => {
-    setLimit(limit + 20);
-  };
 
   const handleKeyDown = (e: React.KeyboardEvent, movie: SearchResult) => {
     if (e.key === 'Tab') {
@@ -131,9 +156,10 @@ export const Search: React.FC = () => {
       )}
       {data?.getMoviesByTitle.length > 0 && isDropdownOpen && (
         <ul className={styles.dropdown} ref={dropdownRef} tabIndex={0} aria-label='Search result for movie title'>
-          {data.getMoviesByTitle.map((movie: SearchResult) => (
+          {data.getMoviesByTitle.map((movie: SearchResult, index: number) => (
             <li
               key={movie._id}
+              ref={(e) => (movieRefs.current[index] = e)}
               className={styles.movie}
               tabIndex={0}
               onClick={() => handleMovieSelect(movie)}
@@ -143,7 +169,7 @@ export const Search: React.FC = () => {
               {movie.title}
             </li>
           ))}
-          {data?.getMoviesByTitle.length % 20 === 0 && (
+          {data?.getMoviesByTitle.length % 20 === 0 && !hideLoadMore && (
             <li
               className={styles.loadMore}
               onClick={loadMoreMovies}

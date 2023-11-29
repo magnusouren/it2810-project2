@@ -30,7 +30,7 @@ const movieResolver = {
         throw new Error('Error while getting movie: ' + error);
       }
     },
-    async getMoviesByTitle(_, { title, limit }) {
+    async getMoviesByTitle(_, { title, limit, offset }) {
       try {
         // Includes movies that contains the searchexpression
         const regexSearch = new RegExp(title, 'i');
@@ -58,6 +58,8 @@ const movieResolver = {
               title: 1,
             },
           },
+
+          { $skip: offset },
           { $limit: limit },
         ]);
 
