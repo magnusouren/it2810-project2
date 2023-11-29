@@ -11,6 +11,7 @@ const mocks = [
       variables: {
         title: 'foo',
         limit: 20,
+        offset: 0,
       },
     },
     result: {
@@ -142,6 +143,7 @@ describe('Search', () => {
           variables: {
             title: 'bar',
             limit: 20,
+            offset: 0,
           },
         },
         result: {
@@ -171,6 +173,7 @@ describe('Search', () => {
           variables: {
             title: 'The',
             limit: 20,
+            offset: 0,
           },
         },
         result: {
@@ -265,7 +268,8 @@ describe('Search', () => {
           query: GET_MOVIES_BY_TITLE,
           variables: {
             title: 'The',
-            limit: 40,
+            limit: 20,
+            offset: 20,
           },
         },
         result: {
