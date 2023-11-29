@@ -15,6 +15,15 @@ interface FilterSortProps {
   setSort: React.Dispatch<React.SetStateAction<'' | 'a-z' | 'z-a' | 'h-l' | 'l-h'>>;
 }
 
+/**
+ * FilterSort
+ *
+ * Component to handle filtering and sorting by setting states of the parent component.
+ * It also sets the cached filter values in the apollo cache.
+ *
+ * @param {FilterSortProps} props
+ * @returns {React.FC}
+ */
 export const FilterSort: FC<FilterSortProps> = ({ genre, sort, setGenre, setSort, setPage }) => {
   const { data } = useQuery(GET_GENRES);
 

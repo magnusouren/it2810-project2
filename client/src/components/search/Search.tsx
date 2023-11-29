@@ -7,19 +7,20 @@ import { useNavigate } from 'react-router-dom';
 import { GET_MOVIES_BY_TITLE } from '../../graphql/queries';
 import styles from './Search.module.scss';
 
-/**
- *
- * Search component.
- * Displays a search bar that filters movies by title.
- *
- * @returns {React.JSX.Element}
- *
- */
 interface SearchResult {
   title: string;
   _id: string;
 }
 
+/**
+ *
+ * Search component.
+ *
+ * Displays a search bar that filters movies by title.
+ *
+ * @returns {React.JSX.Element}
+ *
+ */
 export const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>('');

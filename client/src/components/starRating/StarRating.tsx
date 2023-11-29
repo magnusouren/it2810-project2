@@ -11,6 +11,14 @@ interface StarRatingProps {
   user: User;
 }
 
+/**
+ * StarRating
+ *
+ * Component to handle rating movies.
+ * It is connected to the UserContext to store the review for the user.
+ *
+ * @param {StarRatingProps} props
+ */
 export const StarRating: FC<StarRatingProps> = ({ movieId, user }) => {
   const MId: number = parseInt(movieId.toString()); // tmp fix because of data type mismatch
 

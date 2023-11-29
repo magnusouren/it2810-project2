@@ -12,7 +12,11 @@ When I sort alphabetically and don't want to sort again, nothing happens. You mi
 
 ### Our reflection
 
-We have not thought about this before. We have now added a function that resets the sorting and filtering, even with a clear button or when clicking on the “none” option.
+We have not thought about this before, we will look into how we can implement this.
+
+### Improvements
+
+We have changed the functionality after selecting none, to make a new fetch when value changes.
 
 ## Design of the detailed movie page
 
@@ -32,6 +36,8 @@ This is usefull feedback on the design of the movie page. We will try to redesig
 
 Fixed in [#43](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/43) and implemented with [!23](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/23)
 
+We have done some redesign of the detailed movie page to increase the usability of the page. Much focus on readability and user friendlyness.
+
 ## Go back button on the detailed movie page
 
 ### Feedback
@@ -40,11 +46,13 @@ There's a need for a back button on the detailed movie page. Currently, users ha
 
 ### Our reflection
 
-We have not thought about this before. We have now added a back button on the detailed movie page. This function should also remember the previous state of page, genre, and sorting.
+We have not thought about this before. We wil add a back-button on the detailed movie page. This function should also remember the previous state of page, genre, and sorting.
 
 ### Improvements
 
 Fully implemented in [!46](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/46) and [!47](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/47).
+
+A back button is added to the detailed movie page. Global state is used to remember the previous state of page, genre, and sorting.
 
 ## Functionality when logged in vs logged out
 
@@ -54,11 +62,11 @@ There's a functionality that allows users to add movies to a watchlist even when
 
 ### Our reflection
 
-This is a bug we have not thought about before. We should fix this bug similar to have the rating works. When user is not logged in, user should be able to just read about the movies, not rate or put to watchlist.
+This is a bug we have not thought about before. We should fix this bug similar to have the rating works. When a user is not logged in, the user should be able to just read about the movies, not rate or put to watchlist.
 
 ### Improvements
 
-Implicitly implemented with other updates.
+Implicitly implemented with other updates, but fixed in.
 
 ## Search functionallity
 
@@ -68,7 +76,7 @@ The search feature only navigates to individual movie results, rather than displ
 
 ### Our reflection
 
-We will look into how much functionality we can add to the search functionallity. As it is now the functionallity is limited, and we will look into how we can improve it.
+We will look into how much functionality we can add to the search functionallity. As it is now the functionallity is limited, and we will look into how we can improve it. We consider this as a task requiring a lot of time, and we will look into it if time allows it.
 
 # P2-2
 
@@ -78,6 +86,7 @@ We will look into how much functionality we can add to the search functionallity
 
 I would combine the sorting menus, since one (obviously) cannot use both at the same time. I don't see the advantage of having two different dropdown menus when they have the same functionality.
 
+**Before:**
 ![filtering and sortine](./img/filterSort.png)
 
 ### Our reflection
@@ -85,6 +94,8 @@ I would combine the sorting menus, since one (obviously) cannot use both at the 
 We have not thought about this before. We have now combined the sorting menus into one. This should be done to make the page more user friendly.
 
 ### Improvements
+
+After feedback from peer review, we have combined the sorting menus into one. This is done to make the page more user friendly.
 
 Solved in [!42](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/42/commits)
 
@@ -100,6 +111,8 @@ This is true, we have not impelemented a count for the results. We will look int
 
 ### Improvements
 
+A total count of the filterede result is now displayed above the sorting and filtering menu.
+
 Fixed in [#70](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/70) and implemented in [!42](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/42).
 
 ## Filter and sort clear button
@@ -114,6 +127,8 @@ This is a valid point. We have now added a clear button to reset the filters and
 
 ### Improvements
 
+Added a clear button to reset the filters and sorting. The filters and sorting will be reset if the user refreshes the page. The button will not be visible if the filters and sorting are not set. This is done to not mislead the user to think that the button has functionality.
+
 Fixed in [#69](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/69) and implemented in [!42](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/42).
 
 ## Searching for movies
@@ -125,6 +140,10 @@ I wish there was a connection between search and filtering/sorting/pagination. R
 ### Our reflection
 
 This is a good idea. We will look into how we can implement this if time allows it.
+
+### Conclusion
+
+We have not implemented this, but we have added a search button to the search field. This is done to make it more clear that the user can search for movies. Because of time constraints, we have not implemented the functionality to search for movies and later add them to the list in the UI. This is because we that would have needed to change all resolvers we are now using to fetch data based on the search query as well.
 
 ## Static genres-file to map genre-ids to genre-names
 
@@ -138,7 +157,7 @@ This is something we should fix. We should use the database to fetch the categor
 
 ### Improvements
 
-Solved in [#65](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/65).
+Solved as described over in [#65](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/65) and implemented in [!35](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/35).
 
 ## Watchlist button
 
@@ -152,7 +171,9 @@ We have not thought about this before. We should make the watchlist button bigge
 
 ### Improvements
 
-Implemented in [!41](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/41).
+We have made the watchlist button bigger and added a text to it. We have made it more clear that the hamburgermenu-button is a button, and not just a hamburgermenu-icon. We belive this will make it more clear that the watchlist page exists.
+
+Solved in [#68](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/68) and implemented in [!41](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/41).
 
 ## Rating movies interract with the database
 
@@ -166,6 +187,7 @@ As it is now, we have saved the rating to the database, but it is not affecting 
 
 ### Improvements
 
+We have now implemented a new handling of the rating. We are stil storing the rating in the "ratings" database, but we are now also updating the rating data in the "movies" database. This is done by calculating a new average and incrementing the number of ratings.
 Fixed in [#62](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/62) and implemented in [!39](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/39)
 
 ## User Logic
@@ -183,6 +205,8 @@ This is a bug we have not noticed before. We will implement a new user-logic to 
 About the implementation of user, it is true that we generate random usernames. Full explenation of this can be found in the [user.md](./user.md) file.
 
 ### Improvements
+
+We are now using a local storage value to check if the user should be automatically logged in, or not. This is done to make sure the user does not automatically get logged in if the user refreshes the page after logging out.
 
 Fixed in [#66](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/66) Implemented in [!38](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/38).
 
