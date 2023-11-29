@@ -48,11 +48,12 @@ exports[`MovieDetails > should match snapshot 1`] = `
         data-testid="watchlist-button"
       >
         <button
-          aria-label="add movie to watchlist"
+          aria-label="Add movie to watchlist"
           aria-pressed="false"
           class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary css-1dlyelz-MuiButtonBase-root-MuiToggleButton-root"
           data-testid="watchlist-toggle-button"
           tabindex="0"
+          title="Add movie to watchlist"
           type="button"
           value="check"
         >

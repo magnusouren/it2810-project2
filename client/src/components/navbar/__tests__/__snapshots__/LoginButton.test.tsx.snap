@@ -15,15 +15,19 @@ exports[`LoginButton > Should match snapshot when logged inn 1`] = `
       Foo Bar
     </p>
     <svg
-      aria-hidden="true"
+      aria-label="menu"
       class="MuiSvgIcon-root MuiSvgIcon-fontSizeLarge css-156hki5-MuiSvgIcon-root"
       data-testid="MenuIcon"
       focusable="false"
+      role="img"
       viewBox="0 0 24 24"
     >
       <path
         d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
       />
+      <title>
+        menu
+      </title>
     </svg>
     <span
       class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"

@@ -60,13 +60,20 @@ export const Watchlist = () => {
 
   return (
     <>
-      <h1 className={styles.heading}>
-        Watchlist
-        {<Pagination count={count} page={page} onChange={handlePagination} color='primary' />}
-      </h1>
+      <header className={styles.heading}>
+        <h1>Watchlist</h1>
+        <Pagination
+          count={Math.ceil((count || sizeLimit) / sizeLimit)}
+          page={page}
+          onChange={handlePagination}
+          color='primary'
+          size='small'
+          className={styles.paginationTop}
+        />
+      </header>
 
       <MovieList movies={data.getWatchlistByUserID.movies} />
-      <section className={styles.pagination}>
+      <section className={styles.paginationBottom}>
         <Pagination count={count} page={page} onChange={handlePagination} color='primary' size='large' />
       </section>
     </>

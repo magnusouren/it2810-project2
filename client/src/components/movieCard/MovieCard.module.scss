@@ -1,13 +1,23 @@
+.wrapper {
+  position: relative;
+}
+
 .link {
   text-decoration: none;
   color: var(--color-text);
+
+  &:focus {
+    outline-offset: 4px;
+  }
 }
 
 .card {
   position: relative;
   z-index: 1;
+  height: 100%;
 }
 
 div.card {
   background-color: var(--color-background);
+  color: var(--color-text);
 }

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { FilterSort } from '../components/filterSort/FilterSort';
 import { Spinner } from '../components/loading/Loading';
 import { MovieList } from '../components/movieList/MovieList';
-import Search from '../components/search/Search';
+import { Search } from '../components/search/Search';
 import { useUser } from '../context/UserContext';
 import { getCachedFilterValues, setCachedFilterValues } from '../graphql/cachedFilterValues';
 import { Sort } from '../types';
@@ -60,18 +60,19 @@ export const Movies = () => {
     <>
       {/* Create headerelement with h1 inside */}
       <Search />
-      <h1 className={styles.heading}>
-        Movies
+      <header className={styles.heading}>
+        <h1>Movies</h1>
         <Pagination
           count={Math.ceil((count || sizeLimit) / sizeLimit)}
           page={page}
           onChange={handlePagination}
           color='primary'
           size='small'
+          className={styles.paginationTop}
         />
-      </h1>
+      </header>
       {count && (
-        <p>
+        <p className={styles.count} tabIndex={0}>
           Showing {startMovie}-{endMovie} movies of {count} total
         </p>
       )}
@@ -85,16 +86,15 @@ export const Movies = () => {
           <MovieList
             movies={data?.getMovies || data?.getMoviesByGenre || data?.getMoviesByRating || data?.getMoviesByTitleAZ}
           />
-          <section className={styles.pagination}>
-            <Pagination
-              count={Math.ceil((count || sizeLimit) / sizeLimit)}
-              page={page}
-              onChange={handlePagination}
-              color='primary'
-              size='large'
-              data-testid='pagination-container'
-            />
-          </section>
+          <Pagination
+            count={Math.ceil((count || sizeLimit) / sizeLimit)}
+            page={page}
+            onChange={handlePagination}
+            color='primary'
+            size='large'
+            data-testid='pagination-container'
+            className={styles.paginationBottom}
+          />
         </>
       )}
     </>

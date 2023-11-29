@@ -4,7 +4,7 @@
 [data-theme='light'] {
   --color-background: white;
   --color-body: #f9f9f9;
-  --color-text: black;
+  --color-text: #2d2d2d;
   --color-text-secondary: #565656;
   --color-primary: rgb(235 235 235);
   --color-secondary: white;
@@ -12,12 +12,13 @@
   --color-dropdown: #e6e6e6;
   --color-select: #fff;
   --box-shadow: 1px 5px 5px 0 rgb(85 85 85 / 30%);
+  --color-watchlist-button: white;
 }
 
 [data-theme='dark'] {
   --color-body: #191919;
   --color-background: #232323;
-  --color-text: #eee;
+  --color-text: #c2c2c2;
   --color-text-secondary: #b7b7b7;
   --color-primary: #030202;
   --color-secondary: #191919;
@@ -25,6 +26,6 @@
   --color-border: #003162;
   --color-select: #b7b7b7;
   --box-shadow: 1px 5px 5px 0 rgb(0 0 0 / 30%);
-  --color-watchlist-button: white;
-  --color-hover-watchlist-button: gray;
+  --color-watchlist-button: #c2c2c2;
+  --color-hover-watchlist-button: #b7b7b7;
 }

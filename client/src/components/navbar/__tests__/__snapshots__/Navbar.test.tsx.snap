@@ -9,31 +9,26 @@ exports[`Navbar > Should match snapshot 1`] = `
       class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular _navbarToolbar_c9a110 css-hyum1k-MuiToolbar-root"
     >
       <a
-        class="_navLink_c9a110"
+        aria-label="Bingewatcher home"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeMedium css-1d6w9lk-MuiButtonBase-root-MuiIconButton-root"
         data-testid="home-link"
         href="/"
+        tabindex="0"
       >
-        <button
-          aria-label="home-button"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeMedium css-1d6w9lk-MuiButtonBase-root-MuiIconButton-root"
-          tabindex="0"
-          type="button"
+        <img
+          alt="Bingewatcher icon"
+          data-testid="HomeIcon"
+          src="/project2/assets/SVG/camera-white.svg"
+          width="40"
+        />
+        <p
+          class="_navbarTitle_c9a110"
         >
-          <img
-            alt="Bingewatcher icon"
-            data-testid="HomeIcon"
-            src="/project2/assets/SVG/camera-white.svg"
-            width="40"
-          />
-          <h5
-            class="MuiTypography-root MuiTypography-h5 _navbarTitle_c9a110 css-ag7rrr-MuiTypography-root"
-          >
-            Bingewatcher
-          </h5>
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </button>
+          Bingewatcher
+        </p>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
       </a>
       <button
         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-sizeMedium css-zylse7-MuiButtonBase-root-MuiIconButton-root"

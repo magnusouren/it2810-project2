@@ -29,12 +29,25 @@ Brukeren har mulighet til å legge til ratings på filmer, og også mulighet til
 
 - Løsningen skal demonstrere aspekter ved universell utforming / web accessibility (tilgjengelighet).
 
-Vi har hatt fokus på å holde designet enkelt med klare kontraster mellom bakgrunn og tekst. Dette er et viktig tiltak for å sikre lesbarheten av tekst på siden. Når bruker har scrollet lengre ned på siden vil en knapp komme til syne nederst i høyre hjørne på siden. Denne knappen skal gjøre det enkelt for alle brukere av siden å rask scrolle til toppen. Denne er ikke tatt med på smalere skjermer, da dette er noe vi opplever som integrert i operativsystemene på mange nettbrett og mobile enheter.
+  - Leselighet. Vi har hatt fokus på å holde designet enkelt med klare kontraster mellom bakgrunn og tekst. Dette er et viktig tiltak for å sikre lesbarheten av tekst på siden.
+
+  - Kontrast. Vi har sørget for at kontrasten mellom bakgrunn og tekst er godt leselig, men ikke for skarp. Dette har vi gjort for å unngå halation-effekt ved lesing over lengre tid. ref: (https://build.washingtonpost.com/resources/accessibility/color)[https://build.washingtonpost.com/resources/accessibility/color]
+
+  - Scroll to top. Når bruker har scrollet lengre ned på siden vil en knapp komme til syne nederst i høyre hjørne på siden. Denne knappen skal gjøre det enkelt for alle brukere av siden å rask scrolle til toppen. Denne er ikke tatt med på smalere skjermer, da dette er noe vi opplever som integrert i operativsystemene på mange nettbrett og mobile enheter, ved å trykke på øverste del av skjermen.
+
+  - Støtte for tastatur-navigasjon. For å sikre at siden er tilgjengelig for alle brukere har vi også sørget for at alle elementer på siden er tilgjengelig med tastatur. Dette er gjort ved å benytte `tabindex` på alle elementer som er interaktive. Dette gjør at bruker kan navigere seg rundt på siden ved hjelp av tastaturet. Dette er en viktig funksjon for brukere som ikke har mulighet til å benytte mus. Dette er testet gjennom bruk av VoiceOver på MacOS.
+
+  - Semantikk. Vi har benyttet mer presise semantiske html-elementer der det har vært mulig. Dette gjør at skjermlesere kan tolke innholdet på siden på en bedre måte.
 
 - Løsningen skal demonstrere aspekter ved bærekraftig webutvikling (gjennom valg som gjøres i design)
-  Caching, debounce på søk per nå.
 
-- God design, fornuftige valg og løsninger som harmonerer med typen data dere velger
+  - Vi har benyttet Caching på alle våre API-kall for å minnimere antall kall til serveren. Dette gjør at bruker kan navigere mellom sider uten at det blir gjort nye kall til serveren. Dette gjelder også ved søk av samme søkeord.
+  - Ved søking benytter vi debouncing for å unngå at det blir gjort unødvendig mange kall til serveren. Dette gjør at det kun blir gjort et kall til serveren når bruker har stoppet å skrive i søkefeltet. Dette gjør at vi unngår at det blir gjort kall til serveren for hvert eneste tegn bruker skriver inn i søkefeltet.
+  - Bildekvaliteten på bildene er så langt det har latt seg gjøre optimalisert for å redusere filstørrelsen. Vi har her tatt behovet for å ha en viss kvalitet på bildene i betraktning. De mindre bildene som vises i listevisningen er optimalisert for å redusere filstørrelsen.
+  - I og med at vi benytter data fra et eksternt datasett er de ulike størrelsene som tilbys noe begrenset. Når det kommer til bildet som kommer frem i detaljert visning så vi oss nødt til å laste inn bildet i opprinnelig kvalitet. Det kommer av at API-et vi henter bilder fra ikke tilbyr noen begrensede bredder større enn 500px. I et optimalt produkt ville vi sørget for komprimerte bilder i denne visningen også.
+  - På siden er det støtte for både darkmode og lightmode. Vi har implementert darkmode for å spare energiforbuket til bruker. Dette er en funksjon som er tilgjengelig i de fleste moderne operativsystemer, og vi har derfor valgt å implementere dette i vårt produkt også.
+
+- God design, fornuftige valg og løsninger som harmonerer med typen data dere velger.
 
 - Database og backend for prosjektet skal ved innlevering hostes på gruppas virtuelle maskin.
   Database, backend og frontend er hostet på vår virtuelle maskin. Siden kan nås gjennom: [http://it2810-16.idi.ntnu.no/project2/](http://it2810-16.idi.ntnu.no/project2/)

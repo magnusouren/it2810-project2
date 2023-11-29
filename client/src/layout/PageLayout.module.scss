@@ -5,7 +5,8 @@ body {
   background-color: var(--color-body);
 
   section {
-    margin: 0 20%;
+    max-width: 54rem;
+    margin: auto;
 
     @media (width <= breakpoints.$l) {
       margin: 0 10%;
@@ -13,10 +14,6 @@ body {
 
     @media (width <= breakpoints.$m) {
       margin: 0 5%;
-    }
-
-    @media (width <= breakpoints.$xs) {
-      margin: 0 2%;
     }
 
     h1 {
@@ -43,6 +40,12 @@ body {
 
   p {
     color: black;
+  }
+
+  &:focus {
+    box-shadow:
+      0 0 0 4px #285dcd,
+      0 0 0 5px #fff;
   }
 
   &:hover {

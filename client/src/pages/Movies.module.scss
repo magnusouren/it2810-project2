@@ -2,6 +2,14 @@
   display: flex;
   justify-content: space-between;
   color: var(--color-text);
+  border-bottom: solid var(--color-border) 2px;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+
+  h1 {
+    margin: 0;
+    border: 0;
+  }
 
   button {
     color: var(--color-text);
@@ -12,7 +20,7 @@
   }
 }
 
-.pagination {
+.paginationBottom {
   display: flex;
   justify-content: center;
   margin: 2rem 0;
@@ -24,15 +32,32 @@
   div {
     color: var(--color-text);
   }
-}
 
-.header,
-.pagination {
   button:hover {
-    background-color: var(--color-dropdown);
+    color: black;
+    background-color: var(--color-hover-watchlist-button);
+  }
+
+  button:focus {
+    outline: solid 2px #3874cb;
   }
 }
 
-p {
+.paginationTop {
+  margin-top: 0.75rem;
+
+  button:hover {
+    color: black;
+    background-color: var(--color-hover-watchlist-button);
+  }
+
+  button:focus {
+    outline: solid 2px #3874cb;
+  }
+}
+
+.count {
   color: var(--color-text);
+  margin-bottom: 1rem;
+  display: inline-block;
 }

@@ -1,7 +1,7 @@
 import { act, screen } from '@testing-library/react';
 
 import { renderWithProviders } from '../../../utils/testUtils';
-import Navbar from '../Navbar';
+import { Navbar } from '../Navbar';
 
 describe('Navbar', () => {
   it('Should match snapshot', () => {

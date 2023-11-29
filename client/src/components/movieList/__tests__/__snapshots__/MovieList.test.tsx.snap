@@ -7,66 +7,74 @@ exports[`MovieList > should match snapshot 1`] = `
     data-testid="movies-list-container"
   >
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_8de2c1 css-bhp9pd-MuiPaper-root-MuiCard-root"
-      data-testid="movie-card"
+      class="_wrapper_8de2c1"
     >
       <a
         class="_link_8de2c1"
         href="/movie/111111"
       >
-        <img
-          alt="Foo Bar poster."
-          class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img movie-card-image css-o69gx8-MuiCardMedia-root"
-          loading="lazy"
-          src="https://image.tmdb.org/t/p/w400/mockPosterURL.jpg"
-        />
         <div
-          class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_8de2c1 css-bhp9pd-MuiPaper-root-MuiCard-root"
+          data-testid="movie-card"
         >
+          <img
+            alt="Foo Bar poster."
+            class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img movie-card-image css-o69gx8-MuiCardMedia-root"
+            loading="lazy"
+            src="https://image.tmdb.org/t/p/w400/mockPosterURL.jpg"
+          />
           <div
-            aria-label="title: Foo Bar."
-            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-d3wcwz-MuiTypography-root"
+            class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
           >
-            Foo Bar
+            <div
+              aria-label="title: Foo Bar."
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-d3wcwz-MuiTypography-root"
+            >
+              Foo Bar
+            </div>
+            <p
+              aria-label="genres:Adventure, Action"
+              class="MuiTypography-root MuiTypography-body2 css-xx3zdw-MuiTypography-root"
+            >
+              Adventure, Action
+            </p>
           </div>
-          <p
-            aria-label="genres:Adventure, Action"
-            class="MuiTypography-root MuiTypography-body2 css-xx3zdw-MuiTypography-root"
-          >
-            Adventure, Action
-          </p>
         </div>
       </a>
     </div>
     <div
-      class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_8de2c1 css-bhp9pd-MuiPaper-root-MuiCard-root"
-      data-testid="movie-card"
+      class="_wrapper_8de2c1"
     >
       <a
         class="_link_8de2c1"
         href="/movie/222222"
       >
-        <img
-          alt="Foo Bar poster."
-          class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img movie-card-image css-o69gx8-MuiCardMedia-root"
-          loading="lazy"
-          src="https://image.tmdb.org/t/p/w400/mockPosterURL.jpg"
-        />
         <div
-          class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+          class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root _card_8de2c1 css-bhp9pd-MuiPaper-root-MuiCard-root"
+          data-testid="movie-card"
         >
+          <img
+            alt="Foo Bar poster."
+            class="MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img movie-card-image css-o69gx8-MuiCardMedia-root"
+            loading="lazy"
+            src="https://image.tmdb.org/t/p/w400/mockPosterURL.jpg"
+          />
           <div
-            aria-label="title: Foo Bar."
-            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-d3wcwz-MuiTypography-root"
+            class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
           >
-            Foo Bar
+            <div
+              aria-label="title: Foo Bar."
+              class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-d3wcwz-MuiTypography-root"
+            >
+              Foo Bar
+            </div>
+            <p
+              aria-label="genres:Adventure, Action"
+              class="MuiTypography-root MuiTypography-body2 css-xx3zdw-MuiTypography-root"
+            >
+              Adventure, Action
+            </p>
           </div>
-          <p
-            aria-label="genres:Adventure, Action"
-            class="MuiTypography-root MuiTypography-body2 css-xx3zdw-MuiTypography-root"
-          >
-            Adventure, Action
-          </p>
         </div>
       </a>
     </div>

@@ -4,7 +4,6 @@
   margin-top: 15px;
   width: 100%;
   position: relative;
-  color: var(--color-text);
 
   .searchInput {
     width: 100%;
@@ -17,6 +16,11 @@
 
     input {
       color: var(--color-text);
+    }
+
+    input::placeholder {
+      color: var(--color-text);
+      opacity: 0.9;
     }
   }
 

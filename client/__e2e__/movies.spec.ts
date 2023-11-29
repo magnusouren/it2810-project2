@@ -129,7 +129,7 @@ test('movie added to watchlist', async ({ page }) => {
   // Remove movie from watchlist
   await page.getByTestId('watchlist-toggle-button').click();
   // First toggle button in case of mis-click
-  await expect(page.getByTestId('watchlist-toggle-button')).toHaveAttribute('aria-label', 'add movie to watchlist');
+  await expect(page.getByTestId('watchlist-toggle-button')).toHaveAttribute('aria-label', 'Add movie to watchlist');
   await page.reload();
   await expect(page.locator('[data-testid="movies-list-container"]')).toHaveCount(0);
 });
@@ -161,7 +161,7 @@ test('movie added to watchlist from icon on moviecard in movielist', async ({ pa
   // Check watchlist button
   await expect(page.getByTestId('watchlist-toggle-button')).toHaveAttribute(
     'aria-label',
-    'remove movie from watchlist',
+    'Remove movie from watchlist',
   );
 
   // Check watchlist
@@ -171,7 +171,7 @@ test('movie added to watchlist from icon on moviecard in movielist', async ({ pa
 
   // Remove movie from watchlist
   await page.getByTestId('watchlist-toggle-button').click();
-  await expect(page.getByTestId('watchlist-toggle-button')).toHaveAttribute('aria-label', 'add movie to watchlist');
+  await expect(page.getByTestId('watchlist-toggle-button')).toHaveAttribute('aria-label', 'Add movie to watchlist');
   await page.reload();
 });
 
@@ -190,7 +190,7 @@ test('reviews affect score', async ({ page }) => {
   // Give the page time to update
   await page.waitForTimeout(1000);
   const secondCount = Number(await page.getByTestId('vote-count').innerText());
-  expect(secondCount).toBeGreaterThan(firstCount);
+  await expect(secondCount).toBeGreaterThan(firstCount);
 
   // Check that the the count stays the same if clicking again
   await page
@@ -200,12 +200,12 @@ test('reviews affect score', async ({ page }) => {
   // Give the page time to update
   await page.waitForTimeout(1000);
   const thirdCount = Number(await page.getByTestId('vote-count').innerText());
-  expect(thirdCount).toBe(secondCount);
+  await expect(thirdCount).toBe(secondCount);
 
   // Check that the count stays the same after reloading the page and clicking again
   page.reload();
   const fourthCount = Number(await page.getByTestId('vote-count').innerText());
-  expect(fourthCount).toBe(secondCount);
+  await expect(fourthCount).toBe(secondCount);
   // Give the page time to update
   await page
     .locator('label')
@@ -213,5 +213,5 @@ test('reviews affect score', async ({ page }) => {
     .click();
   await page.waitForTimeout(1000);
   const fifthCount = Number(await page.getByTestId('vote-count').innerText());
-  expect(fifthCount).toBe(secondCount);
+  await expect(fifthCount).toBe(secondCount);
 });
