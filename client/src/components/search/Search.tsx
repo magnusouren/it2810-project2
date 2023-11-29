@@ -104,7 +104,7 @@ export const Search: React.FC = () => {
   };
 
   return (
-    <search className={styles.searchBar} data-testid='searchbar-container'>
+    <div className={styles.searchBar} data-testid='searchbar-container'>
       <TextField
         id='searchBar'
         variant='outlined'
@@ -163,6 +163,6 @@ export const Search: React.FC = () => {
           )}
         </ul>
       )}
-    </search>
+    </div>
   );
 };
