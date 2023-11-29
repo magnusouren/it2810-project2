@@ -2,7 +2,7 @@
 
 exports[`Search > Should match snapshot 1`] = `
 <div>
-  <search
+  <div
     class="_searchBar_bce88e"
     data-testid="searchbar-container"
   >
@@ -56,13 +56,13 @@ exports[`Search > Should match snapshot 1`] = `
         </fieldset>
       </div>
     </div>
-  </search>
+  </div>
 </div>
 `;
 
 exports[`Search > Should match snapshot when dropdown is open 1`] = `
 <div>
-  <search
+  <div
     class="_searchBar_bce88e"
     data-testid="searchbar-container"
   >
@@ -136,13 +136,13 @@ exports[`Search > Should match snapshot when dropdown is open 1`] = `
         Bar
       </li>
     </ul>
-  </search>
+  </div>
 </div>
 `;
 
 exports[`Search > Should shhow the correct message if no movies are found 1`] = `
 <div>
-  <search
+  <div
     class="_searchBar_bce88e"
     data-testid="searchbar-container"
   >
@@ -206,6 +206,6 @@ exports[`Search > Should shhow the correct message if no movies are found 1`] = 
         "bar"
       </li>
     </ul>
-  </search>
+  </div>
 </div>
 `;
