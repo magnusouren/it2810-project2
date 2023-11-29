@@ -41,23 +41,6 @@ const watchlistResolver = {
         throw new Error('Error retrieving watchlist count');
       }
     },
-    movieIsInWatchlist: async (_, { userID, movieID }) => {
-      try {
-        // Finds the watchlist for the given userID
-        const watchlist = await Watchlist.findOne({ userID: userID });
-
-        // If user doesn't exist, return false
-        if (!watchlist) {
-          return false;
-        }
-
-        // Returns true if the movieID is in the watchlist
-        return watchlist.movies.includes(movieID);
-      } catch (error) {
-        console.error(error);
-        throw new Error('Error checking if movie is in watchlist');
-      }
-    },
   },
   Mutation: {
     addMovieToWatchlist: async (_, { userID, movieID }) => {

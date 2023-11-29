@@ -189,7 +189,7 @@ describe('movieResolver', () => {
         try {
           await movieQuery.getMoviesByTitleAZ(null, { page: 1, order: 'a-m' });
         } catch (error) {
-          expect(error.message).toBe('Invalid order');
+          expect(error.message).toBe('Error while getting sorted movies by title: Error: Invalid order');
         }
       });
     });
@@ -229,7 +229,7 @@ describe('movieResolver', () => {
         try {
           await movieQuery.getMoviesByRating(null, { page: 1, order: 'l-m' });
         } catch (error) {
-          expect(error.message).toBe('Invalid order');
+          expect(error.message).toBe('Error while getting sorted movies by rating: Error: Invalid order');
         }
       });
     });

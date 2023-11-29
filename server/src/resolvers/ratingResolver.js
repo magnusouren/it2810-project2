@@ -60,8 +60,8 @@ const ratingResolver = {
         await Movie.findByIdAndUpdate(movieID, { vote_average: voteAvg, vote_count: voteCount });
 
         return userRating.ratings.filter((r) => r.movieID.toString() === movieID.toString())[0];
-      } catch (err) {
-        throw new Error(err);
+      } catch (error) {
+        throw new Error('Error while adding rating: ' + error);
       }
     },
   },
