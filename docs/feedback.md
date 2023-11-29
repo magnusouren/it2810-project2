@@ -180,10 +180,78 @@ Fixed in [#62](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/i
 
 This is a bug we have not noticed before. We will implement a new user-logic to make sure the user does not automatically get logged in.
 
-About the implementation of user, it is true that we generate random usernames. Full exnplenation of this can be found in the [README.md](../README.md) file.
+About the implementation of user, it is true that we generate random usernames. Full explenation of this can be found in the [user.md](./user.md) file.
 
 ### Improvements
 
 Fixed in [#66](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/issues/66) Implemented in [!38](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/38).
+
+# P2-3
+
+## Combine filtering and search
+
+### Feedback
+
+I would combine the filtering and search functionality. Right now, they are separate, and it's not possible to use them interchangeably. This means, for example, I can't see which of the movies in a film series is the highest rated.
+
+### Our reflection
+
+This is a good idea. Unfortunately, we did not have time to implement this.
+
+## Removing movie from watchlist
+
+### Feedback
+
+When I am inside Watchlist and remove a movie, I expect it to disappear from there right away
+
+### Our reflection
+
+This is a valid point, and we have thought about it. However, we concluded that it is annoying if the movie disappears right away in case of a misclick. We have therefore decided to keep the movie in the watchlist until the user refreshes the page. We could have applies a delay to the removal of the movie, but we focused on other functionality.
+
+## Home page
+
+### Feedback
+
+Site-navigation feels a bit unnatural, it's not quite intuitive that home (logo) = search.
+
+### Our reflection
+
+As a home-page and a search page would look and function very similar, we decided to set the landing page as the main page with the search functionality.
+
+## Movie pictures
+
+### Feedback
+
+I would use WEBP instead of jpg for the images, as it is a more modern format and that reduces climate impact.
+
+### Our reflection
+
+This is a good idea, however we are restriced by the dataset we are using as it has stored the URLs for jpg images. We have not found a good way to convert the images to WEBP.
+
+## Keyboard navigation
+
+### Feedback
+
+1. It is possible to "tab" to components you cannot interact with.
+2. It is sometimes hard to see which component is focused when navigating with the keyboard.
+
+### Our reflection
+
+1. This is because we have used the `tabindex` attribute to make certain text-components focusable. This allows screenreaders to read the text.
+2. This was something we were aware of with the delivery. We have since then added a focus indicator to the components that are focusable.
+
+### Improvements
+
+2. Fixed in [!60](https://gitlab.stud.idi.ntnu.no/it2810-h23/Team-16/prosjekt-2/-/merge_requests/60).
+
+## Skeleton loading
+
+### Feedback
+
+It would be nice to have a skeleton loading animation while waiting for the data to load, to prevent the page from "jumping".
+
+### Our reflection
+
+This is a good idea, and we have thought about it. However, we decided to focus on other functionality as it would add additional computational requirements to the client, and not reflect our focus on sustainable development.
 
 ### Back to [documentation](./README.md).

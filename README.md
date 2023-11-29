@@ -1,14 +1,16 @@
-# Bingewatcher
+# Bingewatcher <img src="./client/public/camera-blue.svg" height=40>
 
 Binge Watcher is a platform to search for movies and TV shows. The user can search for movies and TV shows, and add them to a watchlist. The user can also rate movies and TV shows, and see the average rating of each movie and TV show.
 
 The user can search for movies and TV shows by typing in the search bar. The user can also filter the search results by selecting a category. The user can add movies and TV shows to a watchlist by clicking the "Add to watchlist" button. The user can also rate movies and TV shows by clicking the "Rate" button. The user can see the average rating of each movie and TV show by hovering over the rating. The personal rating is per user, and the average rating is for all users.
 
+<img src="./docs/img/bingewatcher-main.jpg">
+
 The project can be found at:
 
 > http://it2810-16.idi.ntnu.no/project2/
 
-<i>You need to be connected to NTNU's network to access the project.</i>
+> <i>Note: You need to be connected to NTNU's network to access the project. Either directly or through VPN.</i>
 
 ## Documentation
 
@@ -19,26 +21,25 @@ Other documentation can be found in the [docs](./docs) folder.
 
 The project is divided into two main folders: `client`, `server`.
 
-### Root
-
-The `root` has its own `package.json` file, and is used to install dependencies common for the entire project. This includes Typescript, Eslint and Prettier.
-It also contains the `README.md` file, and the `docs` folder.
-
 ### Client
 
-The `client` folder contains the frontend code for the project. The frontend is built with React and TypeScript. The frontend is built with Vite, and uses Apollo Client to fetch data from the GraphQL API.
+The `client` folder contains the frontend code for the project.
 
 The client documentation can be found in the [client/README.md](./client/README.md) file.
 
 ### Server
 
-The `server` folder contains the backend code for the project. The backend is built with Node.js and Javascript. The backend is built with Node.js, and uses Apollo Server to create a GraphQL API.
+The `server` folder contains the backend code for the project.
 
 The server documentation can be found in the [server/README.md](./server/README.md) file.
 
+### Root
+
+The `root` has its own `package.json` file, and is used to install dependencies common for the entire project. This includes Typescript, Eslint and Prettier. It also contains scripts for easy initialization of the client, server or both (if set up from before).
+
 ## Environment
 
-The system is built on node v20.5.0 and npm v9.8.1.
+The system is built on node v20.5.0 and npm v9.8.1. We cannot guarantee that other versions of node will run the project without complications.
 
 To set correct node version, run:
 
@@ -46,7 +47,11 @@ To set correct node version, run:
 nvm install 20.5.0
 ```
 
-> Note, the project could not be runned with node 20.6.0 or higher.
+```cli
+nvm use 20.5.0
+```
+
+> <i>Note: The project cannot be run with node 20.6.0.</i>
 
 To set correct npm version, run:
 
@@ -54,7 +59,11 @@ To set correct npm version, run:
 npm install -g npm@9.8.1
 ```
 
+The project have been developed and tested with Google Chrome, and therefore is best viewed in Google Chrome. Certain features may not work as intended in other browsers.
+
 ## Setup
+
+### Basic setup
 
 To setup the project for development, run:
 
@@ -62,126 +71,88 @@ To setup the project for development, run:
 npm run setup
 ```
 
-This will install all dependencies for the project.
+This will concurrently install all dependencies for the project.
+
+For client spesific setup, please follow instructions located in [./client/README.md](./client/README.md#run-the-client).
+
+Once client is setup up, run:
+
+```cli
+npm run dev:client
+```
+
+> <i>Client spesific scripts will only be available when the shell is located in the `client` directory. Please navigate to the directory if you wish to use them or have more flexability.</i>
+
+<hr />
+
+### Local server
+
+If you wish to set up a local backend server, please follow instructions located in [./server/README.md](./server/README.md#configuration).
+
+> **Note**: You will need a valid database connection to run the server locally.
+
+Once configured properly, start the server by running:
+
+```cli
+npm run dev:server
+```
+
+> <i>Server spesific scripts will only be available when the shell is located in the `server` directory. Please navigate to the directory if you wish to use them or have more flexability.</i>
+
+<hr>
+
+If both client and server is set up correctly, you can use the following script to run both the client and server concurrently in the same terminal:
 
 ```cli
 npm run dev
 ```
 
-This will start the project in development mode. The client and server will run concurrently. The project will run locally on a local port number. Any code changes will trigger automatic browser and server updates.
+This will start the project in development mode. The project will run locally on a local ports, initialized by Vite and node. Any code changes will trigger automatic browser- and server updates.
 
-**Note**: You will need a valid database connection to run the project. See the [server/README.md](./server/README.md) file for more information.
-
-<i>For specialized development, you can find explenations for all the scripts in the section below.</i>
+<i> Overview over all the scripts can be found in the section below.</i>
 
 ## Available NPM Scripts
 
 This section provides an overview of the available npm scripts for this project. These scripts help you manage development, testing, building, and other maintenance tasks for the project.
 
-```
-npm run setup
-```
+### Setup
 
-To be executed in order to run the project. Installs all dependencies in the project.
-It runs three concurrent terminals to install dependencies for the root, backend and frontend.
+| <div style="width:200px">Command</div> | Description                                                                                                           |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `npm install`                          | Installs dependencies for `root`.locally.                                                                             |
+| `npm run setup`                        | Concurrently installs dependencies in `root`, `client` & `server`.                                                    |
+| `npm run setup:nonconcurrent`          | Sequencially installs dependencies in `root`, `client` & `server`.                                                    |
+| `npm run dev`                          | This script starts client & server concurrently in development mode. Any code changes will trigger automatic updates. |
+| `npm run dev:client`                   | This script starts client in development mode. Any code changes will trigger automatic browser updates.               |
+| `npm run dev:server`                   | This script starts server in development mode. Any code changes will trigger automatic updates.                       |
 
-```cli
-npm run setup:nonconcurrent
-```
+### Test
 
-This script installs all dependencies in the project, non concurrently.
+| <div style="width:200px">Command</div> | Description                                                                                                                                                                                                        |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run test`                         | Runs all the test files in the entire project. <b>Note:</b> You must [set up Playwright](./docs/playwright.md) for this to work.                                                                                   |
+| `npm run test:client`                  | Runs tests in the `./client` using Vitest and Playwright. <b>Note:</b> You must [set up Playwright](./docs/playwright.md) for this to work.                                                                        |
+| `npm run test:server`                  | This script runs tests in the server using Vitest. It will execute all tests in the `./server` directory.                                                                                                          |
+| `npm run coverage:client`              | This script runs tests with code coverage using Vitest. After completion, it will generate code coverage reports that you can find in your project. You can find the reports [here](./client/coverage/index.html). |
 
-```
-npm run dev
-```
+### Code Quality
 
-This script starts Vite development mode, and server with nodemon. The project will run locally on a local port number. Any code changes will trigger automatic browser updates.
+| <div style="width:200px">Command</div> | Description                                                                                                                                                              |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run lint`                         | Runs ESLint to check TypeScript and TypeScript-related files in the project for style errors and code issues. It will also report any unused ESLint-disable directives.  |
+| `npm run lint:fix`                     | Runs ESLint with the --fix flag to automatically fix formatting issues and style errors in project files.                                                                |
+| `npm run lint:style`                   | Runs Stylelint to check CSS files in the project for style errors and code issues.                                                                                       |
+| `npm run lint:style:fix`               | Runs Stylelint with the --fix flag to automatically fix formatting issues and style errors in project files.                                                             |
+| `npm run format`                       | Runs Prettier to format the code in TypeScript, JavaScript, SCSS, JSON, and CSS files in the project according to the configuration defined in the .prettierrc.cjs file. |
 
-```
-npm run dev:frontend
-```
+### Production
 
-This script starts Vite development mode. The project will run locally on a local port number. Any code changes will trigger automatic browser updates.
+| <div style="width:200px">Command</div> | Description                                              |
+| -------------------------------------- | -------------------------------------------------------- |
+| `npm run build:client`                 | This script builds the client for production using Vite. |
 
-```
-npm run dev:server
-```
+### CI/CD
 
-This script starts the server with nodemon. The project will run locally on a local port number. Any code changes will trigger automatic updates.
-
-```cli
-npm test
-```
-
-This script will run all the test files in the project.
-
-```cli
-npm run test:frontend
-```
-
-This script runs tests in the frontend using Vitest. It will execute all tests in the `./client` directory.
-
-```cli
-npm run test:server
-```
-
-This script runs tests in the server using Vitest. It will execute all tests in the `./server` directory.
-
-```cli
-npm run coverage:frontend
-```
-
-This script runs tests with code coverage using Vitest. After completion, it will generate code coverage reports that you can find in your project. You can find the reports [here](./client/coverage/index.html).
-
-```
-npm run build:frontend
-```
-
-This script builds the project for production using Vite. Before building, it will perform the following steps:
-
-- Run linting for TypeScript files.
-- Run linting for SCSS files.
-- Run TypeScript compilation.
-- Run Vite bundling.
-
-```cli
-npm run lint
-```
-
-This script runs ESLint to check TypeScript and TypeScript-related files in the project for style errors and code issues. It will also report any unused ESLint-disable directives.
-
-```cli
-npm run lint:fix
-```
-
-This script runs ESLint with the --fix flag to automatically fix formatting issues and style errors in project files. This can help improve code quality.
-
-```cli
-npm run lint:style
-```
-
-This script runs Stylelint to check CSS files in the project for style errors and code issues.
-
-```cli
-npm run lint:style:fix
-```
-
-This script runs Stylelint with the --fix flag to automatically fix formatting issues and style errors in project files. This can help improve code quality.
-
-```cli
-npm run preview
-```
-
-This script starts Vite in preview mode, allowing you to preview the production build locally before deployment. Please use this before deploying to the VM.
-
-```cli
-npm run format
-```
-
-This script runs Prettier to format the code in TypeScript, JavaScript, SCSS, JSON, and CSS files in the project according to the configuration defined in the .prettierrc.cjs file.
-
-```cli
-npm run pipeline
-```
-
-This script will simulate the CI/CD pipeline locally.
+| <div style="width:200px">Command</div> | Description                                           |
+| -------------------------------------- | ----------------------------------------------------- |
+| `npm run pipeline`                     | This script will simulate the CI/CD pipeline locally. |
