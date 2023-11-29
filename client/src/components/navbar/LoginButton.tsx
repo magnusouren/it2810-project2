@@ -63,7 +63,7 @@ const LoginButton = () => {
         <p className={styles.loginText} data-testid='user-name'>
           {user.name}
         </p>
-        <MenuIcon fontSize='large' sx={{ margin: '0 0 0 10px' }} />
+        <MenuIcon fontSize='large' aria-label='menu' titleAccess='menu' sx={{ margin: '0 0 0 10px' }} />
       </IconButton>
       <Popover
         open={Boolean(anchorEl)}

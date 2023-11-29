@@ -2,7 +2,7 @@ import { ArrowUpward } from '@mui/icons-material';
 import { type FC, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Navbar from '../components/navbar/Navbar';
+import { Navbar } from '../components/navbar/Navbar';
 import styles from './PageLayout.module.scss';
 
 /**
@@ -40,17 +40,19 @@ export const PageLayout: FC = () => {
   return (
     <>
       <main>
-        <Navbar />
+        <nav>
+          <Navbar />
+        </nav>
         <section>
           <Outlet />
         </section>
+        {isVisible && (
+          <button onClick={scrollToTop} className={styles.scrollToTop} data-testid='scroll-to-top-button'>
+            <ArrowUpward />
+            <p>Scroll to top</p>
+          </button>
+        )}
       </main>
-      {isVisible && (
-        <button onClick={scrollToTop} className={styles.scrollToTop} data-testid='scroll-to-top-button'>
-          <ArrowUpward />
-          <p>Scroll to top</p>
-        </button>
-      )}
     </>
   );
 };

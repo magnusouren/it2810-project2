@@ -4,10 +4,20 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
+test('should reload home when clicking on home button', async ({ page }) => {
+  await page.getByTestId('home-link').click();
+  await page.reload();
+  expect(page.waitForURL('**/')).toBeTruthy();
+});
+
 test('should navigate to home when clicking on home button', async ({ page }) => {
   const baseURL = page.url();
+
+  // Go to movie page
+  await page.getByRole('link', { name: 'Blue Beetle poster. title: Blue Beetle.' }).click();
+
   await page.getByTestId('home-link').click();
-  expect(page.waitForURL(baseURL)).toBeTruthy();
+  await expect(page.waitForURL(baseURL)).toBeTruthy();
 });
 
 test('should navigate to a movie when clicking on a movie', async ({ page }) => {

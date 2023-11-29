@@ -38,7 +38,7 @@ export const FilterSort: FC<FilterSortProps> = ({ genre, sort, setGenre, setSort
   };
 
   return (
-    <div className={styles.filter} data-testid='filter-container'>
+    <search className={styles.filter} data-testid='filter-container'>
       <p>Filter:</p>
 
       <FormControl variant='filled' className={styles.categorySelect}>
@@ -79,10 +79,10 @@ export const FilterSort: FC<FilterSortProps> = ({ genre, sort, setGenre, setSort
         </FormControl>
       </div>
       {(genre || sort) && (
-        <Button onClick={handleReset} variant='contained' data-testid='reset-filter-button'>
+        <Button onClick={handleReset} variant='outlined' data-testid='reset-filter-button'>
           Reset Filter
         </Button>
       )}
-    </div>
+    </search>
   );
 };

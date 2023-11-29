@@ -9,6 +9,7 @@
   border-radius: 5px;
   border: 1px solid black;
   opacity: 0.8;
+  z-index: 1;
 
   .add {
     color: black;
@@ -16,6 +17,11 @@
 
   .remove {
     color: rgb(0 0 0 / 61%);
+  }
+
+  &:focus-within {
+    opacity: 1;
+    background-color: #f8f8f8; /* Lys bakgrunnsfarge for kontrast */
   }
 }
 
@@ -52,4 +58,13 @@
     width: 100%;
     margin-bottom: 1rem;
   }
+}
+
+.smallContainer button:focus {
+  // outline: 2px solid #285dcd; /* Svart omriss som er lett synlig */
+  // outline-offset: 2px; /* Litt plass mellom omrisset og knappen */
+  outline: none; /* Fjerner standard outline */
+  box-shadow:
+    0 0 0 3px #285dcd,
+    0 0 0 4px #fff;
 }

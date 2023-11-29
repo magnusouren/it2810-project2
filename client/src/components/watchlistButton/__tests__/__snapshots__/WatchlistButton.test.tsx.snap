@@ -7,11 +7,12 @@ exports[`WatchlistButton > Should match snapshot when movie is in watchlist 1`] 
     data-testid="watchlist-button"
   >
     <button
-      aria-label="remove movie from watchlist"
+      aria-label="Remove movie from watchlist"
       aria-pressed="true"
       class="MuiButtonBase-root MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary css-1dlyelz-MuiButtonBase-root-MuiToggleButton-root"
       data-testid="watchlist-toggle-button"
       tabindex="0"
+      title="Remove movie from watchlist"
       type="button"
       value="check"
     >
@@ -41,11 +42,12 @@ exports[`WatchlistButton > Should match snapshot when movie is not in watchlist 
     data-testid="watchlist-button"
   >
     <button
-      aria-label="add movie to watchlist"
+      aria-label="Add movie to watchlist"
       aria-pressed="false"
       class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeSmall MuiToggleButton-primary css-1dlyelz-MuiButtonBase-root-MuiToggleButton-root"
       data-testid="watchlist-toggle-button"
       tabindex="0"
+      title="Add movie to watchlist"
       type="button"
       value="check"
     >
@@ -75,11 +77,12 @@ exports[`WatchlistButton > Should match snapshot when style prop is big 1`] = `
     data-testid="watchlist-button"
   >
     <button
-      aria-label="remove movie from watchlist"
+      aria-label="Remove movie from watchlist"
       aria-pressed="true"
       class="MuiButtonBase-root MuiToggleButton-root Mui-selected MuiToggleButton-sizeSmall MuiToggleButton-primary css-1dlyelz-MuiButtonBase-root-MuiToggleButton-root"
       data-testid="watchlist-toggle-button"
       tabindex="0"
+      title="Remove movie from watchlist"
       type="button"
       value="check"
     >

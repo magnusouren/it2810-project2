@@ -79,8 +79,9 @@ const Button: FC<WatchlistButtonProps> = ({ movie, style = 'small', user }) => {
         onChange={handleClick}
         color='primary'
         size='small'
-        aria-label={isInWatchlist ? 'remove movie from watchlist' : 'add movie to watchlist'}
+        aria-label={isInWatchlist ? 'Remove movie from watchlist' : 'Add movie to watchlist'}
         data-testid='watchlist-toggle-button'
+        title={isInWatchlist ? 'Remove movie from watchlist' : 'Add movie to watchlist'}
       >
         {isInWatchlist ? <BookmarkRemove className={styles.remove} /> : <BookmarkAdd className={styles.add} />}
         {style === 'big' && (

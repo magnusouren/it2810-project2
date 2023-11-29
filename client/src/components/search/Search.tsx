@@ -8,10 +8,6 @@ import { GET_MOVIES_BY_TITLE } from '../../graphql/queries';
 import styles from './Search.module.scss';
 
 /**
- * TODO: Add tests
- */
-
-/**
  *
  * Search component.
  * Displays a search bar that filters movies by title.
@@ -24,7 +20,7 @@ interface SearchResult {
   _id: string;
 }
 
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
@@ -108,7 +104,7 @@ const Search: React.FC = () => {
   };
 
   return (
-    <div className={styles.searchBar} data-testid='searchbar-container'>
+    <search className={styles.searchBar} data-testid='searchbar-container'>
       <TextField
         id='searchBar'
         variant='outlined'
@@ -167,8 +163,6 @@ const Search: React.FC = () => {
           )}
         </ul>
       )}
-    </div>
+    </search>
   );
 };
-
-export default Search;

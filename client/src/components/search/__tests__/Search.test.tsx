@@ -2,7 +2,7 @@ import { fireEvent, screen, waitFor } from '@testing-library/react';
 
 import { GET_MOVIES_BY_TITLE } from '../../../graphql/queries';
 import { renderWithProviders } from '../../../utils/testUtils';
-import Search from '../Search';
+import { Search } from '../Search';
 
 const mocks = [
   {
