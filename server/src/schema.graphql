@@ -48,7 +48,6 @@ type Query {
   getMovieRatingWithUserID(userID: String!, movieID: Int!): Rating
   getWatchlistByUserID(userID: String!, page: Int!): UserWatchlist
   getWatchlistCountByUserID(userID: String!): Int
-  movieIsInWatchlist(userID: String!, movieID: Int!): Boolean
   getGenres: [Genre]
 }
 
