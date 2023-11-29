@@ -6,6 +6,14 @@ import React from 'react';
 import { useUser } from '../../context/UserContext';
 import styles from './Dark.module.scss';
 
+/**
+ * DarkModeToggle
+ *
+ * Button to toggle dark mode.
+ * It is connected to the UserContext to get the current dark mode state and toggle it.
+ *
+ * @returns {React.FC}
+ */
 const DarkModeToggle: React.FC = () => {
   const { darkMode, toggleDarkMode } = useUser();
 

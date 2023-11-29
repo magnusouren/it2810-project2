@@ -8,11 +8,8 @@ Note that component names should be written with an initial capital letter. This
 │   ├── __tests__                           # tests for the component
 │       ├── __snapshots__                   # snapshots from tests
 │       ├── Component.test.tsx              # test file for 'Component'
-│       ├── Component-utils.test.ts         # tests for the utils file in the component
 │   ├── Component.tsx                       # component
-│   ├── Component.scss                       # stylesheet
-│   ├── utils.ts                            # utils for the component (optional)
-
+│   ├── Component.scss                      # stylesheet
 
 ```
 

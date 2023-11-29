@@ -35,6 +35,10 @@ export const PageLayout: FC = () => {
       top: 0,
       behavior: 'smooth',
     });
+    const topHeading = document.getElementById('scroll-to-top-focus') as HTMLHeadingElement;
+    if (topHeading) {
+      topHeading.focus();
+    }
   };
 
   return (

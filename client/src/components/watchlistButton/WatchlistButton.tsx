@@ -13,6 +13,14 @@ interface WatchlistButtonProps {
   user: User;
 }
 
+/**
+ * WatchlistButton
+ *
+ * Component to handle adding and removing movies from the watchlist.
+ *
+ * @param {WatchlistButtonProps} props
+ * @returns {React.FC}
+ */
 const Button: FC<WatchlistButtonProps> = ({ movie, style = 'small', user }) => {
   const movieId = parseInt(movie._id.toString(), 10);
   const baseVariables = { movieId: movieId, userId: user.id };

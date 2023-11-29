@@ -30,7 +30,7 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
 
   return (
     <div className={styles.movieDetails}>
-      <Link to='/' className={styles.goBack} aria-label='link back to movie page'>
+      <Link to='/' className={styles.goBack} aria-label='link back to movie page' id={'scroll-to-top-focus'}>
         <ArrowBack /> <span>Movies</span>
       </Link>
       <img
@@ -40,7 +40,7 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
         loading='lazy'
       />
       <div className={styles.container}>
-        <h1 tabIndex={0}>
+        <h1 tabIndex={-1}>
           {movie.title} ({movie.release_date.split('-')[0]})
         </h1>
         {user && <WatchlistButton movie={movie} style={'big'} user={user} />}
